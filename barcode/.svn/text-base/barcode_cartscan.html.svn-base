@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<title>新增商品</title>
+		<link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/common.js"></script>
+
+		<link rel="stylesheet" href="../css/mui.css" type="text/css" charset="utf-8" />
+		<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				position: absolute;
+				top: 44px;
+				bottom: 50px;
+				text-align: center;
+			}
+			#scanTips {
+				width: 100%;
+				position: absolute;
+				bottom: 0px;
+				left: 0;
+				text-align: center;
+				color: #fff;
+				font-size: 14px;
+				line-height: 51px;
+				height: 51px
+			}
+			.tip {
+				color: #FFFFFF;
+				font-weight: bold;
+				text-shadow: 0px -1px #103E5C;
+			}
+			footer {
+				width: 100%;
+				height: 44px;
+				position: absolute;
+				bottom: 0px;
+				line-height: 44px;
+				text-align: center;
+				color: #FFF;
+			}
+			.fbt {
+				width: 50%;
+				height: 100%;
+				background-color: #FFCC33;
+				float: left;
+			}
+			.fbt:active {
+				-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+				box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+			}
+			.mui-back-width{
+				width: 44px;
+				height: 44px;
+			}
+		</style>
+	</head>
+
+	<body style="background:#000">
+		<header class="mui-bar mui-bar-nav" id="toshoppingcare">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width"></a>
+			<h1 class="mui-title">扫描 </h1>
+			<a class="mui-pull-right">
+				<button class="mui-btn mui-btn-primary mui-btn-outlined" id="success" style="color: #FFFFFF;border-color:#FFFFFF;display: none;">完成</button>
+			</a>
+		</header>
+		<div id="bcid">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<p class="tip">...载入中...</p>
+		</div>
+		<div id="scanTips">
+
+		</div>
+
+		<script type="text/javascript">
+			var ws = null,
+				wo = null;
+			var newlist=null;
+			var scan = null,
+				domready = false;
+			var scanTips;
+			 // H5 plus事件处理
+			function plusReady() {
+				if (ws || !window.plus || !domready) {
+					return;
+				}
+				scanTips=document.getElementById("scanTips")
+				ws = plus.webview.currentWebview();
+				wo = plus.webview.getWebviewById("shoppingcart.html");
+				newlist = plus.webview.getWebviewById("list/newlist.html");
+					// 开始扫描
+				ws.addEventListener('show', function() {
+					scan = new plus.barcode.Barcode('bcid');
+					scan.onmarked = onmarked;
+					scan.start({
+						conserve: true,
+						filename: "_doc/barcode/"
+					});
+				});
+				// 显示页面并关闭等待框
+				ws.show("pop-in");
+				plus.nativeUI.closeWaiting()
+			}
+			if (window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			 // 监听DOMContentLoaded事件
+			document.addEventListener("DOMContentLoaded", function() {
+				domready = true;
+				plusReady();
+			}, false);
+			if (document.getElementById("success")) {
+				document.getElementById("success").addEventListener("tap", function() {
+					mui.openWindow({
+						id: "list/newlist.html",
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					setTimeout(function() {
+						ws.close();
+					}, 0)
+				});
+			}
+			 // 二维码扫描成功
+			function onmarked(type, result, file) {
+				newlist.evalJS("clearCheck()");
+				switch (type) {
+					case plus.barcode.QR:
+						type = "QR";
+						break;
+					case plus.barcode.EAN13:
+						type = "EAN13";
+						break;
+					case plus.barcode.EAN8:
+						type = "EAN8";
+						break;
+					case plus.barcode.CODE93:
+						type = "CODE93";
+						break;
+					case plus.barcode.CODE128:
+						type = "CODE128";
+						break;
+					case plus.barcode.CODE39:
+						type = "CODE39";
+						break;
+					case plus.barcode.RSSEXPANDED:
+						type = "RSSEXPANDED";
+						break;
+					case plus.barcode.RSS14:
+						type = "RSS14";
+						break;
+					case plus.barcode.PDF417:
+						type = "PDF417";
+						break;
+					case plus.barcode.MAXICODE:
+						type = "MAXICODE";
+						break;
+					case plus.barcode.ITF:
+						type = "ITF";
+					case plus.barcode.CODABAR:
+						type = "CODABAR";
+					case plus.barcode.UPCE:
+						type = "UPCE";
+					case plus.barcode.UPCA:
+						type = "UPCA";
+					case plus.barcode.DATAMATRIX:
+						type = "DATAMATRIX";
+					case plus.barcode.AZTEC:
+						type = "AZTEC";
+						break;
+					default:
+						type = "其它";
+						break;
+				}
+				result = result.replace(/\n/g, '');
+				console.log(result);
+				var param = systemParam("V5.mobile.item.get");
+				param.barcode = result;
+				param.type = "addOrder";
+				dataSendFn('itemGet', param, function(data) {
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						scanTips.innerHTML = mapmsg
+						return
+					}
+					var product = data.product
+					var barcode = product.barcode;
+					var productNumber = product.productNumber;
+					var productName = product.productName;
+					var productPic = product.productPic || "../images/cbd.jpg";;
+					var skuNumber = product.skuNumber;
+					var skuName = product.skuName;
+					var price = product.price;
+					if (!barcode) {
+						document.getElementById("scanTips").innerHTML = "此商品不在系统中"
+					} else {
+						newlist.evalJS("scanCallback('" + result + "');");
+						var html= '<div class="mui-input-group" style="color:#000000;text-align:left;"><div class="mui-flex-all"><div class="mui-table-flex"><div class="mui-flex-all dd-top" ><img class="itempic" style="margin-top:2px;margin-left: 2px;" src="' + productPic + '"><div class="mui-table-flex mui-flex-lineheight"><span class="mui-flex-block">' + productName + '</span><span class="mui-flex-block">' + productNumber + ' </span><span class="mui-flex-block">' + skuName + '</span></div></div></div></div></div>';
+						document.getElementById("scanTips").innerHTML=html;
+						document.getElementById("success").style.display = "block";
+						plus.storage.setItem("itemExist","1");
+//						newlist.evalJS("OpenAllpay()");
+//						newlist.evalJS("OpenTopay()");
+					}
+					setTimeout(function() {
+						scan.onmarked = onmarked;
+						scan.start();
+					}, 3000)
+//					var product = data.product
+//					var barcode = product.barcode;
+//					if (!barcode) {
+//						scanTips.innerHTML = "该商品在系统中不存在"
+//					} else {
+//						wo.evalJS("scanCallback('" + result + "');");
+//						document.getElementById("success").style.display = "block";
+//						plus.storage.setItem("itemExist","1");
+//						newlist.evalJS("OpenAllpay()");
+//						newlist.evalJS("OpenTopay()");
+//					}
+//					setTimeout(function() {
+//						scanTips.innerHTML = ""
+//						scan.onmarked = onmarked;
+//						scan.start();
+//					}, 3000)
+				}, "get")
+			}
+		</script>
+
+	</body>
+
+</html>

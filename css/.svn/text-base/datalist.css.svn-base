@@ -1,0 +1,410 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+}
+
+.mui-padding-zoom {
+	padding: 10px;
+}
+
+.mui-bar-nav {
+	background-color: #007aff;
+}
+
+.mui-font-white {
+	color: #FFFFFF;
+}
+
+.mui-back-width {
+	width: 44px;
+	height: 44px;
+}
+
+.mui-segmented-control.mui-control-change {
+	border-color: #CCCCCC;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.mui-segmented-control.mui-control-change a.mui-active {
+	background-color: #FFFFFF;
+	color: #007aff;
+}
+
+.mui-segmented-control.mui-control-change a {
+	color: #CCCCCC;
+	border-color: #CCCCCC;
+	font-size: 12px;
+	line-height: 32px;
+	background-color: #F6F6F6;
+}
+
+.mui-flex-bc {
+	margin-top: 10px;
+	background-color: #D9E9F7;
+}
+
+.mui-flex-content {
+	background-color: #efeff4;
+	overflow: auto;
+}
+
+.mui-flex-all {
+	display: -webkit-flex;
+	display: flex;
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	-o-flex-direction: row;
+	flex-direction: row;
+}
+
+.mui-table-flex {
+	-webkit-flex: 1;
+	flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+.mui-bottomline {
+	position: relative;
+	height: 25px;
+	line-height: 25px;
+}
+
+.mui-bottomline:after {
+	margin: 0 auto;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 1px;
+	width: 80%;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #E7E7E7;
+}
+
+.mui-ordercor {
+	color: #FF6600;
+}
+
+/*昨日数据概况页面开始*/
+.mui-home-bodycolor .mui-slider .mui-slider-group .mui-slider-item .mui-table-view:before,
+.mui-slider .mui-slider-group .mui-slider-item .mui-table-view:after {
+	height: 0px;
+}
+
+.mui-home-bodycolor #homelist:after {
+	height: 2px;
+	background-color: #EEEEEE;
+}
+
+.mui-home-bodycolor #toxiaoxilist:before {
+	height: 0;
+}
+
+.mui-home-bodycolor .mui-flex-all span {
+	display: block;
+}
+
+.mui-home-bodycolor .mui-flex-all a {
+	display: block;
+	text-align: center;
+	height: 100%;
+	padding-top: 17px;
+}
+
+.mui-home-bodycolor #homelist li {
+	height: 90px;
+	border-right: 1px solid #eee;
+}
+
+.mui-home-bodycolor .mui-table-view-cell a:not(.mui-btn) {
+	margin: 0;
+}
+
+.mui-home-bodycolor #homelist2 a {
+	color: #CCCCCC;
+	font-size: 12px;
+	padding-top: 21px;
+	border-right: 1px solid #EEEEEE;
+}
+
+.mui-home-bodycolor .home-bottom {
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.mui-home-bodycolor #item2mobile .home-bottom {
+	border-bottom: 0px solid #EEEEEE;
+}
+
+.mui-home-bodycolor .mui-liwidth {
+	width: 50px;
+}
+
+.mui-home-bodycolor .mui-width-sixty {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.mui-home-bodycolor .mui-width-ten {
+	padding-top: 4px;
+}
+
+.mui-home-bodycolor .mui-control-content {
+	background-color: white;
+	min-height: 450px;
+}
+
+.mui-home-bodycolor .mui-control-content .mui-loading {
+	margin-top: 50px;
+}
+
+.mui-home-bodycolor .mui-slider-bottom {
+	bottom: 0px;
+}
+
+.mui-home-bodycolor .mui-active.mui-indicator-bac {
+	background: #0099FF;
+}
+
+.mui-home-bodycolor .mui-indicator-bac {
+	width: 10px;
+	height: 10px;
+	background: #94D1FA;
+	/*-webkit-box-shadow: 0 0 1px 1px rgba(148, 209, 250, .8);
+	box-shadow: 0 0 1px 1px rgba(148, 209, 250, .8);*/
+	-webkit-box-shadow: 0 0 0px 0px rgba(148, 209, 250, .8);
+	box-shadow: 0 0 0px 0px rgba(148, 209, 250, .8);
+}
+
+.mui-home-bodycolor .mui-yt-header {
+	height: 44px;
+	text-align: center;
+	color: #FFFFFF;
+	line-height: 44px;
+	background-color: #007aff;
+	font-size: 17px;
+}
+
+.mui-home-bodycolor .mui-yt-shopnamelogo {
+	font-size: 16px;
+}
+
+.mui-home-bodycolor .mui-yt-shopname {
+	background-color: #007aff;
+	margin-top: 10px;
+	line-height: 21px;
+	display: inline-block;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #FFF;
+}
+
+.mui-home-bodycolor .mui-yt-borderright {
+	color: #007aff;
+	border-right: 1px solid #EEEEEE;
+}
+
+.mui-home-bodycolor .mui-yt-font {
+	font-size: 22px;
+}
+
+.mui-home-bodycolor .mui-yt-spancolor {
+	color: #999999;
+}
+
+.mui-home-bodycolor .mui-slider .statisticaldata a {
+	color: #CCCCCC;
+	font-size: 14px;
+	padding-top: 21px;
+}
+
+.mui-home-bodycolor .mui-slider .mui-slider-group .mui-slider-item .mui-table-view.statisticaldata:before {
+	height: 0;
+}
+
+.mui-home-bodycolor .mui-slider .mui-slider-group .mui-slider-item .mui-table-view.statisticaldata:after {
+	height: 0;
+}
+
+.mui-home-bodycolor .mui-slider .mui-slider-group .mui-slider-item .mui-table-view.hasbottom:after {
+	margin: 0 auto;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	width: 80%;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #EEEEEE;
+}
+
+#statisticaldata2 a {
+	color: #CCCCCC;
+	font-size: 12px;
+	padding-top: 17px;
+}
+
+#statisticaldata2:before {
+	height: 0;
+}
+
+#statisticaldata2:after {
+	margin: 0 auto;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	width: 100%;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #EEEEEE;
+}
+
+.mui-home-bodycolor .mui-yt-black {
+	color: #000000;
+	border-right: 1px solid #EEEEEE;
+}
+
+.mui-home-bodycolor .mui-home-ulcolor2 {
+	background-color: #fff
+}
+
+.mui-home-bodycolor .mui-home-ulcolor2 li {
+	height: 75px;
+}
+
+.mui-home-bodycolor .mui-table-view-cell {
+	padding: 0;
+}
+
+.mui-home-bodycolor .mui-table-view-cell:after {
+	height: 0;
+}
+
+@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2) {
+	/* 兼容iphone4/4s */
+	.mui-home-bodycolor .mui-home-ulcolor2 li {
+		height: 60px;
+	}
+	#statisticaldata2 a {
+		color: #CCCCCC;
+		font-size: 12px;
+		padding-top: 10px;
+	}
+}
+/*昨日数据概况页面结束*/
+
+/*linechart页面开始*/
+.linechart .chart {
+	height: 200px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.linechart h5 {
+	margin-top: 30px;
+	font-weight: bold;
+}
+
+.linechart h5:first-child {
+	margin-top: 15px;
+}
+
+.linechart #flexcontent li {
+	font-size: 12px;
+	padding: 0;
+	line-height: 21px;
+	margin-right: 0;
+	position: relative;
+}
+
+.linechart #flexcontent li:last-child:after {
+	height: 0px;
+}
+
+.linechart #flexcontent li:after {
+	margin: 0 auto;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 1px;
+	width: 80%;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #CCCCCC;
+}
+
+.linechart .mui-table-view.mui-flex-content {
+	overflow: auto;
+}
+
+.linechart .mui-table-view.mui-flex-content:after {
+	height: 0;
+}
+
+.linechart .mui-flex-content li span {
+	display: block;
+	width: 50%;
+	float: left;
+}
+
+.linechart .mui-grid-view.mui-grid-9.mui-flex-content .mui-table-view-cell {
+	border-top: 0px solid #eee;
+	border-left: 0px solid #eee;
+}
+
+.linechart #canvas {
+	display: block;
+	margin: 10px auto;
+}
+
+.linechart #canvascontent {
+	display: none;
+}
+
+.bluespan {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #04ABF2;
+}
+
+.yellowspan {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #FFE99B;
+}
+
+.nowstaff {
+	display: inline-block;
+	font-size: 17px;
+}
+.linechart-padright{
+	padding-right: 5px;
+}
+/*linechart页面结束*/

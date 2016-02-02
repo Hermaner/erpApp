@@ -1,0 +1,55 @@
+{
+    "isSuccess": "true",
+    "totalCount": 3,
+    "orders": [
+        {
+            "allocateOutId": 1111,
+            "orderNumber": "2012Abbb",
+            "allocateOutNo": "调货出库单号",
+            "inStore": "调入门店编码",
+            "orderAllocateStatus": "已审核",
+            "totalAmount": 250,
+            "productNum": 3,
+            "products": [
+                {
+                    "productNumber": 101,
+                    "productName": "2015最新款A",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 111,
+                    "skuName": "灰色L",
+                    "barcode": "条形码",
+                    "count": 2
+                },
+                {
+                    "productNumber": 102,
+                    "productName": "2015最新款B",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 112,
+                    "skuName": "白色L",
+                    "barcode": "条形码",
+                    "count": 2
+                }
+            ]
+        },
+        {
+            "allocateOutId": 1112,
+            "orderNumber": "2012Accc",
+            "allocateOutNo": "调货出库单号",
+            "inStore": "调入门店编码",
+            "orderAllocateStatus": "未审核",
+            "totalAmount": 250,
+            "productNum": 3,
+            "products": [
+                {
+                    "productNumber": 103,
+                    "productName": "2015最新款C",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 1112,
+                    "skuName": "红色L",
+                    "barcode": "条形码",
+                    "count": 2
+                }
+            ]
+        }
+    ]
+}

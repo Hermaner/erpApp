@@ -1,0 +1,30 @@
+{
+    "isSuccess": "true",
+    "totalCount": "3",
+    "products": [
+        {
+            "productNumber": "2015abcd",
+            "productName": "2015夏季新款A",
+            "productPic": "../images/cbd.jpg",
+            "productPriceArea": "100",
+            "stock": "99",
+            "warnStock": "50"
+        },
+        {
+            "productNumber": "2015abcd2",
+            "productName": "2015夏季新款B",
+            "productPic": "../images/cbd.jpg",
+            "productPriceArea": "100",
+            "stock": "120",
+            "warnStock": "30"
+        },
+        {
+            "productNumber": "2015abcd3",
+            "productName": "2015夏季新款C",
+            "productPic": "../images/cbd.jpg",
+            "productPriceArea": "120",
+            "stock": "110",
+            "warnStock": "30"
+        }
+    ]
+}

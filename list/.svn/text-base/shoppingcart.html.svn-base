@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" media="only screen and (min-width:728px),only screen and (min-device-width:728px)" href="../css/stylebypad.css">
+		<script src="../js/apijs/api.js"></script>
+		<style>
+			span {
+				color: #999999;
+				font-size: 12px;
+			}
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+				padding: 6px 5px;
+			}
+			label {
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body class="mui-newlist-body">
+		<header class="mui-bar mui-bar-nav headbac">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-newlist-white mui-back-width"></a>
+			<h1 id="title" class="mui-title mui-newlist-white">购物车</h1>
+			<button class="mui-btn mui-btn-primary mui-pull-right changebtn" id="tonewlist" href="newlist.html">继续添加</button>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table mui-table-view limargin" id="goodsList" style="padding-top:5px;"></ul>
+
+		</div>
+		<div class="maxwidth2">
+			<div class="maxwidth2 nl-foot">
+				<div class="mui-pull-left">
+					<div class="mui-input-row mui-checkbox mui-pull-left dd-footmar mui-newlist-right">
+						<label class="mui-newlist-labelpadding"><span>全选</span></label>
+						<input name="checkbox" class="changeinput" id="selectAll" value="Item 1" type="checkbox">
+					</div>
+					<span class="nl-span" id="totalSpan">￥0</span>
+				</div>
+				<div class="mui-pull-right mui-newlist-divmargin" id="tolistdetailbyshop">
+					<button class="mui-btn-mini" id="dataDel">删除</button>
+					<button class="mui-btn-mini button-disabled" disabled="disabled" id="createOrder">生成订单</button>
+
+				</div>
+			</div>
+		</div>
+		<script>
+			var goodsList, createOrder,totalSpan;
+			var price = 0;
+			mui.plusReady(function() {
+				goodsList = document.getElementById("goodsList");
+				totalSpan = document.getElementById("totalSpan");
+				var cartDetailPage = plus.webview.getWebviewById("listdetailbyshop.html");
+				createOrder = document.getElementById("createOrder")
+				createOrder.addEventListener("tap", function() {
+					var isCheck = false;
+					var list = goodsList.getElementsByClassName("mui-table-view-cell");
+					var itemHtml = '';
+					var itemPrice = 0;
+					var itemNum = 0;
+					for (var p = 0; p < list.length; p++) {
+						var listCheck = list[p].getElementsByTagName('input')[0];
+						if (listCheck.checked) {
+							var cloneItem = document.createElement("li");
+							cloneItem.className = "mui-table-view-cell";
+							cloneItem.innerHTML = list[p].innerHTML;
+							var itemCheckbox = cloneItem.getElementsByClassName("mui-checkbox")[0];
+							var itemCount = parseInt(list[p].getElementsByClassName("openNum")[0].getElementsByTagName("input")[0].value);
+							var unitPrice = parseFloat(cloneItem.getElementsByClassName("pricei")[0].innerHTML);
+							itemPrice += itemCount * unitPrice;
+							itemNum += 1;
+							itemCheckbox.style.display = "none";
+							cloneItem.getElementsByClassName("openNum")[0].style.display = "none";
+							cloneItem.getElementsByClassName("openCount")[0].style.display = "block";
+							cloneItem.getElementsByClassName("openCount")[0].innerHTML = "*" + itemCount;
+							itemHtml += '<li class="mui-table-view-cell">' + cloneItem.innerHTML + '</li>';
+							isCheck = true;
+						}
+					}
+					var checkboxAll = document.getElementsByTagName('input');
+					for(var i=0;i<checkboxAll.length;i++){
+						if(checkboxAll[i].getAttribute("type")=="checkbox"){
+							checkboxAll[i].checked=false 
+						}
+					}
+					mui.fire(cartDetailPage, 'createOrderShow', {
+						itemHtml: itemHtml,
+						itemPrice: itemPrice,
+						itemNum: itemNum
+					});
+					mui.openWindow({
+						id: "listdetailbyshop.html",
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: true
+						}
+					})
+				})
+				var old_back = mui.back;
+				mui.back = function() {
+					var boxAr=document.getElementsByTagName("input");
+					for(var i=0;i<boxAr.length;i++){
+						if(boxAr[i].getAttribute("type")=="checkbox"){
+							boxAr[i].checked=false
+						}
+					}
+					old_back();
+					PriceClear();//价格清零
+					CloseCreateOrder();//关闭生成订单
+				}
+			});
+			document.getElementById("tonewlist").addEventListener("click",function(){
+				mui.openWindow({
+					id: "list/newlist.html",
+					url: "list/newlist.html",
+					show: {
+						aniShow: "pop-in"
+					},
+					waiting: {
+						autoShow: true
+					}
+				})
+			});
+			document.getElementById("selectAll").addEventListener("click", function() {
+				var isOk=false;//判断是否开启生成订单
+				var listUl = document.getElementById("goodsList")
+				var list = listUl.getElementsByTagName('input');
+				var value = this.checked ? true : false;
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].getAttribute("type") == "checkbox") {
+						list[i].checked = value
+					}
+				}
+				var count = 0;
+				price = 0;
+				var allIpt = goodsList.getElementsByTagName("input");
+				for (var i = 0; i < allIpt.length; i++) {
+					if (allIpt[i].getAttribute("type") == "checkbox" && allIpt[i].checked) {
+						var avalue = allIpt[i].checked ? "true" : "false";
+						var par = allIpt[i].parentNode.parentNode;
+						var pricei = parseFloat(par.getElementsByClassName("pricei")[0].innerText)
+						var num = parseInt(par.getElementsByTagName("input")[1].value);
+						if (avalue) {
+							count++
+							price += pricei * num;
+							isOk=true;
+						}else{
+							isOk=false;
+						}
+					}
+				}
+				if(isOk){
+					OpenCreateOrder();
+				}else{
+					CloseCreateOrder();
+				}
+				totalSpan.innerHTML = '￥' + price.toFixed(2);
+			});
+			mui('#goodsList').on('change', 'input', function() {
+				var isOk=false;//判断是否开启生成订单
+				price = 0;
+				var count = 0;
+				var allIpt = goodsList.getElementsByTagName("input");
+				for (var i = 0; i < allIpt.length; i++) {
+					if (allIpt[i].getAttribute("type") == "checkbox" && allIpt[i].checked) {
+						var avalue = allIpt[i].checked ? "true" : "false";
+						var par = allIpt[i].parentNode.parentNode;
+						var pricei = parseFloat(par.getElementsByClassName("pricei")[0].innerText)
+						var num = parseInt(par.getElementsByTagName("input")[1].value);
+						if (avalue) {
+							count++
+							price += pricei * num;
+							isOk=true;
+						}else{
+							isOk=false;
+						}
+					}
+				}
+				if(isOk){
+					OpenCreateOrder();
+				}else{
+					CloseCreateOrder();
+				}
+				totalSpan.innerHTML = '￥' + price.toFixed(2);
+			});
+			document.getElementById("dataDel").addEventListener("tap", function() { //删除列表
+				// 弹出提示信息对话框
+				var isCheck = false;
+				var list = goodsList.getElementsByClassName("mui-table-view-cell");
+				var p = 0;
+				while (p < list.length) {
+					var listCheck = list[p].getElementsByTagName('input')[0];
+					if (listCheck.checked) {
+						isCheck = true;
+						break;
+					} else {
+						p++
+					}
+				}
+				if (isCheck) {
+					plus.nativeUI.confirm("是否删除所选产品？", function(e) {
+						if (e.index == 0) {
+							var list = goodsList.getElementsByClassName("mui-table-view-cell");
+							var p = 0;
+							while (p < list.length) {
+								var listCheck = list[p].getElementsByTagName('input')[0];
+								if (listCheck.checked) {
+									var str = totalSpan.innerHTML;
+									var newStr = parseInt(str.substring(1, str.length));
+									var listbar = list[p].getAttribute("barcode");
+//									var cha = price - newStr;
+//									totalSpan.innerHTML = '￥' + cha.toFixed(2);
+									document.getElementById("selectAll").checked = false;
+									goodsList.removeChild(list[p]);
+									totalSpan.innerHTML = '￥0.00';
+									if (!goodsList.innerHTML) {
+										var adby,adlist;
+										if (plus.webview.getWebviewById("additembyself.html")) {
+											adby = plus.webview.getWebviewById("additembyself.html");
+											adby.evalJS("CloseAllpay()")
+										}
+										plus.storage.setItem("itemExist", "0")
+										if (plus.webview.getWebviewById("list/newlist.html")) {
+											adlist = plus.webview.getWebviewById("list/newlist.html")
+											adlist.evalJS("CloseAllpay()");
+											adlist.evalJS("CloseTopay()");
+										}
+										price = 0;
+									}
+									if (list.length == 0) {
+										CloseCreateOrder();
+										totalSpan.innerHTML = '￥0.00';
+									}
+								} else {
+									p++
+								}
+							}
+						} else {
+							return;
+						}
+					}, "", ["确认", "取消"]);
+				} else {
+					plus.ui.toast("请勾选商品！", {
+						duration: 200,
+						verticalAlign: "top"
+					})
+				}
+			})
+
+			function scanCallback(e) {
+				var tolistli = goodsList.getElementsByTagName("li");
+				for (var i = 0; i < tolistli.length; i++) {
+					var Tbarcode = tolistli[i].getElementsByTagName("div")[0].getAttribute("barcode");
+					if (Tbarcode == e) {
+						tolistli[i].getElementsByClassName("mui-numbox-input")[0].value=parseInt(tolistli[i].getElementsByClassName("mui-numbox-input")[0].value)+1;
+						return
+					}
+				}
+				var param = systemParam("V5.mobile.item.get");
+				param.barcode = e;
+				param.type = "addOrder";
+				dataSendFn('itemGet', param, function(data) {
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						console.log(mapmsg);
+						return
+					}
+					ImportData(data)
+				}, "get")
+			}
+
+			function ImportData(data) { //导入数据
+				var goodsList = document.getElementById("goodsList");
+				var product = data.product;
+				var productNumber = product.productNumber;
+				var productName = product.productName;
+				var productPic = product.productPic || "../images/cbd.jpg";
+				var skuNumber = product.skuNumber;
+				var skuName = product.skuName;
+				var price = product.price;
+				var barcode = product.barcode;
+				var orderCount = product.orderCount;
+				var html = '<div class="mui-input-group" barcode="' + barcode + '"><div class="mui-flex-all"><div class="mui-input-row mui-checkbox mui-flex-checkwidth mui-flex-changeinput"><input name="checkbox"  class="changeinput" value="Item 1" type="checkbox"></div><div class="mui-table-flex"><div class="mui-flex-all dd-top" ><img class="itempic" src="' + productPic + '"><div class="mui-table-flex mui-flex-lineheight"><span class="mui-flex-block">' + productName + '</span><span class="mui-flex-block">' + productNumber + ' </span><span class="mui-flex-block">' + skuName + '</span></div><div class="cellpad mui-flex-width"><span class="mui-flex-block">价格：￥' + '<span class="pricei">' + price + '</span><div class="mui-numbox mui-flex-numbox openNum" data-numbox-min="1"><button class="mui-btn mui-numbox-btn-minus" type="button">-</button><input class="mui-numbox-input" type="number"><button class="mui-btn mui-numbox-btn-plus" type="button">+</button></div><div style="display:none" class="openCount">库存:' + orderCount + '</div></div></div></div></div></div>'
+				var li = document.createElement("li");
+				li.className = "mui-table-view-cell";
+				li.setAttribute("barcode", barcode)
+				li.innerHTML = html;
+				goodsList.appendChild(li);
+				numBtn(); //numer  点击自生成失效，需重新运行
+			}
+
+			function addNewItems(data) {
+				var goodsList = document.getElementById("goodsList");
+				var li = document.createElement("li");
+				li.className = "mui-table-view-cell";
+				li.innerHTML = data;
+				var barcode = li.getElementsByTagName("div")[0].getAttribute("barcode");
+				var tolistli = goodsList.getElementsByTagName("li");
+				for (var i = 0; i < tolistli.length; i++) {
+					var Tbarcode = tolistli[i].getElementsByTagName("div")[0].getAttribute("barcode");
+					if (Tbarcode == barcode) {
+						tolistli[i].getElementsByClassName("mui-numbox-input")[0].value=parseInt(tolistli[i].getElementsByClassName("mui-numbox-input")[0].value)+1;
+						return
+					}
+				}
+//				li.getElementsByClassName("openNum")[0].style.display = "block";
+//				li.getElementsByClassName("openCount")[0].style.display = "none";
+				goodsList.appendChild(li);
+				numBtn();
+			}
+
+			function clearCart() {
+				goodsList.innerHTML = ""
+			}
+			function OpenCreateOrder() { //开启生成订单按钮可编辑状态
+				createOrder = document.getElementById("createOrder");
+				createOrder.disabled = false;
+				createOrder.style.backgroundColor = "#FFFFFF";
+				createOrder.style.color = "#EC6C13";
+				createOrder.style.border = "1px solid #EC6C13";
+			}
+
+			function CloseCreateOrder() { //关闭生成按钮可编辑状态
+				createOrder = document.getElementById("createOrder");
+				createOrder.disabled = true;
+				createOrder.style.backgroundColor = "#CCCCCC";
+				createOrder.style.color = "#FFFFFF";
+				createOrder.style.border = "1px solid #CCCCCC";
+			}
+			function PriceClear(){//价格清零
+				totalSpan.innerHTML = '￥0';
+			}
+		</script>
+	</body>
+
+</html>

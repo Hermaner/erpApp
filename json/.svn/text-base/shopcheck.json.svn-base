@@ -1,0 +1,39 @@
+{
+    "isSuccess": "true",
+    "totalCount": 3,
+    "productSkus": [
+        {
+            "productNumber": "2011aaaa",
+            "productName": "测试盘点1",
+            "productPic": "../images/cbd.jpg",
+            "skuNumber": 1,
+            "skuName": "黑色M",
+            "barcode": 112211221122,
+            "price": 250,
+            "stock": 112,
+            "warnStock": 30
+        },
+        {
+            "productNumber": "2011bbbb",
+            "productName": "测试盘点2",
+            "productPic": "../images/cbd.jpg",
+            "skuNumber": 2,
+            "skuName": "白色M",
+            "barcode": 112123444455,
+            "price": 150,
+            "stock": 138,
+            "warnStock": 30
+        },
+        {
+            "productNumber": "2011cccc",
+            "productName": "测试盘点3",
+            "productPic": "../images/cbd.jpg",
+            "skuNumber": 3,
+            "skuName": "蓝色L",
+            "barcode": 23411111111,
+            "price": 175,
+            "stock": 110,
+            "warnStock": 30
+        }
+    ]
+}

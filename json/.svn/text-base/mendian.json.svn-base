@@ -1,0 +1,22 @@
+{
+    "isSuccess": true,
+    "totalCount": 2,
+    "stores": [
+        {
+            "storeName": "宏巍一号",
+            "storeCode": 2015888,
+            "address": "桂平路418号",
+            "contact": "小成",
+            "mobile": 12345678901,
+            "phone": "021-11111111"
+        },
+        {
+            "storeName": "宏巍二号",
+            "storeCode": 20159999,
+            "address": "桂平路418号",
+            "contact": "小成2",
+            "mobile": 22222222221,
+            "phone": "021-22222222"
+        }
+    ]
+}

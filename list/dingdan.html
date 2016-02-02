@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/stylebypad.css" rel="stylesheet">
+		<link href="../css/mui.listpicker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<script src="../js/layer.m/layer.m.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/mui.listpicker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GKe53c1jaEFzcIyEwzpQHGUU"></script>
+		<script src="../js/ComUrl.js"></script>
+		<!--距离计算-->
+		<style>
+			span {
+				color: #999999;
+				font-size: 12px;
+			}
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+			}
+			label {
+				font-size: 12px;
+			}
+			
+			/*.mui-table-view-cell:after{height: 0px;}*/
+		</style>
+	</head>
+
+	<body class="mui-dingdan-body">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-title dingdan-fff" id="headname" class="mui-action-menu" href="#bottomPopover">
+				全部订单
+				<span class="mui-icon mui-icon-arrowdown dingdan-fff"></span>
+			</a>
+			<!--已接订单和已完结订单有地图图标-->
+			<a href="#" class="mui-icon iconfont icon-ditu mui-pull-right mui-dingdan-whitenone" id="mapIdTap"></a>
+			<a  class="mui-icon iconfont icon-saomiao mui-pull-right mui-dingdan-whitenone"  onclick="clicked('../barcode/barcode_anchor.html',true,true);"  id="saomiaoId"></a>
+		</header> 
+		<div class="mui-contentz mui-contentzh">
+			<!--<div class="searchwidth">
+				<div class="searchwidth2">
+					<input type="search" class="mui-input-clear inputbac mui-input-speech dd-flexsearch" id="orderlistTxt" placeholder="" />
+					<span class="mui-icon mui-icon-search dd-search"></span>
+					<button class="dd-flex3" id="searcBtn">搜索</button>
+				</div>
+			</div>-->
+			<div class="item-searchwidth"> 
+					<div class="shop-search">
+						<input type="search" id="orderlistTxt" class="mui-input-clear inputbac mui-input-speech" placeholder="" />
+					</div>
+					<span class="mui-icon mui-icon-search dd-search"></span>
+					<button class="clearboth shopin-ss" id="searcBtn">搜索</button>
+			</div>
+		</div>
+		<div id="tochange" class="mui-content content-color  mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<ul class="mui-table-view limargin clearboth" id="tolistdetail">
+					
+				</ul>
+			</div>
+		</div>
+		<div class="maxwidth2 orderfixBtn myfixBtn" id="myfixBtn" style="display: block;z-index:9999"> 
+			<!--未接订单-->
+			<div class="mui-pull-left"> 
+				<div class="mui-input-row mui-checkbox mui-left dd-footmar">
+					<label class="mui-dingdan-labelpadding"><span>全选</span><span id="changeNum">(0)</span></label>
+					<input  class="changeinput" id='selectAll'  type="checkbox">
+				</div>
+			</div>
+			<div class="mui-pull-right"  id="id_UN_ACCPET">
+				<button class="mui-btn-mini dd-changebtn mui-dingdan-marginright mui-btnz-tack">接单</button>
+			</div>
+			<div class="mui-pull-right"  id="id_ACCPET">
+				<button class="mui-btn-mini dd-changebtn mui-dingdan-marginright mui-btnz-send">发货</button>
+			</div>
+		</div>
+		<div id="bottomPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view dd-center">
+						<li class="mui-table-view-cell" pid="">
+							<a href="#">
+								<div>
+									全部订单
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" pid="UN_ACCPET">
+							<a href="#">
+								<div>
+									未接订单
+									
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" pid="ACCPET">
+							<a href="#">
+								<div>
+									已接订单
+									
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" pid="SINCE">
+							<a href="#">
+								<div>
+									自提订单
+
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" pid="WAIT_GOOD">
+							<a href="#">
+								<div>
+									待收货订单
+									
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" pid="END_ORDER">
+							<a href="#">
+								<div>
+									已完结订单
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" pid="IN_STORE">
+							<a href="#">
+								<div>
+									门店订单
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="map" style="height:600px;position:fixed;left:9999px;width:600px">地图加载中...</div>
+		</div>
+		<input type="hidden" id="orderStatus">
+		<div id="divios"></div>
+	</body>
+	<script src="../js/common.js"></script>
+	<script src="dingdan.js"></script>
+
+</html>

@@ -1,0 +1,16 @@
+{
+    "isSuccess": "true",
+    "reasons": [
+        {
+            "reasonId": "13",
+            "reasonInfo": "无货"
+        },
+        {
+            "reasonId": "31",
+            "reasonInfo": "无法配送"
+        },{
+            "reasonId": "434",
+            "reasonInfo": "人手不够"
+        }
+    ]
+}

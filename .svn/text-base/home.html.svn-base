@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="mui-home-htmlcolor">
+
+	<head>
+		<meta charset="utf-8">
+		<title>home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.css">
+		<link rel="stylesheet" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/stylebypad.css">
+		<style>
+			.mui-table-view:before{
+				height: 0;
+			}
+			.mui-flex-all span{
+				display: block;
+			}
+			.mui-flex-all a{
+				display: block;
+				text-align: center;
+			}
+			#homelist li{
+				height: 90px;
+				padding-top: 17px;
+				border-right: 1px solid #eee;
+			}
+			#homelist2 a{
+				color: #CCCCCC;
+				font-size: 12px;
+				padding-top:21px;
+				border-right: 1px solid #EEEEEE;
+			}
+			.home-bottom{
+				border-bottom: 1px solid #EEEEEE;
+			}
+			.mui-liwidth{
+				width: 50px;
+			}
+			.mui-width-sixty{
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+			.mui-width-ten{
+				padding-top:4px;
+			}
+		</style>
+	</head>
+
+	<body class="mui-home-bodycolor">
+		<div class="h-head">
+			<ul class="mui-table-view mui-flex-all headbac mui-home-tablepad" id="toxiaoxilist">
+				<li class="mui-home-middle mui-width-ten">
+					<img class="mui-media-object mui-imgradius" src="images/about-logo.png">
+				</li>
+				<li class="mui-table-flex mui-home-middle mui-width-sixty" id="topMsg">
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</li>
+				<li class="mui-liwidth">
+					<a href="index/xiaoxilist.html">
+						<span class="mui-icon mui-icon-chatbubble mui-pull-right h-list">
+							
+						</span>
+					</a>
+					<button class="mui-btn-primary home-zhuxiao" id="exit-btn">注销</button>
+				</li>
+			</ul>
+
+		</div>
+		<div class="mui-content myxhome mui-home-contentcolor">
+			<ul class="mui-table-view mui-flex-all mui-home-contentcolor" id="homelist">
+				<li class="mui-table-flex mui-home-bordertop">
+					<a href="list/shopcheck.html" class="noscan">
+						<!--<a href="pluginPrinter.html" class="noscan">-->
+						<span class="mui-icon iconfont icon-icon mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">商品盘点</span>
+					</a>
+				</li>
+				<li class="mui-table-flex">
+					<a href="list/shopin.html" class="noscan">
+						<span class="mui-icon iconfont icon-mendianchaxun mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">商品入库</span>
+					</a>
+				</li>
+				<li class="mui-table-flex">
+					<a onclick="clicked('barcode/barcode_anchor.html',true,true);">
+						<span class="mui-icon iconfont icon-saomiao mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">定位订单</span>
+					</a>
+				</li>
+				<li class="mui-table-flex">
+					<a href="list/newlist.html" class="noscan">
+						<span class="mui-icon iconfont icon-gengduo mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">门店收银</span>
+					</a>
+				</li>
+			</ul>
+			<ul id="homelist2" class="mui-table-view mui-home-ulcolor">
+				<li class="mui-flex-all">
+					<a uid="UN_ACCPET" class="mui-table-flex home-bottom">
+						<div class="h-fontsize" id="un_acount">0</div>
+						<span class="mui-media-body mui-home-spancolor2">未接订单</span>
+					</a>
+					<a uid="ACCPET" class="mui-table-flex home-bottom">
+						<div class="h-fontsize" id="acount">0</div>
+						<span class="mui-media-body mui-home-spancolor2">已接订单</span>
+					</a>
+				</li>
+				
+				<li class="mui-flex-all">
+					<a uid="SINCE" class="mui-table-flex">
+						<div class="h-fontsize" id="since_acount">0</div>
+						<span class="mui-media-body mui-home-spancolor2">自提订单</span>
+					</a>
+					<a uid="CALL" class="mui-table-flex">
+						<div class="h-fontsize" id="call_acount">0</div>
+						<span class="mui-media-body mui-home-spancolor2">调货单据</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+
+	</body>
+	<script src="js/mui.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/apijs/api.js"></script>
+	<script>
+		var exit, un_acount, acount, since_acount, call_acount, topMsg, callPage, loginPage;
+		var ws,wo;
+		mui.init({
+			swipeBack: false,
+			keyEventBind: {
+				backbutton: false
+			}
+		});
+		mui.plusReady(function() {
+			un_acount = document.getElementById("un_acount");
+			acount = document.getElementById("acount");
+			since_acount = document.getElementById("since_acount");
+			call_acount = document.getElementById("call_acount");
+			topMsg = document.getElementById("topMsg");
+			callPage = plus.webview.getWebviewById("callin.html")
+			loginPage = plus.webview.getWebviewById("login.html")
+			exit = document.getElementById("exit-btn");
+			ws = plus.webview.currentWebview();
+			wo = ws.opener();
+			clickedFn('#homelist', '.noscan');
+			clickedFn('#toxiaoxilist', 'a');
+			mui('#homelist2').on('tap', 'a', function(e) {
+				var uid = this.getAttribute("uid");
+				if (uid == "CALL") {
+					//					mui.fire(callPage, 'callInShow', {});
+					mui.openWindow({
+						id: 'list/callin.html',
+						url: 'list/callin.html',
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: true
+						}
+					})
+					return
+				}
+				if (mui.os.ios) {
+					plus.webview.show('list/dingdan.html');
+				} else {
+					plus.webview.show('list/dingdan.html', "fade-in", 300);
+				}
+				//隐藏当前;
+				plus.webview.hide('home.html');
+				//更改当前活跃的选项卡
+				var activeTab = 'list/dingdan.html';
+				wo.evalJS("orderlistback('" + uid + "')")
+			});
+			exit.addEventListener("tap", function() {
+				loginPage.show()
+				plus.navigator.setStatusBarBackground("#1F71B4");
+//				plus.storage.removeItem("orgCode");
+			})
+		})
+
+		function loadData() {//订单按状态反馈分店总数接口，接口文档No.37
+			var param = systemParam("V5.mobile.order.status.count");
+			dataSendFn('orderStatusCount', param, function(data) {
+				plus.nativeUI.closeWaiting();
+				var storeName = data.storeName
+				var storeCode = data.storeCode
+				var storeIcon = data.storeIcon
+				var address = data.address
+				var unAccpetCount = data.unAccpetCount || 0
+				var acceptCount = data.acceptCount || 0
+				var sinceCount = data.sinceCount || 0
+				var allocateCount = data.allocateCount || 0;
+				var op = plus.storage.getItem("op")
+				topMsg.innerHTML = '<p class="mui-p-font">' + storeName + '</p><p>' + address + '</p><p>' + op + '</p>'
+				un_acount.innerHTML = unAccpetCount
+				acount.innerHTML = acceptCount
+				since_acount.innerHTML = sinceCount
+				call_acount.innerHTML = allocateCount;
+				if(unAccpetCount>0||acceptCount>0){
+					wo.evalJS("addRed(1)");
+				}else{
+					wo.evalJS("addRed(0)");
+				}
+				
+			}, "get")
+		}
+	</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/stylebypad.css" rel="stylesheet">
+		<link href="../css/mui.listpicker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			span {
+						color: #AAAAAA;
+						font-size: 12px;
+					}
+				.mui-content>.mui-table-view:first-child{
+						margin-top: 0px;
+					}
+		</style>
+
+	</head>
+ 
+	<body class="bodypadbot mui-listself-body"> 
+		<header class="mui-bar mui-bar-nav" style="background-color: #007aff;">
+			<a class="mui-action-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width" style="color: #FFFFFF;"></a>
+			<a class="mui-title" class="mui-action-menu" href="#bottomPopover" style="color:#FFFFFF">
+			订单详情
+			</a>
+		</header>
+		<div class="mui-content dingdan">
+			<ul class="mui-table-view" id="orderTopmsg">
+			</ul>
+			<span class="mui-content-padded">商品信息</span>
+			<ul class="mui-table-view" id="detailList">
+				
+			</ul>
+			<span class="mui-content-padded">订单状态</span>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p><span id="orderstatus"></span></p>
+				</li>
+			</ul>  
+			<div class="maxwidth2 ld-divbot2 detailfixBtn myfixBtn" id="detailfixBtn">
+					<div class="ld-footbtn mui-pull-right"  id="id_CALLOUT"><!--调出-->
+						<button class="mui-btn-mini mui-btnz-del" id="dataDel">删除订单</button>
+						<button class="mui-btn-mini dd-changebtn mui-btnz-callout" id="outsaveBtn">确认调出</button>
+					</div>
+					
+					<div class="ld-footbtn mui-pull-right"  id="id_CALLIN"><!--调入-->
+						<button class="mui-btn-mini dd-changebtn mui-btnz-callin" id="insaveBtn">确认调入</button>
+					</div>
+				
+			</div>
+			
+		</div>
+		<script src="../js/common.js"></script>
+		<script src="../js/layer.m/layer.m.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/mui.listpicker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="calldetail.js"></script>
+	</body>
+
+</html>

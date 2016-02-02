@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<title>H5Plugin</title>
+		<script type="text/javascript" src="./js/common.js"></script>
+		<script type="text/javascript" src="jsaip/pdr.js"></script>>
+		<script type="text/javascript" src="./js/printerplugin.js"></script>
+
+		<script type="text/javascript">
+			function pluginShow() {
+				plus.pluginprinter.PluginPrinterFunction("Html5", "Plus", "AsyncFunction", "MultiArgument!", function(result) {
+//					alert(result[0] + "_" + result[1] + "_" + result[2] + "_" + result[3]);
+				}, function(result) {
+					alert(result)
+				});
+			}
+
+			function pluginShowArrayArgu() {
+				plus.pluginprinter.PluginPrinterFunctionArrayArgu(["Html5", "Plus", "AsyncFunction", "ArrayArgument!"], function(result) {
+//					alert(result);
+				}, function(result) {
+//					alert(result)
+				});
+			}
+
+			
+		</script>
+		<link rel="stylesheet" href="./css/common.css" type="text/css" charset="utf-8" />
+	</head>
+
+	<body>
+		<header>
+			<div class="nvtt">HBuilder-Plugin</div>
+		</header>
+		<div id="dcontent" class="dcontent">
+			<br/>
+			<div class="button" onclick="pluginShow()">扫描打印机</div>
+			<div class="button" onclick="pluginShowArrayArgu()">测试打印，请传入参数请看源码</div><br/>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" media="only screen and (min-width:728px),only screen and (min-device-width:728px)" href="../css/stylebypad.css">
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/cityData.js"></script>
+		<style>
+			span {
+				color: #999999;
+				font-size: 12px;
+			}
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+				padding: 6px 5px;
+			}
+			.mui-input-row label {
+				font-size: 17px;
+				line-height: 21px;
+			}
+		</style>
+	</head>
+
+	<body class="mui-newlist-body mui-buyers">
+		<header class="mui-bar mui-bar-nav headbac">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-newlist-white mui-back-width"></a>
+			<h1 id="title" class="mui-title mui-newlist-white">录入买家信息</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table mui-table-view limargin" id="goodsList" style="padding-top:5px;">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>联系方式</label>
+						<input type="text" id="telPhone" onblur="isTelphone()" placeholder="请输入手机号码">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>买家姓名</label>
+						<input type="text" id="nameId" placeholder="请输入买家姓名">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>省份</label>
+						<select class="mui-buyer-select" id="provinceId" onchange="changeProvince(this)">
+							<option value="">请选择省份</option>
+							
+						</select>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>城市</label>
+						<select class="mui-buyer-select" id="cityId" onchange="changeCity(this)">
+							<option value="">请选择城市</option>
+							
+						</select>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>区县</label>
+						<select class="mui-buyer-select" id="countyId" onchange="changeaddre()"> 
+							<option>请选择区县</option>
+							
+						</select>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>收货地址</label>
+						<input type="text" id="addressId" placeholder="请输入收货地址">
+					</div>
+				</li>
+			</ul>
+			<div class="mui-button-row mui-buyers-btn">
+				<button type="button" class="mui-btn mui-buyers-btn-esc" id="cancelId">取消</button>&nbsp;&nbsp;
+				<button type="button" class="mui-btn mui-btn-primary" id="submitId">确认</button>
+			</div>
+		</div>
+		<script>
+			var telPhone, nameId, provinceId, cityId, countyId, addressId, cancelId, submitId, wo, ws, areas, areasData = [];
+			mui.plusReady(function() {
+				wo = plus.webview.currentWebview()
+				ws = wo.opener()
+				telPhone = document.getElementById("telPhone");
+				nameId = document.getElementById("nameId");
+				provinceId = document.getElementById("provinceId");
+				cityId = document.getElementById("cityId");
+				countyId = document.getElementById("countyId");
+				addressId = document.getElementById("addressId");
+				cancelId = document.getElementById("cancelId")
+				submitId = document.getElementById("submitId")
+				var phtml = '<option value="">请选择省份</option>'
+				for (var i = 0; i < pData.length; i++) {
+					phtml += '<option value="' + pData[i] + '">' + pData[i] + '</option>'
+				}
+				provinceId.innerHTML = phtml;
+				cancelId.addEventListener("tap", function() {
+					mui.back()
+				})
+				submitId.addEventListener("tap", function() {
+					var telReg = !!(telPhone.value).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+					if (!telPhone.value || !nameId.value || !provinceId.value || !cityId.value || !countyId.value || !addressId.value) {
+						plus.ui.toast("信息不全！", {
+							duration: 200,
+							verticalAlign: "top"
+						})
+					} else if (telReg == false) {
+						plus.ui.toast("请输入正确的手机号！", {
+							duration: 200,
+							verticalAlign: "top"
+						})
+						telPhone.value = ""
+					} else {
+						var html = '<p><span class="mui-listself-spanblack">' + nameId.value + telPhone.value + '</span></p><p><span class="mui-listself-spanblack">' + provinceId.value + cityId.value + countyId.value + '</span></p><p><span class="mui-listself-spanblack">' + addressId.value + '</span></p>';
+						ws.evalJS("buyCallback('" + html + "','" + nameId.value + "','" + telPhone.value + "','" + provinceId.value + cityId.value + countyId.value + addressId.value + "')")
+						mui.back()
+					}
+				})
+			})
+
+			function isTelphone() {
+				var telPhoneVal = telPhone.value
+				var telReg = !!telPhoneVal.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+				if (telReg == false) {
+					plus.ui.toast("请输入正确的手机号！", {
+						duration: 200,
+						verticalAlign: "top"
+					})
+					telPhone.value = ""
+					return
+				}
+				var param = paramFn("V5.mobile.member.get");
+				param.orgCode = plus.storage.getItem("orgCode");
+				param.op = plus.storage.getItem("op");
+				param.mobilePhone = telPhoneVal;
+				dataSendFn('memberGet', param, function(data) {
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						return
+					}
+					data=data.member
+					var fullName = data.fullName;
+					var mobilePhone = data.mobilePhone;
+					var address = data.address;
+					var provinceName = data.provinceName;
+					var cityName = data.cityName;
+					var cityAreaName = data.cityAreaName;
+					nameId.value = fullName;
+					
+					provinceId.value = provinceName;
+					changeProvince(provinceId)  
+					cityId.value = cityName;
+					changeCity(cityId)
+					countyId.value = cityAreaName;
+					addressId.value = address;
+				}, "get")
+			}
+
+			function changeProvince(e) {
+				var pindex = e.selectedIndex;
+				var chtml = '<option value="">请选择城市</option>'
+				var ccData = cData[pindex - 1]
+				for (var i = 0; i < ccData.length; i++) {
+					chtml += '<option value="' + ccData[i] + '">' + ccData[i] + '</option>'
+				}
+				cityId.innerHTML = chtml;
+				countyId.innerHTML = '<option value="">请选择区县</option>';
+				addressId.value=""
+			}
+
+			function changeCity(e) {
+				var psex = provinceId.selectedIndex - 1;
+				var psexcount = 0;
+				console.log()
+				for (var i = 0; i < psex; i++) {
+					psexcount += cData[i].length;
+				}
+				var pindex = psexcount + e.selectedIndex;
+				var chtml = '<option value="">请选择区县</option>'
+				var ccData = cyData[pindex - 1]
+				if (!ccData.length && e.value) {
+					chtml = '<option value="' + e.value + '">' + e.value + '</option>'
+				} else {
+					for (var i = 0; i < ccData.length; i++) {
+						chtml += '<option value="' + ccData[i] + '">' + ccData[i] + '</option>'
+					}
+				}
+				countyId.innerHTML = chtml;
+				addressId.value=""
+			}
+			function changeaddre() {
+				addressId.value=provinceId.value+cityId.value+countyId.value;
+			}
+				//				if (!plus.storage.getItem("areasGet")) {
+				//					var param = paramFn("V5.mobile.areas.get");
+				//					param.orgCode = plus.storage.getItem("orgCode");
+				//					dataSendFn('areasGet', param, function(data) {
+				//						if (!data.isSuccess) {
+				//							var mapmsg = data.map.errorMsg;
+				//							plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+				//							return
+				//						}
+				//						plus.storage.setItem("areasGet", JSON.stringify(data.areas))
+				//					})
+				//				} else {
+				//					areas = JSON.parse(plus.storage.getItem("areasGet"))
+				//					console.log(areas)
+				//					var d = ""
+				//					for (var i = 0; i < areas.length; i++) {
+				//						var aid = areas[i].id;
+				//						var aname = areas[i].name;
+				//						var aparent_id = areas[i].parent_id;
+				//						if (aparent_id == 1) {
+				//							for (var j = 0; j < areas.length; j++) {
+				//								var bid = areas[j].id;
+				//								var bname = areas[j].name;
+				//								var bparent_id = areas[j].parent_id;
+				//								if (bparent_id == aid) {
+				//									var s = "[";
+				//									for (var p = 0; p < areas.length; p++) {
+				//										var cid = areas[p].id;
+				//										var cname = areas[p].name;
+				//										var cparent_id = areas[p].parent_id;
+				//										if (cparent_id == bid) {
+				//											s += '"' + cname + '",';
+				//										}
+				//									}
+				//									if(s.length>3){
+				//										s = s.substring(0, s.length - 1); 
+				//									} 
+				//									s += "],"
+				//									d += s
+				//								}
+				//							}
+				//						}
+				//					}
+				//					console.log(d)
+				//				}
+		</script>
+
+	</body>
+
+</html>

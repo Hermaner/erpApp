@@ -1,0 +1,47 @@
+{
+    "isSuccess": true,
+    "orderDate":"2015-02-02  06:05:02",
+    "shopName":"某某淘宝店某某淘宝店某某淘宝店某某淘宝",
+    "orderPayStatus":"未付款",
+    "totalAmount":"￥555",
+    "initialTotalAmount":"￥555",
+    "postFee":"￥10",
+    "productNum":"2",
+    "buyerMessage":"节目将阿婆大苏打",
+    "logisticInfo":{
+    "consignee":"收货人",
+    "mobile":"123123132",
+    "phone":"1231313131",
+    "province":"上海",
+    "city":"上海",
+    "cityArea":"徐汇",
+    "address":"桂平路418号2601",
+    "operation":"门店自提",
+    "sinceTime":"2015-02-02  06:05:02",
+    "logisticsCode":"13412313131",
+    "outsid":"1223546" 
+    },
+    "products": [
+        {
+            "productNumber": "1001313211",
+            "productName": "商品A2015夏季新款赞赞赞",
+            "productPic": "../images/cbd.jpg",
+            "skuNumber ": "21823424222342",
+            "skuName": "颜色：白色",
+            "barcode": "24124234",
+            "price": "￥250",
+            "count": "10",
+            "stock": "250"
+        },{
+             "productNumber": "1001313211",
+            "productName": "商品A2015夏季新款赞赞赞",
+            "productPic": "../images/cbd.jpg",
+            "skuNumber ": "21823424222342",
+            "skuName": "颜色：白色",
+            "barcode": "24124234",
+            "price": "￥250",
+            "count": "16",
+            "stock": "250"
+        }
+    ]
+}

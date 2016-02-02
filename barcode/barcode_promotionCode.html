@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<title>新增商品</title>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/common.js"></script>
+
+		<link rel="stylesheet" href="../css/mui.css" type="text/css" charset="utf-8" />
+		<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				position: absolute;
+				top: 44px;
+				bottom: 50px;
+				text-align: center;
+			}
+			#scanTips {
+				width: 100%;
+				position: absolute;
+				bottom: 0px;
+				left: 0;
+				text-align: center;
+				color: #fff;
+				font-size: 14px;
+				line-height: 50px;
+				height: 50px
+			}
+			.tip {
+				color: #FFFFFF;
+				font-weight: bold;
+				text-shadow: 0px -1px #103E5C;
+			}
+			footer {
+				width: 100%;
+				height: 44px;
+				position: absolute;
+				bottom: 0px;
+				line-height: 44px;
+				text-align: center;
+				color: #FFF;
+			}
+			.fbt {
+				width: 50%;
+				height: 100%;
+				background-color: #FFCC33;
+				float: left;
+			}
+			.fbt:active {
+				-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+				box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+			}
+			.mui-back-width{
+				width: 44px;
+				height: 44px;
+			}
+		</style>
+	</head>
+
+	<body style="background:#000">
+		<header class="mui-bar mui-bar-nav" id="toshoppingcare">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width"></a>
+			<h1 class="mui-title">扫描 </h1>
+			<a class="mui-pull-right">
+				<button class="mui-btn mui-btn-primary mui-btn-outlined" id="success" style="color: #FFFFFF;border-color:#FFFFFF;display: none;">完成</button>
+			</a>
+		</header>
+		<div id="bcid">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<p class="tip">...载入中...</p>
+		</div>
+		<div id="scanTips">
+
+		</div>
+
+		<script type="text/javascript">
+			var ws = null,
+				wo = null;
+			var scan = null,
+				domready = false;
+			var scanTips, itemPrice;
+			 // H5 plus事件处理
+			function plusReady() {
+				if (ws || !window.plus || !domready) {
+					return;
+				}
+				scanTips = document.getElementById("scanTips")
+				ws = plus.webview.currentWebview();
+				itemPrice = ws.itemPrice;
+				wo = ws.opener()
+					// 开始扫描
+				ws.addEventListener('show', function() {
+					scan = new plus.barcode.Barcode('bcid');
+					scan.onmarked = onmarked;
+					scan.start({
+						conserve: true,
+						filename: "_doc/barcode/"
+					});
+				});
+				// 显示页面并关闭等待框
+				ws.show("pop-in");
+				plus.nativeUI.closeWaiting()
+			}
+			if (window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			 // 监听DOMContentLoaded事件
+			document.addEventListener("DOMContentLoaded", function() {
+				domready = true;
+				plusReady();
+			}, false);
+			if (document.getElementById("success")) {
+				document.getElementById("success").addEventListener("tap", function() {
+					mui.openWindow({
+						id: "shoppingcart.html",
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					setTimeout(function() {
+						ws.close();
+					}, 0)
+				});
+			}
+			 // 二维码扫描成功
+			function onmarked(type, result, file) {
+				switch (type) {
+					case plus.barcode.QR:
+						type = "QR";
+						break;
+					case plus.barcode.EAN13:
+						type = "EAN13";
+						break;
+					case plus.barcode.EAN8:
+						type = "EAN8";
+						break;
+					case plus.barcode.CODE93:
+						type = "CODE93";
+						break;
+					case plus.barcode.CODE128:
+						type = "CODE128";
+						break;
+					case plus.barcode.CODE39:
+						type = "CODE39";
+						break;
+					case plus.barcode.RSSEXPANDED:
+						type = "RSSEXPANDED";
+						break;
+					case plus.barcode.RSS14:
+						type = "RSS14";
+						break;
+					case plus.barcode.PDF417:
+						type = "PDF417";
+						break;
+					case plus.barcode.MAXICODE:
+						type = "MAXICODE";
+						break;
+					case plus.barcode.ITF:
+						type = "ITF";
+					case plus.barcode.CODABAR:
+						type = "CODABAR";
+					case plus.barcode.UPCE:
+						type = "UPCE";
+					case plus.barcode.UPCA:
+						type = "UPCA";
+					case plus.barcode.DATAMATRIX:
+						type = "DATAMATRIX";
+					case plus.barcode.AZTEC:
+						type = "AZTEC";
+						break;
+					default:
+						type = "其它";
+						break;
+				}
+				result = result.replace(/\n/g, '');
+				console.log(result);
+				var param = paramFn("V5.mobile.order.coupon.get");
+				param.orgCode = plus.storage.getItem("orgCode");
+				param.couponCode = result;
+				dataSendFn('couponGet', param, function(data) {
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						scanTips.innerHTML = mapmsg
+						setTimeout(function() {
+							scanTips.innerHTML = ""
+						}, 3000)
+						return
+					}
+					var condition = data.coupon.condition;
+					if (parseFloat(itemPrice) < parseFloat(condition)) {
+						scanTips.innerHTML='该优惠码未满足优惠条件！';
+						setTimeout(function() {
+							scanTips.innerHTML = ""
+						}, 3000)
+						return
+					}
+					var denomination =data.coupon.denomination;
+					wo.evalJS("couponContentBack('" + condition + "','" + denomination + "','" + result + "');");
+					mui.back()
+				}, "get")
+			}
+		</script>
+
+	</body>
+
+</html>

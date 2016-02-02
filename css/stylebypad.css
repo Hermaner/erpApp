@@ -1,0 +1,160 @@
+
+@media only screen and (min-width:728px) {
+
+.loginlogo {
+	width: 214px;
+	height: 160px;
+	background: url(../images/hwlogo.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+	left: 50%;
+	margin-left: -107px;
+	margin-top: 50px
+}
+.mui-login-bodycolor .mui-input-group .mui-input-row{
+	height: 60px;
+}
+.mui-login-bodycolor .login-iconcolor{font-size: 30px;}
+.mui-login-bodycolor .mui-input-group label{width:10%;}
+.mui-login-bodycolor .mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+	width:90%;
+	font-size: 25px;
+	height: 52px;
+}
+.mui-login-bodycolor .mui-btn{
+	font-size: 25px;
+}
+.mui-home-bodycolor .mui-home-tablepad {
+	padding: 10px;
+	height: 120px;
+}
+.mui-home-bodycolor .mui-width-ten{width:10%}
+.mui-home-bodycolor .mui-width-sixty{width:60%;padding-left: 30px;}
+.mui-home-htmlcolor .mui-table-view .mui-media-object {
+	line-height: 70px;
+	max-width: 100px;
+	height: 100px;
+	width: 100px
+}
+.mui-home-bodycolor .mui-width-sixty p{font-size: 20px;line-height: 35px;}
+.mui-home-bodycolor .h-list {
+	font-size: 50px;
+	position: absolute;
+	top: -5px;
+	right: 5px;
+	color: #FFFFFF
+}
+.mui-home-bodycolor .mui-home-badge{font-size: 15px;border-radius: 50%;line-height:1.2}
+.mui-home-bodycolor .home-zhuxiao {
+	border: 1px solid #FFFFFF;
+	border-radius: 4px;
+	padding: 2px 10px;
+	position: absolute;
+	right: 5px;
+	bottom: 10px;
+	font-size: 20px;
+}
+.mui-home-bodycolor .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+	font-size: 20px;
+}
+.myxhome .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+	border-top: none;
+	height: 150px;
+}
+.mui-home-bodycolor .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+	height: 30px;
+	line-height: 30px;
+}
+.mui-home-bodycolor .mui-grid-view.mui-grid-9 .mui-table-view-cell > a:not(.mui-btn){
+	padding: 30px 0;
+}
+.mui-index-bodycolor .mui-indxe-navfontcolor {
+	color: #FFFFFF;
+	height: 70px;
+}
+.mui-index-bodycolor .mui-bar-tab .mui-tab-item .mui-icon{font-size: 30px;}
+.mui-index-bodycolor .mui-bar-tab .mui-tab-item .mui-icon ~ .mui-tab-label{font-size: 18px;padding-left: 8px;padding-top:5px}
+.shop-search {
+	-webkit-flex: 1;
+	flex: 1;
+	-webkit-box-flex:1;
+	-moz-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+.mui-flex-block {
+	font-size: 17px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
+}
+.itempic {
+	width: 70px;
+	height: 70px;
+	margin-right: 5px;
+	background-size: 100% 100%;
+}
+.item-liheight {
+	height: auto;
+}
+.mui-flex-lineheight {
+	line-height: 25px;
+}
+.mui-callin-body .mui-flex-lineheight {
+	line-height: 25px;
+}
+.mui-items-body .mui-flex-width {
+	width: 140px;
+}
+.mui-listself-body .mui-content span{font-size: 17px;}
+.mui-listself-body .mui-content p{font-size: 17px}
+.mui-dingdan-body span{font-size: 17px;}
+.spanheight {
+	font-size: 17px;
+	line-height: 20px;
+	display: block;
+	color: #666666;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ld-itempic {
+	width: 70px;
+	height: 70px;
+	margin-right: 5px;
+	background-size: 100% 100%;
+}
+.mui-detail-list{
+	height: 90px;
+}
+.mui-table-flex2 {
+	width: 100px
+}
+.mui-flex-width {
+	width: 120px;
+}
+.mui-callin-body .mui-slider-group span{font-size: 17px;}
+.mui-callin-body .mui-callin-outfize {
+	font-size: 20px;
+}
+.mui-callin-body .mui-segmented-control .mui-control-item.mui-active span {
+	font-size: 20px;
+	color: #007aff;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #007AFF;
+}
+.mui-callin-body .mui-slider .mui-slider-group .mui-slider-item img {
+	width: 70px;
+	height: 70px;
+	margin-right: 5px;
+	background-size: 100% 100%;
+}
+.mui-callin-body .itempic {
+	width: 70px;
+	height: 70px;
+	margin-right: 5px;
+	background-size: 100% 100%;
+}
+}

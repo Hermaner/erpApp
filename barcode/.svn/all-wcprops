@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/erpApp/!svn/ver/707/barcode
+END
+barcode_payment.html
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/erpApp/!svn/ver/707/barcode/barcode_payment.html
+END
+barcode_anchor.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/erpApp/!svn/ver/656/barcode/barcode_anchor.html
+END
+barcode_item.html
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/erpApp/!svn/ver/626/barcode/barcode_item.html
+END
+barcode_promotionCode.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/erpApp/!svn/ver/626/barcode/barcode_promotionCode.html
+END
+barcode.html
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/erpApp/!svn/ver/79/barcode/barcode.html
+END
+barcode_cartscan.html
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/erpApp/!svn/ver/664/barcode/barcode_cartscan.html
+END
+barcode_scan.html
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/erpApp/!svn/ver/659/barcode/barcode_scan.html
+END

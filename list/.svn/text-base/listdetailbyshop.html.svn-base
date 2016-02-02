@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/stylebypad.css" rel="stylesheet">
+		<link href="../css/mui.listpicker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			span {
+				color: #AAAAAA;
+				font-size: 12px;
+			}
+			
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+			}
+			
+			.mui-listshop {
+				padding-bottom: 110px
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.mui-bar-popover {
+				width: 45%;
+			}
+			
+			.mui-popover.mui-bar-popover .mui-table-view {
+				width: auto;
+			}
+			
+			.mui-popover .mui-popover-arrow.mui-bottom:after {
+				border: 1px solid #E0E0E0;
+			}
+		</style>
+
+	</head>
+
+	<body class="mui-listself-body mui-listshop">
+		<header class="mui-bar mui-bar-nav" style="background-color: #007aff;">
+			<a class="mui-action-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<a class="mui-title" class="mui-action-menu" href="#bottomPopover" style="color:#FFFFFF">
+			订单详情
+			</a>
+		</header>
+		<div class="mui-content dingdan">
+			<ul class="mui-table-view" id="orderTopmsg">
+				<li class="mui-table-view-cell">
+					<ul class="mui-table-view mui-grid-view">
+						<li class="mui-table-view-cell mui-listdetail-num mui-col-xs-7"><span id="createTime">2015-08-08&nbsp;&nbsp;09:22:22</span></li>
+						<li class="mui-table-view-cell mui-listdetail-km mui-col-xs-5"><span>未付款</span></li>
+						<li class="mui-table-view-cell mui-listdetail-num mui-col-xs-7">
+							<span class="mui-listself-spanblack" id="createStore">门店A</span>
+							<span class="mui-listself-spanblack2" id="createOp">导购员A</span>
+						</li>
+
+					</ul>
+				</li>
+			</ul>
+			<span class="mui-content-padded">商品信息</span>
+			<ul class="mui-table-view" id="detailList">
+
+			</ul>
+			<div class="">
+				<span class="mui-content-padded">配送方式</span>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<p><span class="mui-listself-spanblack" id="getType">现场自提</span></p>
+					</li>
+				</ul>
+			</div>
+
+			<div id="detailBuymsg" style="display: none;">
+				<span class="mui-content-padded">买家信息</span>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" id="detailBuymsgli">
+						<p><span class="mui-listself-spanblack">aa</span></p>
+						<p><span class="mui-listself-spanblack">aa</span></p>
+						<p><span class="mui-listself-spanblack">aa</span></p>
+					</li>
+				</ul>
+			</div>
+			<div class="" id="freightmsg" style="display: none;">
+				<span class="mui-content-padded">运费</span>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<span>￥</span>
+						<div class="mui-numbox" data-numbox-min="0" id="freightBtn">
+							<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+							<input class="mui-numbox-input" type="number" id="freightVal" oninput="OnInput(event)" value="0">
+							<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<span class="mui-content-padded">优惠信息</span>
+			<ul class="mui-table-view" id="buyer">
+				<li class="mui-table-view-cell">
+					<p><span class="mui-listself-spanblack" id="couponContent"></span></p>
+				</li>
+			</ul>
+			<div class="maxwidth2">
+				<div class="maxwidth2 nl-foot">
+					<ul class="mui-table-view" id="">
+						<li class="mui-table-view-cell mui-listshop-lipadding">
+							<ul class="mui-table-view mui-grid-view" id="goodPricemsg">
+
+							</ul>
+						</li>
+					</ul>
+					<div class="mui-pull-right mui-newlist-divmargin">
+						<a href="#dispatchPopover">
+							<button class="mui-btn-mini dd-changebtn">修改配送方式</button>
+						</a>
+						<a href="#discountPopover">
+							<button class="mui-btn-mini dd-changebtn">优惠核销</button>
+						</a>
+						<a href="#payPopover">
+							<button class="mui-btn-mini dd-changebtn">付款</button>
+						</a>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="dispatchPopover" class="mui-popover mui-bar-popover">
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" pid="SINCE">
+					<div>现场自提</div>
+				</li>
+				<li class="mui-table-view-cell" pid="STORE_DELIVER">
+					<a href="buyers.html">
+						<div>门店配送</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell" pid="ONLINE_DELIVER">
+					<a href="buyers.html">
+						<div>线上发货</div>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+		<div id="discountPopover" class="mui-popover mui-bar-popover">
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="mlsh" pid="tonewlist">
+					<div>优惠满减</div>
+				</li>
+				<li class="mui-table-view-cell" pid="enter">
+					<div>输入优惠码</div>
+				</li>
+				<li class="mui-table-view-cell" pid="scan">
+					<div>扫描优惠码</div>
+				</li>
+			</ul>
+		</div>
+
+		<div id="payPopover" class="mui-popover mui-bar-popover">
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="display: none;" pid="createCode">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/pay.png" /> 生成支付码
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell" pid="scanCode">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/pay.png" /> 扫描付款码
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell" pid="cashPay">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/money.png" /> 现金支付
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell" pid="cardPay">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/cardpay.png" /> 刷卡支付
+					</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<input type="hidden" id="getTypeValue" value="SINCE">
+		<input type="hidden" id="typeChange" tc="SINCE">
+		<input type="hidden" id="couponId">
+		<input type="hidden" id="mycouponId">
+		<input type="hidden" id="consigneeVal">
+		<input type="hidden" id="mobileVal">
+		<input type="hidden" id="addressVal">
+		<script src="../js/common.js"></script>
+		<script src="../js/layer.m/layer.m.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/mui.listpicker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script>
+			var mlsh;
+			var itemHtml, detailList, itemPrice, couponId, mycouponId, createTime, createStore, createOp, getType, getTypeValue, itemNum, goodPricemsg, freightText, privilegeText, totalPriceText, freightVal, detailBuymsg, detailBuymsgli, couponContent, consigneeVal, mobileVal, addressVal, wo, freightmsg, denomination = 0;
+			var couponFullcut=[{"full":"100","cut":"20"},{"full":"200","cut":"40"},{"full":"300","cut":"60"},{"full":"400","cut":"80"}]
+			mui.plusReady(function() {
+				detailList = document.getElementById("detailList")
+				createTime = document.getElementById("createTime")
+				createStore = document.getElementById("createStore")
+				createOp = document.getElementById("createOp")
+				getType = document.getElementById("getType")
+				getTypeValue = document.getElementById("getTypeValue")
+				goodPricemsg = document.getElementById("goodPricemsg")
+				freightVal = document.getElementById("freightVal")
+				detailBuymsg = document.getElementById("detailBuymsg")
+				detailBuymsgli = document.getElementById("detailBuymsgli")
+				couponContent = document.getElementById("couponContent")
+				couponId = document.getElementById("couponId")
+				mycouponId = document.getElementById("mycouponId")
+				consigneeVal = document.getElementById("consigneeVal")
+				mobileVal = document.getElementById("mobileVal")
+				addressVal = document.getElementById("addressVal")
+				freightmsg = document.getElementById("freightmsg");
+				mlsh=document.getElementById("mlsh");
+				if(plus.storage.getItem("orgCode")!="mlsh"){
+					mlsh.style.display="block";
+				}else{
+					mlsh.style.display="none";
+				}
+				window.addEventListener('createOrderShow', function(event) {
+					itemHtml = event.detail.itemHtml;
+					itemPrice = event.detail.itemPrice.toFixed(2);
+					itemNum = event.detail.itemNum
+					detailList.innerHTML = itemHtml
+					var thisDate = new Date()
+					thisDate = thisDate.Format("yyyy-MM-dd hh:mm:ss");
+					createTime.innerHTML = thisDate;
+					createStore.innerHTML = plus.storage.getItem("store")
+					createOp.innerHTML = plus.storage.getItem("op")
+					var frValue = freightVal.value;
+					goodPricemsg.innerHTML = '<li class="mui-table-view-cell mui-listdetail-num mui-col-xs-7"><span>共' + itemNum + '件商品</span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-5"><span class="dd-fontcolor">商品小计：￥' + itemPrice + '</span></li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-7 mui-listshop-bordertopbot" style="padding-top:10px"><span class="dd-fontcolor" id="freightText">运费：￥' + frValue + '</span>&nbsp;&nbsp;<span class="dd-fontcolor" id="privilegeText">优惠：￥0</span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-5 mui-listshop-bordertopbot" style="padding-top:10px"><span class="dd-fontcolor" id="totalPriceText">应付：￥' + (parseFloat(itemPrice) + parseInt(frValue)) + '</span></li>';
+					freightText = document.getElementById("freightText")
+					privilegeText = document.getElementById("privilegeText")
+					totalPriceText = document.getElementById("totalPriceText")
+					var list = detailList.getElementsByClassName("mui-table-view-cell");
+					for (var p = 0; p < list.length; p++) {
+						list[p].removeChild(list[p].getElementsByTagName("div")[0]);
+					}
+				});
+				clickedFn('#dispatchPopover', 'a');
+				var old_back = mui.back;
+				mui.back = function() {
+					var boxAr = document.getElementsByTagName("input");
+					for (var i = 0; i < boxAr.length; i++) {
+						if (boxAr[i].getAttribute("type") == "checkbox") {
+							boxAr[i].checked = false
+						}
+					}
+					denomination = 0;
+					couponContent.setAttribute("coupon", "")
+					old_back();
+					//					wo.evalJS("CloseCreateOrder()");
+					//					wo.evalJS("PriceClear()");
+				}
+			})
+
+			function getFreightFee(e) {
+				var param = systemParam("V5.mobile.freight.get");
+				param.type = e;
+				dataSendFn('freightGet', param, function(data) {
+					console.log(data)
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+						return
+					}
+					freightmsg.style.display = "block";
+					var freightFee = (data.freight).freightFee;
+					freightVal.value = freightFee;
+					freightText.innerHTML = "运费：￥" + freightFee;
+					totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(freightFee) - parseFloat(denomination));
+				}, "get")
+			}
+
+			function buyCallback(e, a, b, c) {
+				detailBuymsg.style.display = "block"
+				detailBuymsgli.innerHTML = e
+				getType.innerHTML = typeChange.value
+				getTypeValue.value = typeChange.getAttribute("tc")
+				consigneeVal.value = a
+				mobileVal.value = b
+				addressVal.value = c;
+				var tc = typeChange.getAttribute("tc");
+				if (tc == "STORE_DELIVER") {
+					getFreightFee("STORE")
+				} else {
+					getFreightFee("ONLINE")
+				}
+			}
+
+			function OnInput(event) {
+				var val = parseFloat(event.target.value) || 0;
+				val = val < 0 ? 0 : val;
+				freightText.innerHTML = "运费：￥" + parseFloat(val);
+				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(val) - parseFloat(couponId.value||0)- parseFloat(mycouponId.value||0));
+			}
+			document.getElementById("freightBtn").addEventListener("tap", function() {
+				var val = freightVal.value;
+				freightText.innerHTML = "运费：￥" + val;
+				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(val) - parseFloat(couponId.value||0)- parseFloat(mycouponId.value||0));
+			})
+			mui("#dispatchPopover").on("tap", "li", function() {
+				var pid = this.getAttribute("pid");
+				var pidText = this.innerText;
+				if (pid == "SINCE") {
+					getType.innerHTML = pidText;
+					detailBuymsg.style.display = "none";
+					consigneeVal.value = "";
+					mobileVal.value = "";
+					addressVal.value = "";
+					freightVal.value = "0";
+					freightText.innerHTML = "运费：￥0";
+					totalPriceText.innerHTML = "应付：￥" + itemPrice;
+					getTypeValue.value = "SINCE";
+				}
+				//				else if (pid == "STORE_DELIVER") {
+				//					getFreightFee("STORE")
+				//				} else if (pid == "ONLINE_DELIVER") {
+				//					getFreightFee("ONLINE")
+				//				}
+				typeChange.value = pidText;
+				typeChange.setAttribute("tc", pid)
+				mui('#dispatchPopover').popover('hide');
+			})
+			mui("#discountPopover").on("tap", "li", function() {
+				var pid = this.getAttribute("pid");
+				mui('#discountPopover').popover('hide');
+				if (pid == "enter") {
+					mui.prompt('输入优惠码：', '请输入优惠码', '', ['确定', '取消'], function(e) {
+						if (e.index == 0) {
+							var val = e.value
+							if (!val) {
+								plus.nativeUI.alert("请输入优惠码", function() {}, "", "OK");
+								return
+							}
+							var param = paramFn("V5.mobile.order.coupon.get");
+							param.orgCode = plus.storage.getItem("orgCode");
+							param.couponCode = val;
+							dataSendFn('couponGet', param, function(data) {
+								if (!data.isSuccess) {
+									var mapmsg = data.map.errorMsg;
+									plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+									return
+								}
+								var condition = data.coupon.condition;
+								if (parseFloat(itemPrice) < parseFloat(condition)) {
+									plus.nativeUI.alert("该优惠码未满足优惠条件！", function() {}, "", "OK");
+									return
+								}
+								denomination = parseFloat(data.coupon.denomination);
+								couponId.value = denomination;
+								couponContent.setAttribute("coupon", val)
+								if (couponContent.getElementsByClassName("p1")[0]) {
+									couponContent.getElementsByClassName("p1")[0].innerHTML = "满" + condition + "减" + denomination;
+								} else {
+									couponContent.innerHTML = couponTxt + "<p class='p1'>满" + condition + "减" + denomination + "</p>";
+								}
+								privilegeText.innerHTML = "优惠：￥" + (parseFloat(denomination) + parseFloat(mycouponId.value || 0));
+								totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(freightVal.value) - parseFloat(denomination) - parseFloat(mycouponId.value || 0));
+							}, "get")
+						}
+					})
+				}else if(pid="tonewlist"){
+					var html=""
+					for(var i=0;i<couponFullcut.length;i++){
+						html+="<div class='mui-input-row mui-radio mui-left'><label>" + "满"+couponFullcut[i].full+"减"+couponFullcut[i].cut+ "</label><input name='radio' rid=" + couponFullcut[i].full+ " rinfo=" + couponFullcut[i].cut + " type='radio'></div>";
+					}
+					layer.open({
+						title: ['选择满减规则', 'text-align:center'],
+						content: html,
+						btn: ['确认', '取消'],
+						shadeClose: false,
+						style: 'width:260px;',
+						yes: function() {
+							getMycoupon()
+						}
+					});
+				}else {
+					mui.openWindow({
+						id: "../barcode/barcode_promotionCode.html",
+						url: "../barcode/barcode_promotionCode.html",
+						styles: {
+							popGesture: "close"
+						},
+						extras: {
+							itemPrice: itemPrice
+						},
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: true
+						}
+					})
+				}
+			})
+
+			function couponContentBack(a, c, d) {
+				couponContent.innerHTML = "满" + a + "减" + c;
+				denomination = parseFloat(c);
+				couponContent.setAttribute("coupon", d)
+			}
+			mui("#payPopover").on("tap", "li", function() {
+				var pid = this.getAttribute("pid");
+				if (pid == "scanCode") {
+					successPay(pid,getTypeValue.value, 1)
+				} else {
+					plus.nativeUI.confirm("确定已完成付款?", function(e) {
+						if (e.index == 0) {
+							successPay(pid,getTypeValue.value)
+						}
+					}, "温馨提示", ["是", "否"]);
+				}
+				mui('#payPopover').popover('hide');
+			})
+
+			function successPay(p,e, c) {
+				var list = detailList.getElementsByClassName("mui-input-group")
+				var products = {};
+				var product = [];
+				for (var i = 0; i < list.length; i++) {
+					var barcode = list[i].getAttribute("barcode")
+					var stock = list[i].getElementsByClassName("openCount")[0].innerHTML.substring(1);
+					product[i] = {
+						barcode: barcode,
+						stock: stock
+					};
+				}
+				products.postFee = parseFloat(freightVal.value)- parseFloat(mycouponId.value || 0);
+				products.couponCode = couponContent.getAttribute("coupon") || "";
+				products.buyer = {
+					consignee: consigneeVal.value,
+					mobile: mobileVal.value,
+					address: addressVal.value
+				}
+				products.products = product;
+				console.log(products)
+				var param = systemParam('V5.mobile.order.create');
+				param.orderData = JSON.stringify(products);
+				param.uniqueCode = uniqueCode();
+				console.log(e)
+				param.type = e;
+				console.log(param)
+				plus.nativeUI.showWaiting()
+				dataSendFn('orderCreate', param, function(data) {
+					plus.nativeUI.closeWaiting()
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						console.log(mapmsg)
+						plus.ui.toast(mapmsg, {
+							verticalAlign: "top"
+						});
+						return
+					}
+					if (c) {
+						mui.openWindow({
+							id: "../barcode/barcode_payment.html",
+							url: "../barcode/barcode_payment.html",
+							extras: {
+								orderNumber: data.orderNumber
+							},
+							styles: {
+								popGesture: "close"
+							},
+							show: {
+								aniShow: "pop-in"
+							},
+							waiting: {
+								autoShow: true
+							}
+						})
+						cleardetailShop()
+					} else {
+						var param = systemParam("V5.mobile.order.alipay");
+						param.orderNumber = data.orderNumber;
+						param.authCode = "";
+						param.paymentType = p == 'cashPay' ? 'CASH' : 'CARD';
+						console.log(param.paymentType)
+						dataSendFn('orderAlipay', param, function(data) {
+							if (!data.isSuccess) {
+								var mapmsg = data.map.errorMsg;
+								plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+								return
+							}
+							plus.nativeUI.alert("支付成功！", function() {
+								plus.nativeUI.showWaiting()
+								checkDetail(param.orderNumber)
+							}, "", "OK");
+						}, "get")
+					}
+				})
+			}
+
+			function checkDetail(e) {
+				var pageDetail = plus.webview.getWebviewById("list/listdetail.html")
+				var orderStatus;
+				var param = systemParam("V5.mobile.order.info.get");
+				param.orderNumber = e;
+				dataSendFn('orderInfoGet', param, function(data) {
+					data = JSON.stringify(data)
+					mui.openWindow({
+						id: "list/listdetail.html",
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: false
+						}
+					})
+					cleardetailShop()
+					pageDetail.evalJS("loadData('" + data + "',1)");
+					plus.webview.hide(plus.webview.currentWebview());
+				}, "get")
+			}
+
+			function getMycoupon() {
+				var fullPrice, cutPrice,has=false;
+				var layermcont=document.getElementsByClassName("layermcont")[0];
+				var layput=layermcont.getElementsByTagName("input");
+				for(var i=0;i<layput.length;i++){
+					if(layput[i].checked){
+						fullPrice=layput[i].getAttribute("rid")
+						cutPrice=layput[i].getAttribute("rinfo")
+						has=true
+					}
+				}
+				if(!has){
+					return
+				}
+				if(parseFloat(itemPrice)<parseFloat(fullPrice)){
+					plus.nativeUI.alert("不符合优惠条件！", function() {}, "", "OK");
+					return
+				}
+				
+				var couponTxt = couponContent.innerHTML;
+				mycouponId.value = cutPrice;
+				if (couponContent.getElementsByClassName("p2")[0]) {
+					couponContent.getElementsByClassName("p2")[0].innerHTML = "满" + fullPrice + "减" + cutPrice;
+				} else {
+					couponContent.innerHTML = couponTxt + "<p class='p2'>满" + fullPrice + "减" + cutPrice + "</p>";
+				}
+				privilegeText.innerHTML = "优惠：￥" + (parseFloat(cutPrice) + parseFloat(couponId.value || 0));
+				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(freightVal.value) - parseFloat(cutPrice) - parseFloat(couponId.value || 0));
+				layer.closeAll();
+			}
+
+			function cleardetailShop() {
+				freightVal.value = 0;
+				getType.innerHTML = "现场自提";
+				getTypeValue.value = "SINCE"
+				freightmsg.style.display = "none";
+				detailBuymsg.style.display = "none";
+				consigneeVal.value = "";
+				mobileVal.value = "";
+				addressVal.value = "";
+				couponContent.innerHTML = "不使用优惠券";
+				plus.storage.setItem("itemExist", "0")
+				var creatListPage = plus.webview.getWebviewById("list/newlist.html")
+				if (plus.webview.getWebviewById("additembyself.html")) {
+					plus.webview.close(plus.webview.getWebviewById("additembyself.html"));
+				}
+				couponContent.setAttribute("coupon", "")
+					//				wo.evalJS("clearCart()")
+				plus.webview.close(creatListPage);
+				//				plus.webview.hide(wo);
+			}
+			Date.prototype.Format = function(fmt) { //author: meizz 
+				var o = {
+					"M+": this.getMonth() + 1, //月份 
+					"d+": this.getDate(), //日 
+					"h+": this.getHours(), //小时 
+					"m+": this.getMinutes(), //分 
+					"s+": this.getSeconds(), //秒 
+					"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+					"S": this.getMilliseconds() //毫秒 
+				};
+				if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for (var k in o)
+					if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+				return fmt;
+			}
+		</script>
+	</body>
+
+</html>

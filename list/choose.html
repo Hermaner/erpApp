@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="choose">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.js"></script>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/stylebypad.css" rel="stylesheet">
+		<script src="../js/apijs/api.js"></script>
+	</head>
+
+	<body class="bodypadbot">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<a class="mui-title" class="mui-action-menu" href="javascript:void(0);">
+			选择门店
+		</a>
+
+		</header>
+		<div class="mui-content">
+			<div class="searchwidth">
+				<div class="searchwidth2">
+					<input type="search" id="searchTxt" class="mui-input-clear inputbac mui-input-speech dd-flexsearch" placeholder="请输入门店名称或地址" />
+					<span class="mui-icon mui-icon-search dd-search"></span>
+					<button class="dd-flex3" id="searchBtn">搜索</button>
+				</div>
+			</div>
+			<ul class="mui-table-view" id="tolistdetail">
+				<!--<li class="mui-table-view-cell mui-media">
+					<a href="#">
+						<div class="mui-media-body">
+							<span>桂平路店</span>
+							<p class='mui-ellipsis'>桂平路418号</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="#">
+						<div class="mui-media-body">
+							<span>桂平路店</span>
+							<p class='mui-ellipsis'>桂平路418号</p>
+						</div>
+					</a>
+				</li>-->
+
+			</ul>
+
+		</div>
+		<div class="maxwidth2 ld-divbot2 mui-callin-padtop" id="callinbtnone">
+			<div class="mui-pull-right mui-choose-martop">
+				<button class="mui-btn-mini dd-changebtn mui-callin-trueright" id="saveBtn">确定</button>
+			</div>
+			<div class="clearboth"></div>
+		</div>
+
+		<script>
+			var searchTxt, searchBtn, tolistdetail, saveBtn, products
+			 mui.plusReady(function() {
+				searchTxt = document.getElementById("searchTxt")
+				searchBtn = document.getElementById("searchBtn")
+				tolistdetail = document.getElementById("tolistdetail")
+				saveBtn = document.getElementById("saveBtn")
+				window.addEventListener('storePage', function(event) {
+					products = event.detail.products;
+					console.log(products) 
+				})
+				searchBtn.addEventListener("tap", function() {
+					var val = searchTxt.value;
+					if (!val) {
+						plus.nativeUI.alert("请输门店名称或地址", function() {}, "", "OK");
+						return
+					}
+					plus.nativeUI.showWaiting();
+					tolistdetail.innerHTML = ""
+					var param = systemParam("V5.mobile.allocate.warehouse.search");
+					param.condition = val;
+					dataSendFn('warehouseSearch', param, function(data) {
+						plus.nativeUI.closeWaiting();
+						if (!data.isSuccess) {
+							var mapmsg = data.map.errorMsg;
+							plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+							console.log(mapmsg)
+							return
+						}
+						searchTxt.value=""
+						data = data.stores;
+						for (var i = 0; i < data.length; i++) {
+							var address = data[i].address
+							var storeName = data[i].storeName
+							var li = document.createElement("li");
+							li.className = "mui-table-view-cell mui-media mui-table-view-cell mui-radio";
+							li.innerHTML = '<input type="radio" name="radio"/><a><div class="mui-media-body"><span>' + storeName + '</span><p class="mui-ellipsis">' + address + '</p></div></a>'
+							tolistdetail.appendChild(li);
+						}
+					}, 'get')
+				})
+				saveBtn.addEventListener("tap", function() {
+					var allLi=tolistdetail.getElementsByTagName("li");
+					var storeApply;
+					var count=0;
+					for(var i=0;i<allLi.length;i++){
+						var listCheck=allLi[i].getElementsByTagName("input")[0];
+						if(listCheck.checked){
+							count++
+							storeApply=allLi[i].getElementsByTagName("span")[0].innerText;
+						}
+					}
+					if(count==0){
+						plus.nativeUI.alert("请选择门店！", function() {}, "", "OK");
+						return
+					} 
+					plus.nativeUI.showWaiting();
+					var param = systemParam('V5.mobile.allocate.apply');
+					param.applyData = products;
+					param.storeApply = storeApply;
+					param.uniqueCode = uniqueCode();
+					console.log(param)
+					dataSendFn('allocateApply', param, function(data) {
+						plus.nativeUI.closeWaiting();
+						if (!data.isSuccess) {
+							var mapmsg = data.map.errorMsg;
+							console.log(mapmsg)
+							plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+							return
+						}
+						plus.webview.close("newcalllist.html")
+						tolistdetail.innerHTML=""
+						mui.back()
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

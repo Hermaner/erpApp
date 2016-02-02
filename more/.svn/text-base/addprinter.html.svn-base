@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-cell > a:not(.mui-btn) {
+				color: #666666;
+			}
+		</style>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav headbac">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width" style="color: #FFFFFF;"></a>
+			<h1 id="title" class="mui-title" style="color: #FFFFFF;">设置打印机</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view ulcor">
+				<li class="mui-table-view-cell">
+					<a id="openprinter" class="">
+					  	添加打印机
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="closeprinter" class="">
+						删除打印机
+					</a>
+				</li>
+
+			</ul>
+		</div>
+ 
+		<script>
+			document.getElementById("openprinter").addEventListener('tap', function(e) {
+				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+				if (plus.storage.getItem("printMac")) {
+					var confirmArray = ['是', '否'];
+					mui.confirm('确认更换打印机？','', confirmArray, function(e) {
+						if (e.index == 0) {
+							var btnArray = ['确定', '取消'];
+							mui.prompt('添加打印机：', '请输入打印机的终端ID', '', btnArray, function(e) {
+								if (e.index == 0) {
+									if (!e.value) {
+										plus.nativeUI.alert("请输入ID", function() {}, "", "OK");
+										return
+									}
+									plus.storage.setItem("printMac", e.value)
+								} 
+							})
+						}
+					})
+				}
+				else{
+					var btnArray = ['确定', '取消'];
+							mui.prompt('添加打印机：', '请输入打印机的终端ID', '', btnArray, function(e) {
+								if (e.index == 0) {
+									if (!e.value) {
+										plus.nativeUI.alert("请输入ID", function() {}, "", "OK");
+										return
+									}
+									plus.storage.setItem("printMac",e.value)
+								}  
+							})
+				}
+			});
+			document.getElementById("closeprinter").addEventListener('tap', function(e) {
+				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+				if (plus.storage.getItem("printMac")) { 
+					var confirmArray = ['是', '否'];
+					mui.confirm('确认删除绑定的打印机？','', confirmArray, function(e) {
+						if (e.index == 0) {
+							plus.storage.removeItem("printMac")
+							plus.nativeUI.alert("打印机已删除！", function() {}, "", "OK");
+						}
+					})
+				}
+				else{
+					plus.nativeUI.alert("打印机尚未设置！", function() {}, "", "OK");
+				}
+			});
+		</script>
+	</body>
+
+</html>

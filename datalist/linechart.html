@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/datalist.css">
+		<style>
+
+		</style>
+	</head>
+
+	<body class="linechart">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-font-white mui-back-width"></a>
+			<a class="mui-title mui-font-white" id="linechartheader">
+				门店配送订单
+			</a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-padding-zoom">
+				<div id="segmentedControl" class="mui-segmented-control mui-control-change">
+					<a class="mui-control-item mui-active" index="1">
+						昨日
+					</a>
+					<a class="mui-control-item" index="2">
+						近7天
+					</a>
+					<a class="mui-control-item" index="3">
+						近30天
+					</a>
+					<a class="mui-control-item" index="4">
+						近60天
+					</a>
+				</div>
+			</div>
+			<div id="canvascontent">
+				<canvas id="canvas" width="250" height="250"></canvas>
+				<div class="mui-flex-all mui-text-center">
+					<div class="mui-table-flex mui-text-right linechart-padright">
+						<div class="bluespan"></div>
+					</div>
+					<div class="mui-table-flex mui-text-left">
+						<div class="nowstaff" id="nowstaff"></div>
+					</div>
+				</div>
+				<div class="mui-flex-all mui-text-center">
+					<div class="mui-table-flex mui-text-right linechart-padright">
+						<div class="yellowspan"></div>
+					</div>
+					<div class="mui-table-flex mui-text-left">
+						<div class="nowstaff">其他</div>
+					</div>
+				</div>
+			</div>
+			<div id="lineChart" class="chart">
+
+			</div>
+
+			<div id="listcontent">
+				<div class="mui-flex-all mui-text-center mui-flex-bc">
+					<div class="mui-table-flex">时间</div>
+					<div class="mui-table-flex" id="lineCount">订单数</div>
+				</div>
+
+				<ul class="mui-table-view mui-grid-view mui-grid-9 mui-flex-content" id="flexcontent">
+
+				</ul>
+			</div>
+
+		</div>
+
+		<script>
+			var phoneheight, chartBase, getid, tid, flexcontent, listcontent, nowstaff, phonetype,idSaleCount;
+			var chartName="订单数";
+			var num=1;
+			var proportion=0;
+			var angle=0;
+			var allObj = { //60天总数据对象
+				arrs: [
+					[],
+					[]
+				],
+				linearrs: [
+					[],
+					[]
+				]
+			}
+			var tabObj = { //除60天总数据三个选项卡对象
+				yesday: {
+					arrs: [
+						["00:00-04:00", "04:00-08:00", "08:00-12:00", "12:00-16:00", "16:00-20:00", "20:00-24:00"],
+						[]
+					],
+					linearrs: [
+						["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+						[]
+					]
+				},
+				sevenday: {
+					arrs: [
+						[],
+						[]
+					],
+					linearrs: [
+						[],
+						[]
+					]
+				},
+				thirthday: {
+					arrs: [
+						[],
+						[]
+					],
+					linearrs: [
+						[],
+						[]
+					]
+				}
+			}
+			mui.plusReady(function() {
+				phonetype = plus.os.name.toLowerCase();
+				nowstaff = document.getElementById("nowstaff");
+				nowstaff.innerHTML = plus.storage.getItem("op");
+				phoneheight = plus.screen.resolutionHeight; //mui获取设备高度分辨率
+				var canvasheight = document.getElementById("lineChart").offsetHeight;
+				flexcontent = document.getElementById("flexcontent");
+				listcontent = document.getElementById("listcontent");
+				flexcontent.style.maxHeight = phoneheight - 160 - canvasheight + "px";
+				chartBase = new chartBase();
+				window.addEventListener('toCount', function(event) {
+					document.getElementById("linechartheader").innerHTML = "";
+					getid = event.detail.getid;
+					tid = event.detail.tid;
+					idSaleCount=0;
+//					alert(getid+"--"+tid);
+					splitDataArr(tid,"yesterday",idSaleCount);
+					splitDataArr(tid,"60day",idSaleCount);
+					setChartBase();
+					toLinechart(getid);
+				})
+				mui("#segmentedControl").on("tap", "a", function() { //选项卡切换折线图
+					clearDraw();
+					num=parseInt(this.getAttribute("index"));
+					chartBase.loadCharts(parseInt(this.getAttribute("index")));
+					showList(parseInt(this.getAttribute("index")));
+					if (getid != "BONUS") {
+						closeCanvascontent()
+					} else {
+						if (parseInt(this.getAttribute("index")) == 1) {
+							openCanvascontent();
+							draw(proportion,angle);
+						} else {
+							closeCanvascontent();
+							chartBase.lineChart = echarts.init(document.getElementById('lineChart'));
+							chartBase.loadCharts(parseInt(this.getAttribute("index")));
+						}
+					}
+				})
+				var old_back = mui.back;
+				mui.back = function() {
+					num=1;
+					backFirst();
+					closeCanvascontent();
+					clearDraw();
+					clearLine();
+					old_back();
+				}
+			});
+//			splitDataArr();
+//			setChartBase();
+			/*折线图开始*/
+			function chartBase() {
+				this.xAxisData = "";
+				this.seriesData = "";
+				this.lineChart = echarts.init(document.getElementById('lineChart'));
+				this.init()
+			}
+			chartBase.prototype.init = function() {
+				this.xAxisData = [
+					tabObj.yesday.linearrs[0],
+					tabObj.sevenday.linearrs[0],
+					tabObj.thirthday.linearrs[0],
+					allObj.linearrs[0]
+				];
+				this.seriesData = [
+					tabObj.yesday.linearrs[1],
+					tabObj.sevenday.linearrs[1],
+					tabObj.thirthday.linearrs[1],
+					allObj.linearrs[1]
+				];
+				this.loadCharts(1);
+			}
+			chartBase.prototype.loadCharts = function(e) {
+				this.lineChart.setOption(this.getOption(e));
+			}
+			chartBase.prototype.getOption = function(e) {
+				var chartOption = {
+						tooltip: {
+							trigger: 'axis',
+							formatter: function(params, ticket, callback) {
+										var isnow=params[0].name;
+										var res="";
+										if(num==1){
+											for(var i=0;i<tabObj.yesday.linearrs[0].length;i++){
+												if(isnow==tabObj.yesday.linearrs[0][0]){
+													res =params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}else if(isnow==tabObj.yesday.linearrs[0][i]){
+													res =tabObj.yesday.linearrs[0][i-1]+"至"+params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+											}
+										}
+									
+										if(num==2){
+											res =params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+										}
+										if(num==3){
+											for(var i=0;i<tabObj.thirthday.linearrs[0].length;i++){
+												if(isnow==tabObj.thirthday.linearrs[0][0]){
+													res =params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+												if(isnow==tabObj.thirthday.linearrs[0][6]){
+													res =tabObj.thirthday.linearrs[0][5]+"至"+params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+												if(isnow==tabObj.thirthday.linearrs[0][i]){
+													var dd = new Date();
+													var y=dd.getFullYear();
+													var splitarr=params[0].name.split("-");
+													var isgetday=GetDay(y,splitarr[0],splitarr[1]);
+													res =tabObj.thirthday.linearrs[0][i-1]+"至"+isgetday+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+											}
+										}
+										if(num==4){
+											for(var i=0;i<allObj.linearrs[0].length;i++){
+												if(isnow==allObj.linearrs[0][0]){
+													res =params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+												if(isnow==allObj.linearrs[0][6]){
+													res =allObj.linearrs[0][5]+"至"+params[0].name+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+												if(isnow==allObj.linearrs[0][i]){
+													var dd = new Date();
+													var y=dd.getFullYear();
+													var splitarr=params[0].name.split("-");
+													var isgetday=GetDay(y,splitarr[0],splitarr[1]);
+													res =allObj.linearrs[0][i-1]+"至"+isgetday+'<br/>'+params[0].seriesName+":"+params[0].data;
+													break;
+												}
+											}
+										}
+									setTimeout(function() {
+										// 仅为了模拟异步回调
+										callback(ticket, res);
+									}, 0)
+									return 'loading';
+								}
+						
+					},
+					legend: {
+						show: true,
+						data: [chartName]
+					},
+					grid: {
+						x: 60,
+						x2: 10,
+						y: 30,
+						y2: 25
+					},
+					xAxis: [{
+						type: 'category',
+						data: this.xAxisData[e - 1]
+					}],
+					yAxis: [{
+						type: 'value'
+					}],
+					series: [{
+						name: chartName,
+						type: 'line',
+						data: this.seriesData[e - 1]
+					}]
+			};
+			return chartOption;
+			}
+			/*折线图结束*/
+			function toLinechart(lid) { //修改不同选项卡的标题和显示信息
+				switch (lid) {
+					case "TALL":
+						document.getElementById("linechartheader").innerHTML = "门店订单总数";
+						document.getElementById("lineCount").innerHTML = "订单数";
+						chartName="订单数";
+						break;
+					case "SALL":
+						document.getElementById("linechartheader").innerHTML = "门店总销售额";
+						document.getElementById("lineCount").innerHTML = "总销售额";
+						chartName="总销售额";
+						break;
+					case "DIS":
+						document.getElementById("linechartheader").innerHTML = "门店配送订单";
+						document.getElementById("lineCount").innerHTML = "订单数";
+						chartName="订单数";
+						break;
+					case "DELIVER":
+						document.getElementById("linechartheader").innerHTML = "门店发货订单";
+						document.getElementById("lineCount").innerHTML = "订单数";
+						chartName="订单数";
+						break;
+					case "OWN":
+						document.getElementById("linechartheader").innerHTML = "门店自提订单";
+						document.getElementById("lineCount").innerHTML = "订单数";
+						chartName="订单数";
+						break;
+					case "HAN":
+						document.getElementById("linechartheader").innerHTML = "门店处理订单总数";
+						document.getElementById("lineCount").innerHTML = "订单数";
+						chartName="订单数";
+						break;
+					case "COOR":
+						document.getElementById("linechartheader").innerHTML = "申请协调订单";
+						document.getElementById("lineCount").innerHTML = "订单数";
+						chartName="订单数";
+						break;
+					case "MONEY":
+						document.getElementById("linechartheader").innerHTML = "门店分润金额";
+						document.getElementById("lineCount").innerHTML = "总销售额";
+						chartName="总销售额";
+						break;
+					case "SALES":
+						document.getElementById("linechartheader").innerHTML = "员工总销售额";
+						document.getElementById("lineCount").innerHTML = "总销售额";
+						chartName="总销售额";
+						break;
+					case "BONUS":
+						document.getElementById("linechartheader").innerHTML = "员工分润金额";
+						document.getElementById("lineCount").innerHTML = "总销售额";
+						chartName="总销售额";
+						break;
+				}
+			}
+
+			function showList(index) { //读取不同类型折线图数据
+				if (index - 1 == 0) {
+					flexcontent.innerHTML = "";
+					for (var i = 0; i < tabObj.yesday.arrs[0].length; i++) {
+						var jishu=tabObj.yesday.arrs[1][i]||0;
+						var html = '<span class="mui-time">' + tabObj.yesday.arrs[0][i] + '</span><span class="mui-ordercor">' + jishu + '</span>';
+						var li = document.createElement("li");
+						li.className = "mui-table-view-cell mui-media mui-col-xs-12";
+						li.innerHTML = html;
+						flexcontent.appendChild(li);
+					}
+				} else if (index - 1 == 1) {
+					flexcontent.innerHTML = "";
+					for (var i = 0; i < tabObj.sevenday.arrs[0].length; i++) {
+						var html = '<span class="mui-time">' + tabObj.sevenday.arrs[0][i] + '</span><span class="mui-ordercor">' + tabObj.sevenday.arrs[1][i] + '</span>';
+						var li = document.createElement("li");
+						li.className = "mui-table-view-cell mui-media mui-col-xs-12";
+						li.innerHTML = html;
+						flexcontent.appendChild(li);
+					}
+				} else if (index - 1 == 2) {
+					flexcontent.innerHTML = "";
+					for (var i = 0; i < tabObj.thirthday.arrs[0].length; i++) {
+						var html = '<span class="mui-time">' + tabObj.thirthday.arrs[0][i] + '</span><span class="mui-ordercor">' + tabObj.thirthday.arrs[1][i] + '</span>';
+						var li = document.createElement("li");
+						li.className = "mui-table-view-cell mui-media mui-col-xs-12";
+						li.innerHTML = html;
+						flexcontent.appendChild(li);
+					}
+				} else {
+					flexcontent.innerHTML = "";
+					for (var i = 0; i < allObj.arrs[0].length; i++) {
+						var html = '<span class="mui-time">' + allObj.arrs[0][i] + '</span><span class="mui-ordercor">' + allObj.arrs[1][i] + '</span>';
+						var li = document.createElement("li");
+						li.className = "mui-table-view-cell mui-media mui-col-xs-12";
+						li.innerHTML = html;
+						flexcontent.appendChild(li);
+					}
+				}
+				if (getid == "MONEY" || getid == "SALES" || getid == "BONUS"||getid=="SALL") {
+					var money=document.getElementsByClassName("mui-ordercor");
+					var allmoney=0;
+					for(var i=0;i<money.length;i++){
+						allmoney=allmoney+parseFloat(money[i].innerHTML);
+					}
+					allmoney=allmoney.toFixed(2);
+					var html = "<span class='mui-text-right' style='float: right;padding-right: 10%;'>合计：<span style='color: #FF6600;float: right;text-align:left;'>¥"+allmoney+"</span></span>"
+					var li = document.createElement("li");
+					li.className = "mui-table-view-cell mui-media mui-col-xs-12";
+					li.innerHTML = html;
+					flexcontent.appendChild(li);
+				}
+				plus.nativeUI.closeWaiting();
+			}
+
+			function backFirst() {
+				var muicontrolitem = document.getElementsByClassName("mui-control-item");
+				muicontrolitem[0].className = "mui-control-item mui-active";
+				for (var i = 1; i < muicontrolitem.length; i++) {
+					muicontrolitem[i].className = "mui-control-item";
+				}
+			}
+			/*画布方法开始*/
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var W = canvas.width;
+			var H = canvas.height;
+			var deg = 0,
+				new_deg = 0,
+				dif = 0;
+			var loop, re_loop;
+			var text, text_w, text2, text_w2, text3, text_w3;
+
+			function showinit(money) {
+				ctx.clearRect(0, 0, W, H);
+				ctx.beginPath();
+				ctx.strokeStyle = "#FFE99B";
+				ctx.lineWidth = 5;
+				ctx.arc(W / 2, H / 2, 100, 0, Math.PI * 2, false);
+				ctx.stroke();
+				var r = deg * Math.PI / 180;
+				ctx.beginPath();
+				ctx.strokeStyle = "#04ABF2";
+				ctx.lineWidth = 15;
+				ctx.arc(W / 2, H / 2, 100, 0 - 90 * Math.PI / 180, r - 90 * Math.PI / 180, false);
+				ctx.stroke();
+				ctx.fillStyle = "#04ABF2";
+				ctx.font = "30px 微软雅黑";
+				text3 = "----------";
+				text2 = "¥" + money;
+				text = (deg / 360 * 100).toFixed(2) + "%";
+				text_w = ctx.measureText(text).width;
+				text_w2 = ctx.measureText(text2).width;
+				text_w3 = ctx.measureText(text3).width;
+				ctx.fillText(text2, W / 2 - text_w2 / 2, H / 2 - 20);
+				ctx.fillText(text, W / 2 - text_w / 2, H / 2 + 50);
+				ctx.fillText(text3, W / 2 - text_w3 / 2, H / 2 + 15);
+			}
+
+			function draw(money,angle) {
+				new_deg = angle;
+				dif = new_deg - deg;
+				loop = setInterval("to("+money+")", 100 / dif);
+			}
+
+			function to(money) {
+				if (deg >= new_deg) {
+					clearInterval(loop);
+				}
+				if (deg < new_deg) {
+					if (phonetype == "ios") {
+						deg += 2;
+					} else {
+						deg++;
+					}
+				}
+				showinit(money);
+			}
+
+			function clearDraw() {
+				dif = 0;
+				new_deg = 0;
+				deg = 0;
+			}
+			/*画布方法结束*/
+
+
+			function setChartBase() {//拆分图表日期
+				tabObj.thirthday.linearrs[0].push(GetDateStr(-1, 0));
+				allObj.linearrs[0].push(GetDateStr(-1, 0));
+				for (var i = 0; i < 7; i++) {
+					tabObj.sevenday.linearrs[0].push(GetDateStr(-(i + 1), 0));
+				}
+				for (var i = 0; i <= 30; i++) {
+					if (i != 0 && i % 5 == 0) {
+						tabObj.thirthday.linearrs[0].push(GetDateStr(-i, 0));
+					}
+				}
+				for (var i = 0; i <= 60; i++) {
+					if (i != 0 && i % 10 == 0) {
+						allObj.linearrs[0].push(GetDateStr(-i, 0));
+					}
+				}
+				tabObj.sevenday.linearrs[0].reverse();
+				tabObj.thirthday.linearrs[0].reverse();
+				allObj.linearrs[0].reverse();
+			}
+			
+			function splitDataArr(type,day,idSaleCount) { //拆分数据
+				clearArr();
+				for (var i = 0; i < 60; i++) {
+					allObj.arrs[0].push(GetDateStr(-i - 1, 1));
+				}
+				var param = systemParam("V5.mobile.order.dataDetailCount");
+				param.type=type;
+				param.day=day;
+				dataSendFn('dataDetailCount', param, function(data) {
+					if (!data.isSuccess) {
+						flexcontent.innerHTML = "";
+						var mapmsg = data.map.errorMsg;
+						console.log(mapmsg);
+						plus.nativeUI.closeWaiting();
+//						return
+					}
+					var allCount=JSON.stringify(data.dataResult);
+//					console.log(allCount);
+					if(day=="60day"){
+						var sixday=allCount.split(",");
+						var newsix=[];
+						sixday[0]=sixday[0].substring(2,sixday.length);
+						sixday[sixday.length-1]=sixday[sixday.length-1].replace(/\}/g, "");
+						sixday[sixday.length-1]=sixday[sixday.length-1].replace(/\]/g, "");
+						for(var i=0;i<sixday.length;i++){
+							var news = sixday[i].split(":");
+							newsix.push(parseFloat(news[1].replace(/\"/g, "")));
+						}
+						newsix.reverse();
+						for(var i=0;i<newsix.length;i++){
+							allObj.arrs[1].push(newsix[i]);
+						}
+						var total = 0;
+						var index = 0;
+						var total2 = 0;
+						var index2 = 0;
+						for (var i = 0; i < allObj.arrs[1].length; i++) {
+							if (i < 7) {
+								tabObj.sevenday.arrs[1].push(allObj.arrs[1][i]);
+								tabObj.sevenday.arrs[0].push(allObj.arrs[0][i]);
+								tabObj.sevenday.linearrs[1].push(allObj.arrs[1][i]);
+							}
+							if (i < 30) {
+								tabObj.thirthday.arrs[1].push(allObj.arrs[1][i]);
+								tabObj.thirthday.arrs[0].push(allObj.arrs[0][i]);
+								if (i != 0 && i % 5 == 0) {
+									index++;
+									total = 0;
+								}
+								total += allObj.arrs[1][i]
+								tabObj.thirthday.linearrs[1][index] = total.toFixed(2);
+							}
+							if (i != 0 && i % 10 == 0) {
+								index2++;
+								total2 = 0;
+							}
+							total2 += allObj.arrs[1][i]
+							allObj.linearrs[1][index2] = total2.toFixed(2);
+						}
+						
+						tabObj.sevenday.linearrs[1].reverse();
+						tabObj.thirthday.linearrs[1].reverse();
+						tabObj.thirthday.linearrs[1].unshift(allObj.arrs[1][29]);
+						allObj.linearrs[1].reverse();
+						allObj.linearrs[1].unshift(allObj.arrs[1][59]);
+					}else{
+						if (type == "selfBonus") {
+							var bonu=data.selfResult;
+							var bonuone=JSON.stringify(bonu);
+							bonuone=bonuone.replace(/\}/g, "");
+							bonuone=bonuone.replace(/\]/g, "");
+							bonuone=bonuone.replace(/\{/g, "");
+							bonuone=bonuone.replace(/\[/g, "");
+							var newbonu=bonuone.split(":");
+							proportion=parseFloat(newbonu[0].replace(/\"/g, ""));
+							idSaleCount=parseFloat(newbonu[1].replace(/\"/g, ""));
+//							console.log(proportion+"--"+idSaleCount);
+						}
+						var yday=allCount.split(",");
+						var newyday=[];
+						yday[0]=yday[0].substring(2,yday.length);
+						yday[yday.length-1]=yday[yday.length-1].replace(/\}/g, "");
+						yday[yday.length-1]=yday[yday.length-1].replace(/\]/g, "");
+						for(var i=0;i<yday.length;i++){
+							var news = yday[i].split(":");
+							newyday.push(parseFloat(news[1].replace(/\"/g, "")));
+						}
+						newyday.reverse();
+						var total1 = 0;
+						var total2 = 0;
+						var total3 = 0;
+						var total4 = 0;
+						var total5 = 0;
+						var total6 = 0;
+						var alltotal=0;
+						for(var i=0;i<newyday.length;i++){
+							if (i>= 0 && i <=3) {
+								total1 += newyday[i];
+							}
+							if (i>= 4 && i <=7) {
+								total2 += newyday[i];
+							}
+							if (i>= 8 && i <=11) {
+								total3 += newyday[i];
+							}
+							if (i>= 12 && i <=15) {
+								total4 += newyday[i];
+							}
+							if (i>= 16 && i <=19) {
+								total5 += newyday[i];
+							}
+							if (i>= 20 && i <=23) {
+								total6 += newyday[i];
+							}
+							alltotal+=newyday[i];
+						}
+						
+						
+						tabObj.yesday.arrs[1].push(total1);
+						tabObj.yesday.arrs[1].push(total2);
+						tabObj.yesday.arrs[1].push(total3);
+						tabObj.yesday.arrs[1].push(total4);
+						tabObj.yesday.arrs[1].push(total5);
+						tabObj.yesday.arrs[1].push(total6);
+						
+						tabObj.yesday.linearrs[1].push(newyday[0]);
+						for(var i=0;i<tabObj.yesday.arrs[1].length;i++){
+							tabObj.yesday.linearrs[1].push(tabObj.yesday.arrs[1][i]);
+						}
+						if (type == "selfBonus") {
+							if(proportion==0||idSaleCount==0){
+								angle=0;
+							}else{
+								angle=parseFloat(idSaleCount)/proportion*360;
+							}
+							if(angle>360){
+								angle=359;
+							}else{
+								angle=angle.toFixed(2);
+							}
+							console.log(angle+"--"+proportion);
+							openCanvascontent();
+							draw(proportion,angle);
+						} else {
+							closeCanvascontent();
+						}
+					}
+					
+//					chartBase.init();
+					if(chartBase){
+						chartBase.init();
+						chartBase.lineChart = echarts.init(document.getElementById('lineChart'));
+						chartBase.loadCharts(1);
+						setTimeout(function(){
+							showList(1);
+						},100);
+//						showList(1);
+					}
+				}, "get")
+			}
+
+			function GetDateStr(AddDayCount, isOk) { //获取当天日期前后天数方法
+				var dd = new Date();
+				dd.setDate(dd.getDate() + AddDayCount); //获取AddDayCount天后的日期 
+				var y = dd.getFullYear();
+				var m = (dd.getMonth() + 1) < 10 ? "0" + (dd.getMonth() + 1) : (dd.getMonth() + 1); //获取当前月份的日期，不足10补0
+				var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate(); //获取当前几号，不足10补0
+				if (isOk == 1) {
+					return y + "-" + m + "-" + d;
+				} else {
+					return m + "-" + d;
+				}
+			}
+			function GetDay(year, month, day){//获取指定日期前一天方法   
+		        var today=new Date(year, month-1 ,day);
+		        var yesterday_milliseconds=today.getTime()-1000*60*60*24;
+		         
+		        var yesterday=new Date();      
+		        yesterday.setTime(yesterday_milliseconds);      
+		            
+		        var strYear=yesterday.getFullYear();   
+		        var strDay=yesterday.getDate();   
+		        var strMonth=yesterday.getMonth()+1;   
+		        if(strMonth<10)   
+		        {   
+		            strMonth="0"+strMonth;   
+		        }   
+		        var strYesterday=strMonth+"-"+strDay;   
+		        return strYesterday;
+		    }
+			function clearArr() {
+				allObj.arrs = [
+					[],
+					[]
+				];
+				tabObj.yesday.arrs[1]=[];
+				tabObj.sevenday.arrs = [
+					[],
+					[]
+				];
+				tabObj.thirthday.arrs = [
+					[],
+					[]
+				];
+			}
+			function clearLine(){
+				allObj.linearrs = [
+					[],
+					[]
+				];
+				tabObj.yesday.linearrs = [
+					["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"],
+					[]
+				]
+				tabObj.sevenday.linearrs = [
+					[],
+					[]
+				];
+				tabObj.thirthday.linearrs = [
+					[],
+					[]
+				];
+			}
+
+			function openCanvascontent() {
+				document.getElementById("lineChart").style.display = "none";
+				listcontent.style.display = "none";
+				document.getElementById("canvascontent").style.display = "block";
+			}
+
+			function closeCanvascontent() {
+				document.getElementById("lineChart").style.display = "block";
+				listcontent.style.display = "block";
+				document.getElementById("canvascontent").style.display = "none";
+			}
+		</script>
+		<script src="../js/echarts-all.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/layer.m/layer.m.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GKe53c1jaEFzcIyEwzpQHGUU"></script>
+		<title>地址解析</title>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav" style="background-color: #007aff;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff"></a>
+			<h1 class="mui-title" style="color:#fff">地图</h1>
+
+		</header>
+		<div id="map">加载中……</div>
+		<div class="mapBottmtext" id="mapBottmtext">
+			<ul class="mui-table-view mui-map-bom map-flex">
+				<li class="mui-table-view-cell map-flex-one">
+					<p id="mapCode"></p>
+					<p id="mapAddress"></p>
+				</li>
+				<li class="mui-table-view-cell map-flex-two">
+					<span id="mapDics"></span>
+				</li>
+				<li class="mui-table-view-cell un_block_li">
+					<button type="button" id="getorder">接单</button>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	mui.init({});
+	var sysName, map = null,
+		myGeo, orderStatus;
+	mui.plusReady(function() {
+		sysName = 'iOS' == plus.os.name ? "iosicon" : "androidicon";
+		var mapBottmtext = document.getElementById("mapBottmtext");
+		var mapCode = document.getElementById("mapCode")
+		var mapDics = document.getElementById("mapDics")
+		var mapAddress = document.getElementById("mapAddress")
+		var getorder = document.getElementById("getorder")
+		myGeo = new BMap.Geocoder();
+		map = new plus.maps.Map("map");
+		map.setZoom(12);
+		window.addEventListener('mapShow', function(event) {
+			userLocation();
+			var mapShow = event.detail.mapShow;
+			orderStatus = event.detail.orderStatus;
+			var markerObj = [];
+			var addressObj = [];
+			var j = l = 0;
+			console.log(orderStatus)
+			document.getElementsByClassName("un_block_li")[0].style.display = orderStatus == "UN_ACCPET" ? "block" : "none"
+			for (var i in mapShow) {
+				l++;
+				addressObj.push(i)
+			
+			}
+			getPointer(0)
+			
+			function getPointer(i){
+				    i=addressObj[i]
+					myGeo.getPoint(i, function(point) {
+					if (point) {
+						var ptObj = new plus.maps.Point(point.lng, point.lat);
+						var marker = new plus.maps.Marker(ptObj);
+						marker.setIcon("../images/" + sysName + "/c" + j + ".png");
+						markerObj.push(marker);
+						markerObj.push(i);
+						map.addOverlay(marker);
+						j++;
+						getPointer(j)
+						if (l == j) {
+							for (var n = 0; n < 2*l; n+=2) {
+								(function(arg) {
+									markerObj[n].onclick = function(marker) {
+										for (var m = 0; m < 2*l; m+=2) {
+											markerObj[m].setIcon("../images/" + sysName + "/c" + (m/2) + ".png")
+										}
+										mapBottmtext.style.display = "block";
+										for (var x = 0; x < addressObj.length; x++) {
+											if (markerObj[arg+1] == addressObj[x]) {
+												var mkadress = addressObj[x];
+												var mkdisc = mapShow[addressObj[x]].distance;
+												var mkorderNumber = mapShow[addressObj[x]].orderNumber;
+												mapCode.innerText = mkorderNumber
+												mapDics.innerText = mkdisc
+												mapAddress.innerText = mkadress;
+												break;
+											}
+											
+										}
+										this.setIcon("../images/" + sysName + "/d" + arg/2 + ".png");
+									};
+								})(n); //调用时参数   
+							}
+						}
+					}
+				})
+			
+			}
+			
+		})
+		window.addEventListener("detailMap", function() { //终点map
+			userLocation();
+			var bournObj = event.detail.bournObj;
+			console.log(bournObj)
+			var Destination = event.detail.Destination;
+			orderStatus = event.detail.orderStatus;
+			mapBottmtext.style.display = "block";
+			mapCode.innerText = bournObj.orderNumber;
+			mapDics.innerText = bournObj.distance;
+			mapAddress.innerText = Destination;
+			myGeo.getPoint(Destination, function(point) {
+				if (point) {
+					var ptObj = new plus.maps.Point(point.lng, point.lat);
+					var marker = new plus.maps.Marker(ptObj);
+					marker.setIcon("../images/" + sysName + "/end.png");
+					map.addOverlay(marker);
+				}
+			})
+		})
+		var old_back = mui.back;
+		mui.back = function() {
+			map.clearOverlays();
+			mapCode.innerText = ""
+			mapDics.innerText = ""
+			mapAddress.innerText = "";
+			mapBottmtext.style.display = "none";
+			old_back();
+		}
+		getorder.addEventListener("tap", function() { //点击接单			
+			var getNumber = mapCode.innerText;
+			console.log("接单")
+			var param = systemParam("V5.mobile.order.operation");
+			param.orderNumber = getNumber;
+			param.operation = "ACCEPET";
+			param.operationReason = "";
+			plus.nativeUI.showWaiting();
+			dataSendFn('orderOperation', param, function(data) {
+				plus.nativeUI.closeWaiting();
+				if (!data.isSuccess) {
+					var mapmsg = data.map.errorMsg;
+					plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+					console.log(mapmsg)
+					return
+				}
+				plus.webview.hide("list/listdetail.html");
+				plus.nativeUI.alert("接单成功", function() {
+					var page = plus.webview.getWebviewById("list/dingdan.html");
+					map.clearOverlays();
+					mapCode.innerText = ""
+					mapDics.innerText = "" 
+					mapAddress.innerText = "";
+					mapBottmtext.style.display = "none";
+					console.log(orderStatus)
+					plus.webview.hide(plus.webview.currentWebview());
+					page.evalJS("getThisDate('" + orderStatus + "','',1)")
+				}, "", "OK");
+			}, "get")
+		})
+	})
+
+	function userLocation() { 
+//		map.showUserLocation(false);
+//		map.getUserLocation(function(state, pos) {
+//			if (0 == state) {
+//				mypt = pos;
+//				map.setCenter(pos);
+//				var marker = new plus.maps.Marker(pos);
+//				marker.setIcon("../images/" + sysName + "/start.png");
+//				map.addOverlay(marker);
+//			}
+//		});
+		myGeo.getPoint(plus.storage.getItem("myAddress"),
+function(point) {
+	if (point) {
+		var pos = new plus.maps.Point(point.lng, point.lat);
+		mypt = pos;
+		map.setCenter(pos);
+		var marker = new plus.maps.Marker(pos);
+		marker.setIcon("../images/" + sysName + "/start.png");
+				map.addOverlay(marker);
+
+		}
+	})
+	}
+</script>

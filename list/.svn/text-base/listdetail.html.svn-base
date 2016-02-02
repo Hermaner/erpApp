@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/stylebypad.css" rel="stylesheet">
+		<link href="../css/mui.listpicker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			span {
+				color: #AAAAAA;
+				font-size: 12px;
+			}
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			.mui-bar-popover {
+				width: 45%;
+			}
+			.mui-popover.mui-bar-popover .mui-table-view {
+				width: auto;
+			}
+			.mui-popover .mui-popover-arrow.mui-bottom:after {
+				border: 1px solid #E0E0E0;
+			}
+			.laymshade, .layermmain{
+				height: 140%;
+			}
+			.layermmain .section {
+				display: table-cell;
+				position: absolute;
+				left: 50%;
+				top: 20%;
+				-webkit-transform: translate(-50%);
+			}
+			.listhade {
+				background-color: rgba(0,0,0, .7);
+				/*pointer-events: auto;*/
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: 0;
+				display: none;
+				overflow: auto;
+				padding-bottom: 50px;
+				z-index: 5;
+			}
+			#closeHade{
+				position: fixed;right: 10px;top:50px;font-size: 20px;
+				color: #FFFFFF;
+				width: 25px;height: 25px;
+				border: 1px solid #FFFFFF;
+				border-radius: 50%;
+				text-align: center;
+				z-index: 10;
+				display: none;
+			}
+			#closeHade span{
+				color: #FFFFFF;
+			}
+			#listself{
+				overflow: auto;
+			}
+			.mui-content
+			{
+			    -webkit-overflow-scrolling:touch;
+			}
+		</style>
+
+	</head>
+
+	<body class="mui-listself-body" style="padding-bottom:60px">
+		<header class="mui-bar mui-bar-nav" style="background-color: #007aff;">
+			<a class="mui-action-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width" style="color: #FFFFFF;"></a>
+			<a class="mui-title" class="mui-action-menu" href="#bottomPopover" style="color:#FFFFFF">
+			订单详情
+			</a>
+
+		</header>
+		<div class="mui-content dingdan" id="listself">
+			<ul class="mui-table-view" id="orderTopmsg">
+			</ul>
+			<span class="mui-content-padded">商品信息</span>
+			<ul class="mui-table-view" id="detailList">
+				
+			</ul>
+			<span class="mui-content-padded">买家信息</span>
+			<ul class="mui-table-view" id="detailBuymsg">
+				<li class="mui-table-view-cell">
+					<p><span></span></p>
+					<p><span></span></p>
+					<p><span></span></p>
+				</li>
+			</ul>
+			<span class="mui-content-padded">买家留言</span>
+			<ul class="mui-table-view" id="buyer">
+				<li class="mui-table-view-cell">
+					<p><span></span></p>
+				</li>
+			</ul>
+			<ul class="mui-table-view incodeAction" id="sendCodeUl">
+				<li class="mui-table-view-cell" id="getorderCode">
+					<input class="shouhuoma" type="number" placeholder="请输入收货码" style="width:65%;height:35px;padding:6px 15px" />
+					<button class="mui-btn-mini mui-pull-right dd-changebtn">确认收货</button>
+					<button class="mui-btn-mini mui-btn-minimap mui-btnz-sendcode">发送收货码</button>
+				</li>
+				<li class="mui-table-view-cell" id="sinceorderCode">
+					<input class="shouhuoma" type="number" placeholder="请输入自提码" style="width:65%;height:35px;padding:6px 15px" />
+					<button class="mui-btn-mini mui-pull-right dd-changebtn">自提确认</button>
+					<button class="mui-btn-mini mui-btn-minimap mui-btnz-sendcode" pid="since">发送自提码</button>
+				</li>
+			</ul>
+			
+
+		</div>
+		<div class="maxwidth2 ld-divbot2 detailfixBtn myfixBtn" id="detailfixBtn">
+				<div class="mui-pull-left ld-lianxi ld-lianxi2" id="mtel_div">
+					<a class="lianxi-padding mui-tel-link" id="mtel">联系买家</a>
+				</div>
+				<div class="ld-footbtn mui-pull-right" id="id_UN_ACCPET">
+					<!--未接-->
+					<button class="mui-btn-mini mui-btn-minimap mui-btnz-map">地图显示</button>
+					<button class="mui-btn-mini mui-btnz-kick">踢回订单</button>
+					<button class="mui-btn-mini dd-changebtn mui-btnz-tack">接单</button>
+				</div>
+				<div class="ld-footbtn mui-pull-right" id="id_SINCE">
+					<!--<button class="mui-btn-mini mui-btn-minimap sinceChange" href="changelist.html">修改订单</button>-->
+					<button class="mui-btn-mini mui-btn-minimap sinceCoordinate">申请协调</button>
+					<button class="mui-btn-mini mui-btn-minimap mui-btnz-print">打印订单</button>
+				</div>
+				<div class="ld-footbtn mui-pull-right" id="id_ACCPET">
+
+					<button class="mui-btn-mini sinceCoordinate">申请协调</button>
+					<button class="mui-btn-mini mui-btnz-print">打印订单</button>
+					<button class="mui-btn-mini dd-changebtn mui-btnz-send">发货</button>
+				</div>
+				<div class="ld-footbtn mui-pull-right" id="id_WAIT_GOOD">
+					<!--已接-->
+
+					<button class="mui-btn-mini mui-btnz-print">补打订单</button>
+
+				</div>
+				<div class="ld-footbtn mui-pull-right" id="IN_STORE">
+					<a href="#payPopover">
+						<button class="mui-btn-mini dd-changebtn">确定支付</button>
+					</a>
+				</div>
+			</div>
+		<div id="payPopover" class="mui-popover mui-bar-popover">
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" pid="scanCode">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/pay.png" /> 扫描付款码
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell" pid="cashPay">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/money.png" /> 现金支付
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell" pid="cardPay">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/cardpay.png" /> 刷卡支付
+					</div>
+
+				</li>
+			</ul>
+		</div>
+		<div id="closeHade">
+			<span class="mui-icon mui-icon-closeempty"></span>
+		</div>
+		<div class="listhade" id="listhade">
+		
+		</div>
+		<script src="../js/common.js"></script>
+		<script src="../js/layer.m/layer.m.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/mui.listpicker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<!--<script src="../js/print.js"></script>-->
+		<script src="listdetail.js"></script>
+		<script src="orderBarcode.js"></script>
+	</body>
+	
+	
+</html>

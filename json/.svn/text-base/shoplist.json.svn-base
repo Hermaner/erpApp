@@ -1,0 +1,165 @@
+{
+    "isSuccess": true,
+    "totalCount": 2,
+    "orders": [
+        {
+            "orderNumber": 1001,
+            "address": "上海市桂江路77弄",
+            "orderPayStatus": "已付款",
+            "totalAmount": 218,
+            "initialTotalAmount": 218,
+            "productNum": 2,
+            "operation": "自提",
+            "logisticCode": "nssb001",
+            "sinceTime": "2015年8月10日",
+            "products": [
+                {
+                    "productNumber": "sssceshi001",
+                    "productName": "测试1",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 101,
+                    "skuName": "红色M",
+                    "barcode": 123456,
+                    "price": 111,
+                    "count": 1,
+                    "stock": 102
+                },
+                {
+                    "productNumber": "sssceshi002",
+                    "productName": "测试2",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 102,
+                    "skuName": "粉色M",
+                    "barcode": 1234567,
+                    "price": 113,
+                    "count": 1,
+                    "stock": 108
+                }
+            ]
+        },
+        {
+            "orderNumber": 1002,
+            "address": "上海市龙吴路200号",
+            "orderPayStatus": "未付款",
+            "totalAmount": 250,
+            "initialTotalAmount": 250,
+            "productNum": 1,
+            "operation": "自提",
+            "logisticCode": "nssb002",
+            "sinceTime": "2015年8月10日",
+            "products": [
+                {
+                    "productNumber": "sssceshi003",
+                    "productName": "测试3",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 105,
+                    "skuName": "白色M",
+                    "barcode": 1234568,
+                    "price": 122,
+                    "count": 1,
+                    "stock": 125
+                }
+            ]
+        }
+        ,
+        {
+            "orderNumber": 1002,
+            "address": "上海市天钥桥路210号",
+            "orderPayStatus": "未付款",
+            "totalAmount": 250,
+            "initialTotalAmount": 250,
+            "productNum": 1,
+            "operation": "自提",
+            "logisticCode": "nssb002",
+            "sinceTime": "2015年8月10日",
+            "products": [
+                {
+                    "productNumber": "sssceshi003",
+                    "productName": "测试3",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 105,
+                    "skuName": "白色M",
+                    "barcode": 1234568,
+                    "price": 122,
+                    "count": 1,
+                    "stock": 125
+                }
+            ]
+        }
+        ,
+        {
+            "orderNumber": 1002,
+            "address": "上海市漕宝路220号",
+            "orderPayStatus": "未付款",
+            "totalAmount": 250,
+            "initialTotalAmount": 250,
+            "productNum": 1,
+            "operation": "自提",
+            "logisticCode": "nssb002",
+            "sinceTime": "2015年8月10日",
+            "products": [
+                {
+                    "productNumber": "sssceshi003",
+                    "productName": "测试3",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 105,
+                    "skuName": "白色M",
+                    "barcode": 1234568,
+                    "price": 122,
+                    "count": 1,
+                    "stock": 125
+                }
+            ]
+        }
+        ,
+        {
+            "orderNumber": 1002,
+            "address": "上海市天山路230号",
+            "orderPayStatus": "未付款",
+            "totalAmount": 250,
+            "initialTotalAmount": 250,
+            "productNum": 1,
+            "operation": "自提",
+            "logisticCode": "nssb002",
+            "sinceTime": "2015年8月10日",
+            "products": [
+                {
+                    "productNumber": "sssceshi003",
+                    "productName": "测试3",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 105,
+                    "skuName": "白色M",
+                    "barcode": 1234568,
+                    "price": 122,
+                    "count": 1,
+                    "stock": 125
+                }
+            ]
+        }
+        ,
+        {
+            "orderNumber": 1002,
+            "address": "上海市龙吴路240号",
+            "orderPayStatus": "未付款",
+            "totalAmount": 250,
+            "initialTotalAmount": 250,
+            "productNum": 1,
+            "operation": "自提",
+            "logisticCode": "nssb002",
+            "sinceTime": "2015年8月10日",
+            "products": [
+                {
+                    "productNumber": "sssceshi003",
+                    "productName": "测试3",
+                    "productPic": "../images/cbd.jpg",
+                    "skuNumber": 105,
+                    "skuName": "白色M",
+                    "barcode": 1234568,
+                    "price": 122,
+                    "count": 1,
+                    "stock": 125
+                }
+            ]
+        }
+    ]
+}

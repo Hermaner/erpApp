@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<script src="../js/common.js"></script>
+		<script src="../js/apijs/api.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav headbac">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width" style="color: #FFFFFF;"></a>
+			<h1 id="title" class="mui-title" style="color: #FFFFFF;">通知推送</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view ulcor">
+				<li class="mui-table-view-cell" style="margin-bottom: 10px;color: #666666;">
+					接收新消息通知
+					<div class="mui-switch" sid="msg">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell" style="color: #666666;">
+					新订单提醒
+					<div class="mui-switch" sid="order">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		var msgsid, ordersid;
+		mui.init();
+		mui.plusReady(function() {
+			mui('.mui-content .mui-switch').each(function(index) { //循环所有toggle
+				console.log(plus.storage.getItem("noticeMessage"))
+				console.log(plus.storage.getItem("noticeMessage") == 1)
+				index == 0 && plus.storage.getItem("noticeMessage") == 1 && (this.classList.add('mui-active'))
+				index == 1 && plus.storage.getItem("noticeOrder") == 1 && (this.classList.add('mui-active'))
+				this.addEventListener('toggle', function(event) {
+					index == 0 ? msgsid = event.detail.isActive ? "1" : "0" : "";
+					index == 1 ? ordersid = event.detail.isActive ? "1" : "0" : "";
+					console.log(event.detail.isActive)
+					console.log(msgsid)
+					var param = systemParam("V5.mobile.push.set");
+					param.noticeMessage = msgsid||"0";
+					param.noticeOrder = ordersid||"0";
+					console.log(param)
+					dataSendFn('pushSet', param, function(data) {
+						console.log(JSON.stringify(data))
+						console.log("推送设置");
+						plus.storage.setItem("noticeMessage", msgsid);
+						plus.storage.setItem("noticeOrder", ordersid);
+						console.log(plus.storage.getItem("noticeMessage"))
+						console.log(plus.storage.getItem("noticeMessage") == 1)
+					})
+				});
+			});
+		})
+
+		function loadData() {
+			var sparam = systemParam("V5.mobile.push.get");
+			dataSendFn('pushGet', sparam, function(data) {
+				var noticeMessage = data.noticeMessage
+				var noticeOrder = data.noticeOrder;
+				noticeMessage == 1 ? document.getElementsByClassName("mui-switch")[0].setAttribute("class", "mui-switch mui-active") : ""
+				noticeOrder == 1 ? document.getElementsByClassName("mui-switch")[1].setAttribute("class", "mui-switch mui-active") : ""
+				plus.storage.setItem("noticeMessage", noticeMessage);
+				plus.storage.setItem("noticeOrder", noticeOrder);
+			}, "get")
+		}
+	</script>
+
+</html>

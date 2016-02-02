@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-cell > a:not(.mui-btn){
+				color: #666666;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav headbac">
+
+			<h1 id="title" class="mui-title" style="color: #FFFFFF;">更多</h1>
+		</header>
+		<div class="mui-content">
+			<ul id="morelist" class="mui-table-view ulcor">
+				<li class="mui-table-view-cell" style="margin-bottom: 10px;">
+					<a pid="pushid" class="mui-navigate-right">
+					  	通知推送
+					</a>
+				</li>
+				<li class="mui-table-view-cell" style="margin-bottom: 10px;">
+					<a id="toxitonglist" href="xitonglist.html" class="mui-navigate-right">
+						系统消息
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="toaddour" href="addour.html" class="mui-navigate-right">
+						加入我们
+					</a>
+				</li>
+				<li class="mui-table-view-cell" style="margin-bottom: 10px;">
+					<a id="toabout" href="about.html" class="mui-navigate-right">
+						关于我们
+					</a>
+				</li>
+				<li class="mui-table-view-cell" style="margin-bottom: 10px;">
+					<a id="toquestion" href="question.html" class="mui-navigate-right">
+						问题反馈
+					</a>
+				</li>
+				<li class="mui-table-view-cell" style="margin-bottom: 10px;">
+					<a id="toaddprinter" href="addprinter.html" class="mui-navigate-right">
+						设置打印机
+					</a>
+				</li>
+			</ul>
+			<button class="mui-btn-block mui-btn-primary btnwid" id="exit">退出登录</button>
+		</div>
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				swipeBack: false,
+				keyEventBind: {
+					backbutton: false
+				}
+			});
+			var aniShow = "pop-in";
+			var loginPage,morePage,homePage;
+			mui.plusReady(function() {
+				loginPage = plus.webview.getWebviewById("login.html");
+				morePage = plus.webview.getWebviewById("more/more.html");
+				homePage = plus.webview.getWebviewById("home2.html");
+				mui('#morelist').on('tap', 'a', function() {
+					if (this.getAttribute('pid')) {
+						mui.openWindow({
+							id: "pushset.html",
+							show: {
+								aniShow: aniShow
+							}
+						})
+					}else {
+						var id = this.getAttribute('href');
+						var href = this.href;
+						mui.openWindow({
+							id: id,
+							url: this.href,
+							styles: {
+								popGesture: "close"
+							},
+							show: {
+								aniShow: aniShow
+							},
+							waiting: {
+								autoShow: false
+							}
+						})
+					}
+				});
+				document.getElementById("exit").addEventListener("tap", function() {
+					plus.nativeUI.confirm( "是否退出？", function(e){
+		
+						if(e.index==0){
+							loginPage.show();
+							plus.navigator.setStatusBarBackground("#1F71B4");
+							plus.storage.removeItem("orgCode");
+//							if (mui.os.ios) {
+//								plus.webview.show('home.html');
+//							} else {
+//								plus.webview.show('home.html', "fade-in", 300);
+//							}
+//							//隐藏当前;
+//							plus.webview.hide('more/more.html');
+							//更改当前活跃的选项卡
+//							var activeTab = 'home.html';
+						}else{
+							return;
+						}
+					}, "", ["确认","取消"] );
+
+				})
+			});
+			
+			
+		</script>
+	</body>
+
+</html>

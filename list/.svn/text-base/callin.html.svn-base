@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/mui.listpicker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/stylebypad.css">
+		<style>
+			span {
+				color: #999999;
+				font-size: 12px;
+			}
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+			}
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				bottom: 44px;
+				height: auto;
+			}
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+			}
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				
+				margin: 0;
+			}
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+			.limargin li {
+				padding: 10px 7px
+			}
+		</style>
+	</head>
+
+	<body class="mui-callin-body">
+		<header class="mui-bar mui-bar-nav headbac" id="tonewcalllist">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-callin-white"></a>
+			<h1 id="title" class="mui-title mui-callin-white">调货订单</h1>
+			<a href="newcalllist.html" id="callinjiahao" class="mui-icon iconfont icon-gengduo mui-pull-right mui-callin-white" style="display:none"></a>
+		</header>
+		<div class="mui-contentz3">
+			<div class="searchwidth">
+				<div class="searchwidth2">
+					<!--<input type="search" id="searchtext" class="mui-input-clear inputbac mui-input-speech dd-flexsearch" placeholder="" />
+					<span class="mui-icon mui-icon-search dd-search"></span>
+					<button id="searcBtn" class=" dd-flex3">搜索</button>-->
+					<button class="mui-btn dd-flex2" id="showUserPicker" type='button'>
+						<span id="userResult" class="dd-xuanze">未审核</span>
+						<span class="mui-icon mui-icon-arrowdown"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-callin-ttt mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll mui-callin-width">
+						<a class="mui-control-item" id="callout" href="#itemone">
+							<span class="mui-callin-outfize">调货出库单</span>
+						</a>
+						<a class="mui-control-item mui-active" id="callin" href="#itemtwo">
+							<span class="mui-callin-outfize">调货入库单</span>
+						</a>
+
+					</div>
+				</div>
+				<div class="mui-slider-group mui-callin-top80" id="callAlink">
+					<div id="itemone" class="mui-slider-item mui-control-content ">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="toitemone">
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="itemtwo" class="mui-slider-item mui-control-content mui-active">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="toitemtwo">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="maxwidth2  ld-divbot3 mui-callin-padtop2" id="callinbtnone">
+			<div class="mui-pull-right callin-footmar" id='detail-action'>
+				<button class="mui-btn-mini" id="dataDel">删除订单</button>
+				<button class="mui-btn-mini dd-changebtn mui-callin-trueright" id="outsaveBtn">确认调出</button>
+			</div>
+			<div class="clearboth"></div>
+		</div>
+		<div class="maxwidth2 clearboth ld-divbot3 mui-callin-padtop" id="callinbtntwo">
+			<div class="mui-pull-right callin-footmar" id='detail-action'>
+				<button class="mui-btn-mini dd-changebtn mui-callin-trueright" id="insaveBtn">确认调入</button>
+			</div>
+			<div class="clearboth"></div>
+		</div>
+
+		<input type="hidden" id="callStatus" value="callin" />
+		<input type="hidden" id="callStatuson" value="ALL" />
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.listpicker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/mui.pullToRefresh.js"></script>
+		<script src="../js/mui.pullToRefresh.material.js"></script>
+		<script src="callin.js"></script>
+
+	</body>
+
+</html>

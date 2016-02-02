@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	mui.plusReady(function(){
+      		var subPage=plus.webview.create("https://openapi.alipay.com/gateway.do?app_id=2014072300007148&biz_content={%22button%22:[{%22actionParam%22:%22ZFB_HFCZ%22,%22actionType%22:%22out%22,%22name%22:%22%E8%AF%9D%E8%B4%B9%E5%85%85%E5%80%BC%22},{%22name%22:%22%E6%9F%A5%E8%AF%A2%22,%22subButton%22:[{%22actionParam%22:%22ZFB_YECX%22,%22actionType%22:%22out%22,%22name%22:%22%E4%BD%99%E9%A2%9D%E6%9F%A5%E8%AF%A2%22},{%22actionParam%22:%22ZFB_LLCX%22,%22actionType%22:%22out%22,%22name%22:%22%E6%B5%81%E9%87%8F%E6%9F%A5%E8%AF%A2%22},{%22actionParam%22:%22ZFB_HFCX%22,%22actionType%22:%22out%22,%22name%22:%22%E8%AF%9D%E8%B4%B9%E6%9F%A5%E8%AF%A2%22}]},{%22actionParam%22:%22http://m.alipay.com%22,%22actionType%22:%22link%22,%22name%22:%22%E6%9C%80%E6%96%B0%E4%BC%98%E6%83%A0%22}]}&charset=GBK&method=alipay.mobile.public.menu.add&sign_type=RSA&timestamp=2014-07-24%2003:07:50&version=1.0&sign=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDOyqaoweyQauihfWBPixaWkAYR
+PG/OJ5wSnEzFsAvcYZWU5mz4YBSmvuHU39K7RNA5kyjXFMJUkqBgShWNLa6bPtFQ
+m6AGpjzIBPfvOpleFxiwr5zFhErTEsvKmaTEmJ1f7DZDGkitYys9OXGXBA38oNkK
+DXTlGG88u86YanXWNQIDAQAB");
+      		void subPage.setJsFile("_www/more/subtest.js");
+      		var str=plus.storage.getItem("subjson")
+      		var json=eval("("+str+")");
+      	})
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav headbac">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-back-width" style="color: #FFFFFF;"></a>
+		<h1 id="title" class="mui-title" style="color: #FFFFFF;">关于我们</h1>
+	</header>
+	<div class="mui-content">
+		<div class="about">
+			<div class="about-logo"></div>
+			<div class="about-p">
+				<p>当前版本</p>
+				<p id="version"></p>
+			</div>
+		</div>
+		<div class="about-foot">
+			<p>Copyright ©2005-2015</p>
+			<p>上海宏巍信息技术有限公司</p>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+    "isSuccess": true,
+    "totalCount": 3,
+    "messages": [
+        {
+            "messageId": 111,
+            "messageType": "未接",
+            "messageInfo": "您有新的未接订单请查收",
+            "orderNumber": 100101
+        },
+        {
+            "messageId": 112,
+            "messageType": "自提",
+            "messageInfo": "您有新的自提订单请查收",
+            "orderNumber": 100102
+        },
+        {
+            "messageId": 113,
+            "messageType": "待收货",
+            "messageInfo": "您有新的待收货订单请查收",
+            "orderNumber": 100103
+        }
+    ]
+}

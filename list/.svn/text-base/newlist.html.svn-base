@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/iconfont.css">
+		<link href="../css/style.css" rel="stylesheet" />
+		<link href="../css/stylebypad.css" rel="stylesheet">
+		<script src="../js/mui.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<script src="../js/common.js"></script>
+		<style>
+			
+			span {
+				color: #999999;
+				font-size: 12px;
+			}
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+				padding: 6px 5px;
+			}
+			label {
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body class="mui-newlist-body bodypadbot">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-newlist-white mui-back-width"></a>
+			<a class="mui-title mui-action-menu mui-newlist-white" href="#bottomPopover">
+				购物篮
+			</a>
+			<span id="isScan" class="mui-icon iconfont icon-saomiao mui-pull-right shopin-sm" onclick="clicked('../barcode/barcode_cartscan.html',true,true);"></span>
+		</header>
+		<div class="mui-contentz">
+			<div class="switchBox">
+				<div class="item-searchwidth">
+					<div class="shop-search">
+						<input type="search" id="scanTxt" class="mui-input-clear inputbac mui-input-speech" placeholder="" />
+					</div>
+
+					<span class="mui-icon mui-icon-search dd-search"></span>
+					<button class="shopin-ss" id="searcBtn" onclick="openIntv()">搜索</button>
+				</div>
+			</div>
+		</div>
+		<div class="mui-content dingdan" id="tochange">
+			<ul class="mui-table mui-table-view limargin" id="tolistdetail" style="padding-top:5px;">
+				
+			</ul>
+		</div>
+		
+		<div class="maxwidth2 nl-foot">
+			<div class="mui-pull-left">
+				<div class="mui-input-row mui-checkbox mui-pull-left dd-footmar mui-newlist-right">
+					<label class="mui-shopcheck-labelpadding"><span>全选，合计<i id="allCategory">0</i>种<i id="allNumber">0</i>件商品</span></label>
+					<input name="checkbox" class="changeinput" id="selectAll" value="Item 1" type="checkbox">
+				</div>
+			</div>
+			<div class="mui-pull-right mui-newlist-divmargin" id="toshoppingcare">
+				<button class="mui-btn-mini" id="dataDel">删除</button>
+				
+				<button class="mui-btn-mini button-disabled" disabled="disabled" id="allpay">结算</button>
+				
+				
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="newlist.js"></script>
+	<script src="../js/layer.m/layer.m.js"></script>
+	<script src="newlistBarcode.js"></script>
+	<script>
+		
+	</script>
+
+</html>
