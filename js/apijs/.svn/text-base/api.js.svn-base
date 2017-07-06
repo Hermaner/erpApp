@@ -440,7 +440,7 @@ function bit_rol(a, b) {
 
 
 function paramFn(e) {
-	var param = {
+	var param = { 
 		nick: 'V5mobile',
 		name: 'V5mobile',
 //		nick: '欧少辉',
@@ -476,11 +476,11 @@ function messageAdd(e) { //消息新增接口
 	})
 }
 
-function dataSendFn(obj, data, callback, type,error) {
-
+function dataSendFn(obj, data, callback, type,error,timeout) {
 	type = type ? type : "post";
 	//	url = '../json/' + obj;
-//		url = 'http://192.168.50.233:8089/openApi/dyncHongware/mobile/' + obj;
+//			url = 'http://192.168.50.216:8089/openApi/dyncHongware/mobile/' + obj;
+//		url = 'http://192.168.50.215:8089/openApi/dyncHongware/mobile/' + obj;
 //		url = 'http://jira.hongware.cn:8084/openApi/dyncHongware/mobile/' + obj;
 //		url = 'http://swapi.sandbox.hongware.com/openApi/dyncHongware/mobile/' + obj;
 	url = 'http://swapi.hongware.com/openApi/dyncHongware/mobile/' + obj;
@@ -489,7 +489,7 @@ function dataSendFn(obj, data, callback, type,error) {
 		data: data,
 		dataType: 'application/json', //服务器返回json格式数据    
 		type: type, //HTTP请求类型
-		timeout:10000,
+		timeout:timeout||10000,
 		success: function(data) {
 			data = JSON.parse(data)
 			console.log(data)

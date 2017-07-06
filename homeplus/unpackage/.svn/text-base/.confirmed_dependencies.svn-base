@@ -1,0 +1,735 @@
+{
+  "pages/login/login.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "styles/style.css",
+      "images/daogou.jpg",
+      "pages/login/login.js",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/hwlogo.png",
+      "fonts/mui.ttf",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "index.html": {
+    "resources": [
+      "pages/login/login.html",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "js/index.js",
+      "pages/home/home.html",
+      "pages/goods/goods.html",
+      "pages/order/order.html",
+      "pages/more/more.html",
+      "pages/goodsAction/goodsAction.html",
+      "images/close.png",
+      "images/daogou.jpg",
+      "login.js",
+      "images/daogouphone.png",
+      "images/hwlogo.png",
+      "styles/styleAll.css"
+    ],
+    "refer": [
+      "pages/login/login.html",
+      "pages/more/pushSet.html",
+      "pages/order/orderDetail.html",
+      "pages/chart/chart.html",
+      "pages/cashr/cashrDetail.html",
+      "pages/map/map.html",
+      "pages/order/order.html",
+      "pages/home/home.html",
+      "pages/goods/goods.html",
+      "pages/more/more.html",
+      "pages/goodsAction/goodsAction.html",
+      "pages/tab/tab.html"
+    ]
+  },
+  "pages/order/orderDetail.html": {
+    "resources": [
+      "images/close.png",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "js/app.js",
+      "js/vue.js",
+      "fonts/mui.ttf",
+      "pages/order/orderDetail.js",
+      "images/icontu/15.jpg",
+      "images/icontu/34.jpg",
+      "styles/styleAll.css",
+      "images/cardpay.png",
+      "images/weixin.png",
+      "images/pay.png",
+      "images/money.png",
+      "images/logo.png",
+      "images/cbd.jpg"
+    ],
+    "refer": [
+      "pages/map/map.html",
+      "pages/order/changePayType.html",
+      "pages/order/mixPay.html",
+      "pages/barcode/orderScan.html"
+    ]
+  },
+  "pages/home/home.html": {
+    "resources": [
+      "pages/home/home.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/about-logo.png",
+      "styles/styleAll.css"
+    ],
+    "refer": [
+      "pages/goodsAction/goodsAction.html",
+      "login.html",
+      "pages/chart/chart.html",
+      "pages/barcode/orderScan.html",
+      "pages/more/msgList.html",
+      "pages/cashr/cashrCart.html",
+      "pages/map/location.html",
+      "pages/payLog/payLog.html",
+      "pages/vipCard/vipCard.html",
+      "pages/createVip/createVip.html",
+      "pages/vipRecharge/vipRecharge.html",
+      "pluginPrinter.html"
+    ]
+  },
+  "pages/goods/goods.html": {
+    "resources": [
+      "images/close.png",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "pages/goods/goods.js",
+      "js/app.js",
+      "js/vue.js",
+      "fonts/mui.ttf",
+      "images/logo.png",
+      "js/common.js",
+      "styles/styleAll.css",
+      "images/cbd.jpg"
+    ],
+    "refer": [
+      "pages/barcode/orderScan.html",
+      "pages/goods/goodsDetail.html"
+    ]
+  },
+  "pages/more/pushSet.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "js/app.js",
+      "js/vue.js",
+      "fonts/mui.ttf",
+      "styles/styleAll.css",
+      "js/common.js",
+      "pages/more/pushSet.js"
+    ],
+    "refer": []
+  },
+  "pages/chart/chart.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "styles/style.css",
+      "images/daogou.jpg",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/hwlogo.png",
+      "styles/styleAll.css",
+      "fonts/mui.ttf",
+      "pages/chart/chart.js",
+      "js/echarts-all.js"
+    ],
+    "refer": []
+  },
+  "pages/order/order.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "pages/order/order.js",
+      "images/logo.png",
+      "js/app.js",
+      "js/vue.js",
+      "fonts/mui.ttf",
+      "styles/styleAll.css",
+      "images/cbd.jpg"
+    ],
+    "refer": [
+      "pages/map/map.html",
+      "pages/barcode/orderScan.html"
+    ]
+  },
+  "pages/cashr/cashrDetail.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "js/app.js",
+      "js/vue.js",
+      "styles/styleAll.css",
+      "images/cardpay.png",
+      "images/weixin.png",
+      "images/pay.png",
+      "images/money.png",
+      "fonts/mui.ttf",
+      "pages/cashr/cashrDetail.js",
+      "js/mui.js",
+      "images/cbd.jpg"
+    ],
+    "refer": [
+      "pages/barcode/orderScan.html",
+      "pages/cashr/getAddress.html",
+      "pages/cashr/mixPay.html",
+      "pages/cashr/vipInfo.html",
+      "pages/barcode/payment.html"
+    ]
+  },
+  "pages/map/map.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "js/app.js",
+      "js/vue.js",
+      "pages/map/map.js",
+      "fonts/mui.ttf",
+      "styles/styleAll.css",
+      "images/androidicon/c1.png",
+      "images/iosicon/c1.png",
+      "images/iosicon/c0.png",
+      "images/iosicon/c4.png",
+      "images/iosicon/c5.png",
+      "images/iosicon/c7.png",
+      "images/iosicon/c6.png",
+      "images/iosicon/c8.png",
+      "images/iosicon/c3.png",
+      "images/iosicon/c9.png",
+      "images/iosicon/c2.png",
+      "images/iosicon/d0.png",
+      "images/iosicon/d3.png",
+      "images/iosicon/d4.png",
+      "images/iosicon/d2.png",
+      "images/iosicon/d1.png",
+      "images/iosicon/st.png",
+      "images/iosicon/ed.png",
+      "images/iosicon/d7.png",
+      "images/iosicon/d6.png",
+      "images/iosicon/d8.png"
+    ],
+    "refer": []
+  },
+  "pages/more/more.html": {
+    "resources": [
+      "images/close.png",
+      "styles/iconfont.css",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/daogou.jpg",
+      "images/hwlogo.png",
+      "js/app.js",
+      "js/vue.js",
+      "fonts/mui.ttf",
+      "styles/styleAll.css",
+      "pages/more/pushSet.html",
+      "pages/more/msgList.html",
+      "pages/more/more.js"
+    ],
+    "refer": [
+      "pages/more/pushSet.html",
+      "pages/more/msgList.html",
+      "pages/more/join.html",
+      "pages/more/sendPro.html",
+      "pages/more/setPrinter.html",
+      "pages/more/about.html",
+      "pages/more/barcodeSet.html"
+    ]
+  },
+  "pages/goodsAction/goodsAction.html": {
+    "resources": [
+      "pages/goodsAction/goodsAction.js",
+      "js/mui.js",
+      "styles/styleAll.css",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "images/logo.png",
+      "pages/goodsAction/goodsAction.html"
+    ],
+    "refer": [
+      "pages/barcode/orderScan.html",
+      "pages/goodsAction/goodsAction.html"
+    ]
+  },
+  "pages/index/index.html": {
+    "resources": [
+      "pages/index/index.js",
+      "pages/home/home.html",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "styles/mui.css"
+    ],
+    "refer": [
+      "pages/order/order.html",
+      "pages/home/home.html",
+      "pages/goods/goods.html",
+      "pages/more/more.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "js/app.js",
+      "js/vue.js",
+      "login.js",
+      "js/mui.min.js",
+      "styles/iconfont.css",
+      "images/daogou.jpg",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "images/hwlogo.png",
+      "images/close.png",
+      "images/daogouphone.png",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "pages/more/pushSet.html",
+      "pages/order/orderDetail.html",
+      "pages/index/index.html",
+      "pages/chart/chart.html",
+      "pages/cashr/cashrDetail.html",
+      "pages/map/map.html",
+      "pages/tab/tab.html"
+    ]
+  },
+  "pages/tab/tab.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "styles/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "pages/home/home.html",
+      "pages/tab/tab.js",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "js/common.js",
+      "styles/styleAll.css",
+      "pages/order/order.html"
+    ],
+    "refer": [
+      "pages/order/order.html",
+      "pages/home/home.html",
+      "pages/goods/goods.html",
+      "pages/more/more.html",
+      "pages/more/pushSet.html",
+      "pages/order/orderDetail.html"
+    ]
+  },
+  "pages/more/join.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/more/setPrinter.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "pages/more/setPrinter.js",
+      "js/printerplugin.js"
+    ],
+    "refer": []
+  },
+  "pages/more/about.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "images/about-logo.png",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "pages/more/about.js"
+    ],
+    "refer": []
+  },
+  "pages/more/msgList.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "pages/more/msgList.js"
+    ],
+    "refer": []
+  },
+  "pages/more/sendPro.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/barcode/orderScan.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "pages/barcode/orderScan.js",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/cashr/cashrCart.html": {
+    "resources": [
+      "pages/cashr/cashrCart.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "images/logo.png",
+      "images/cbd.jpg"
+    ],
+    "refer": [
+      "pages/cashr/cashrDetail.html",
+      "pages/barcode/orderScan.html"
+    ]
+  },
+  "pages/cashr/getAddress.html": {
+    "resources": [
+      "js/app.js",
+      "pages/cashr/getAddress.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "styles/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": [
+      "pages/cashr/createAddress.html"
+    ]
+  },
+  "pages/cashr/createAddress.html": {
+    "resources": [
+      "pages/cashr/createAddress.js",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "fonts/mui.ttf",
+      "js/cityData.js"
+    ],
+    "refer": []
+  },
+  "pages/cashr/vipInfo.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "js/app.js",
+      "js/vue.js",
+      "pages/cashr/vipInfo.js",
+      "styles/iconfont.css"
+    ],
+    "refer": []
+  },
+  "pages/barcode/payment.html": {
+    "resources": [
+      "pages/barcode/payment.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/cashr/mixPay.html": {
+    "resources": [
+      "images/42x42.gif",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "pages/cashr/mixPay.js",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "images/weixin2.png",
+      "images/shuaka.png",
+      "images/huiyuanka.png",
+      "images/zhifubao.png",
+      "images/qita.png",
+      "images/xianjin.png",
+      "styles/iconfont.css"
+    ],
+    "refer": [
+      "pages/barcode/payment.html"
+    ]
+  },
+  "pages/map/locationMap.html": {
+    "resources": [
+      "pages/map/locationMap.js",
+      "fonts/iconfont.ttf",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/map/location.html": {
+    "resources": [
+      "pages/map/location.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": [
+      "pages/map/locationMap.html"
+    ]
+  },
+  "pages/payLog/payDetail.html": {
+    "resources": [
+      "pages/payLog/payDetail.js",
+      "fonts/mui.ttf",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/payLog/payLog.html": {
+    "resources": [
+      "pages/payLog/payLog.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": [
+      "pages/payLog/payDetail.html"
+    ]
+  },
+  "pages/createVip/createAddress.html": {
+    "resources": [
+      "pages/createVip/createAddress.js",
+      "js/cityData.js"
+    ],
+    "refer": []
+  },
+  "pages/vipCard/vipCard.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "pages/vipCard/vipCard.js",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/createVip/createVip.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "pages/createVip/createVip.js",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": [
+      "pages/createVip/createAddress.html"
+    ]
+  },
+  "pages/vipRecharge/vipRecharge.html": {
+    "resources": [
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "pages/vipRecharge/vipRecharge.js",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/order/changePayType.html": {
+    "resources": [
+      "pages/order/changePayType.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css"
+    ],
+    "refer": []
+  },
+  "pages/goods/goodsDetail.html": {
+    "resources": [
+      "pages/goods/goodsDetail.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/vue.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "images/cbd.jpg"
+    ],
+    "refer": []
+  },
+  "pluginPrinter.html": {
+    "resources": [
+      "js/printerplugin.js"
+    ],
+    "refer": []
+  },
+  "pages/order/mixPay.html": {
+    "resources": [
+      "pages/order/mixPay.js",
+      "js/app.js",
+      "images/weixin2.png",
+      "images/shuaka.png",
+      "fonts/mui.ttf",
+      "images/huiyuanka.png",
+      "images/zhifubao.png",
+      "styles/iconfont.css",
+      "js/vue.js",
+      "js/mui.min.js",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "images/xianjin.png"
+    ],
+    "refer": [
+      "pages/barcode/payment.html"
+    ]
+  },
+  "pages/more/barcodeSet.html": {
+    "resources": [
+      "pages/more/barcodeSet.js",
+      "styles/iconfont.css",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "styles/mui.css",
+      "styles/styleAll.css",
+      "js/vue.js"
+    ]
+  }
+}

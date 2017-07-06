@@ -43,8 +43,8 @@
 				<span class="mui-icon mui-icon-arrowdown dingdan-fff"></span>
 			</a>
 			<!--已接订单和已完结订单有地图图标-->
-			<a href="#" class="mui-icon iconfont icon-ditu mui-pull-right mui-dingdan-whitenone" id="mapIdTap"></a>
-			<a  class="mui-icon iconfont icon-saomiao mui-pull-right mui-dingdan-whitenone"  onclick="clicked('../barcode/barcode_anchor.html',true,true);"  id="saomiaoId"></a>
+			<a href="#" class="mui-icon iconfont icon-ditu2 mui-pull-right mui-dingdan-whitenone" id="mapIdTap"></a>
+			<a  class="mui-icon iconfont icon-saomiao mui-pull-right mui-dingdan-whitenone"  onclick="anchorOrder()"  id="saomiaoId"></a>
 		</header> 
 		<div class="mui-contentz mui-contentzh">
 			<!--<div class="searchwidth">

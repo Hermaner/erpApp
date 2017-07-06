@@ -26,6 +26,41 @@
 			label {
 				font-size: 12px;
 			}
+			.mui-newlist-body .item-searchwidth .mui-icon-list{
+			    line-height: 34px;
+			    width: 35px;
+			    color: #666;
+			    text-align: center;
+			    background-color: #FFFFFA;
+			    margin-left: 10px;
+			    border-radius: 6px;
+			}
+			.mui-newlist-body .item-searchwidth .shop-search{
+				margin-left: 0;
+			}
+			.mui-newlist-body .item-searchwidth .dd-search{
+				left: 54px;
+			}
+			.mui-bar-popover {
+				width: 45%;
+			}
+			.mui-popover.mui-bar-popover .mui-table-view {
+				width: auto;
+			}
+			.mui-popover .mui-popover-arrow.mui-bottom:after {
+				border: 1px solid #E0E0E0;
+			}
+			#payPopover li {
+			    padding: 10px;
+			    text-align: center;
+			}
+			#hang{
+				color: #EC6C13;
+				border: 1px solid #EC6C13;
+			}
+			.mui-newlist-body .mui-popover {
+			    height: 280px;
+			}
 		</style>
 	</head>
 
@@ -40,8 +75,9 @@
 		<div class="mui-contentz">
 			<div class="switchBox">
 				<div class="item-searchwidth">
+					<a href="#payPopover" class="mui-icon mui-icon-list"></a>
 					<div class="shop-search">
-						<input type="search" id="scanTxt" class="mui-input-clear inputbac mui-input-speech" placeholder="" />
+						<input type="search" id="scanTxt" class="mui-input-clear inputbac mui-input-speech" placeholder="请输入要搜索的商品名称" />
 					</div>
 
 					<span class="mui-icon mui-icon-search dd-search"></span>
@@ -54,7 +90,32 @@
 				
 			</ul>
 		</div>
-		
+		<div id="payPopover" class="mui-popover mui-bar-popover">
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" pid="shopName">
+					商品名称
+				</li>
+				<li class="mui-table-view-cell"  pid="shopCode">
+					商品编码
+				</li>
+				<li class="mui-table-view-cell" pid="specName">
+					规格名称
+				</li>
+				<li class="mui-table-view-cell" pid="specCode">
+					规格编码
+				</li>
+				<li class="mui-table-view-cell" pid="shopBar">
+					商品条码
+				</li>
+				<li class="mui-table-view-cell" pid="shopPic">
+					价格
+				</li>
+				<li class="mui-table-view-cell" pid="redCode">
+					红外扫描
+				</li>
+			</ul>
+		</div>
 		<div class="maxwidth2 nl-foot">
 			<div class="mui-pull-left">
 				<div class="mui-input-row mui-checkbox mui-pull-left dd-footmar mui-newlist-right">
@@ -63,8 +124,8 @@
 				</div>
 			</div>
 			<div class="mui-pull-right mui-newlist-divmargin" id="toshoppingcare">
+				<button class="mui-btn-mini" id="hang">挂起</button>
 				<button class="mui-btn-mini" id="dataDel">删除</button>
-				
 				<button class="mui-btn-mini button-disabled" disabled="disabled" id="allpay">结算</button>
 				
 				
@@ -77,7 +138,44 @@
 	<script src="../js/layer.m/layer.m.js"></script>
 	<script src="newlistBarcode.js"></script>
 	<script>
+		mui("#payPopover").on("tap", "li", function() {
+			var pid = this.getAttribute("pid");
+			var searchText=document.getElementById("scanTxt");
+			if(pid=="shopName"){
+				searchText.setAttribute("placeholder","请输入要搜索的商品名称");
+			}else if(pid=="shopCode"){
+				searchText.setAttribute("placeholder","请输入要搜索的商品编码");
+			}else if(pid=="specName"){
+				searchText.setAttribute("placeholder","请输入要搜索的规格名称");
+			}else if(pid=="specCode"){
+				searchText.setAttribute("placeholder","请输入要搜索的规格编码");
+			}else if(pid=="shopBar"){
+				searchText.setAttribute("placeholder","请输入要搜索的商品条码");
+			}else if(pid=="shopPic"){
+				searchText.setAttribute("placeholder","请输入要搜索的商品价格");
+			}else{
+				searchText.setAttribute("placeholder","已开启红外扫描");
+			}
+			mui('#payPopover').popover('hide');
+		});
 		
+		document.getElementById("hang").addEventListener("tap", function() {
+			var ulCon=document.getElementById("tolistdetail");
+			if(plus.storage.getItem("CarText")){
+				ulCon.innerHTML="";
+				ulCon.innerHTML=plus.storage.getItem("CarText");
+				plus.storage.removeItem("CarText");
+				document.getElementById("hang").innerText="挂起";
+			}else{
+				if(ulCon.innerText==""){
+					plus.nativeUI.alert("购物蓝里没有商品可挂起！", function() {}, "", "OK");
+				}else{
+					plus.storage.setItem("CarText",ulCon.innerHTML);
+					ulCon.innerHTML="";
+					document.getElementById("hang").innerText="取消挂起";
+				}
+			}
+		});
 	</script>
 
 </html>

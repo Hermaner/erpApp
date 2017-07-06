@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
-V 27
-/svn/erpApp/!svn/ver/707/js
+V 28
+/svn/erpApp/!svn/ver/1045/js
 END
 cityData.js
 K 25
@@ -84,8 +84,8 @@ END
 login.js
 K 25
 svn:wc:ra_dav:version-url
-V 36
-/svn/erpApp/!svn/ver/706/js/login.js
+V 37
+/svn/erpApp/!svn/ver/1045/js/login.js
 END
 commonscan.js
 K 25
@@ -99,6 +99,12 @@ svn:wc:ra_dav:version-url
 V 57
 /svn/erpApp/!svn/ver/287/js/mui.pullToRefresh.material.js
 END
+vue.js
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/erpApp/!svn/ver/868/js/vue.js
+END
 mui.min.js
 K 25
 svn:wc:ra_dav:version-url
@@ -108,8 +114,14 @@ END
 mui.js
 K 25
 svn:wc:ra_dav:version-url
-V 32
-/svn/erpApp/!svn/ver/1/js/mui.js
+V 35
+/svn/erpApp/!svn/ver/1000/js/mui.js
+END
+app.js
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/erpApp/!svn/ver/1045/js/app.js
 END
 zepto.js
 K 25

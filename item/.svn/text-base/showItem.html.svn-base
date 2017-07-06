@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/apijs/api.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			span {
+				color: #999999;
+				font-size: 12px;
+			}
+			button {
+				color: #AAAAAA;
+				font-size: 12px;
+			}
+			label {
+				font-size: 12px;
+			}
+			.mui-shopcheck-white{
+				color: #FFFFFF;
+			}
+			.imgCon{
+				padding-top: 16px;
+			}
+			.imgCon img{
+				margin: 0 auto;
+			    display: block;
+			    width: 90%;
+			    height: 230px;
+			}
+			.itemText{
+				width: 90%;
+    				margin: 0 auto;
+			}
+			.color444{
+				color: #444444;
+			}
+			.color222{
+				color: #222222;
+			}
+			.mui-table-view.changeUl{
+				background-color: #efeff4;
+			}
+			.mui-table-view.changeUl li{
+				background-color: #efeff4;
+			}
+			.mui-table-view.changeUl p{
+				word-wrap: break-word;
+				word-break: normal;
+				white-space: pre-wrap;
+				word-break: break-all;
+			}
+		</style>
+	</head>
+	<body class="mui-items-body">
+		<header class="mui-bar mui-bar-nav headbac">
+			<a class="mui-action-back mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-shopcheck-white mui-back-width"></a>
+			<h1 id="title" class="mui-title mui-items-white">商品展示</h1>
+		</header>
+		<div class="mui-content">
+			<div class="imgCon">
+				<img id="imgSrc" src="" />
+			</div>
+			<ul class="mui-table-view changeUl">
+				<li class="mui-table-view-cell">
+					<p class="color444">商品名称：</p>
+					<p class="color222" id="itemName"></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="color444">规格编码：</p>
+					<p class="color222" id="no"></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="color444">规格参数：</p>
+					<p class="color222" id="type"></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="color444">条形码：</p>
+					<p class="color222" id="Ibarcode"></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="color444">本店库存：</p>
+					<p class="color222" id="Istock"></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="color444">预警库存：</p>
+					<p class="color222" id="IwarnStock"></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="color444">商品价格：</p>
+					<p class="color222" id="Iprice"></p>
+				</li>
+			</ul>
+		</div>
+		
+		<script>
+			var ws,imgSrc,itemName,no,type,Ibarcode,Istock,IwarnStock,Iprice;
+			mui.plusReady(function() {
+				ws = plus.webview.currentWebview();
+				imgSrc=document.getElementById("imgSrc");
+				itemName=document.getElementById("itemName");
+				no=document.getElementById("no");
+				type=document.getElementById("type");
+				Ibarcode=document.getElementById("Ibarcode");
+				Istock=document.getElementById("Istock");
+				IwarnStock=document.getElementById("IwarnStock");
+				Iprice=document.getElementById("Iprice");
+				imgSrc.setAttribute("src",ws.imgSrc);
+				itemName.innerText=ws.name;
+				no.innerText=ws.no;
+				type.innerText=ws.type;
+				Ibarcode.innerText=ws.Ibarcode;
+				Istock.innerText=ws.Istock;
+				IwarnStock.innerText=ws.IwarnStock;
+				Iprice.innerText=ws.Iprice;
+			});
+
+		</script>
+	</body>
+</html>

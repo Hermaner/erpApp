@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="">
+		<meta http-equiv="content-security-policy">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>财务对账</title>
+		<link href="../../styles/mui.css" rel="stylesheet" />
+		<link href="../../styles/iconfont.css" rel="stylesheet" />
+		<link href="../../styles/styleAll.css" rel="stylesheet" />
+		<link href="../../styles/mui.picker.min.css" rel="stylesheet" />
+	</head>
+
+	<body class="" id="vue">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">财务对账</h1>
+		</header>
+		<div class="mui-content paddingtop85  mui-scroll-wrapper">
+			<div class="mui-topnav-bar flexCon">
+				<button class="flexOne cur" index="0" @click="checkItem(0)">收入</button>
+				<button class="flexOne" index="1" @click="checkItem(1)">支出</button>
+			</div>
+			<div class="financial-top financial-top-store">
+				<div class="flexCon">
+					<div class="mui-input-row flexOne">
+						<select class="mui-buyer-select" v-model="person">
+							<option value="">全部</option>
+							<option value="{{user.userName}}" v-for="user in users">{{user.userName}}</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+					<div class="mui-input-row flexThree flexCon">
+						<button class="btn mui-btn mui-btn-block flexOne" data-options='{{curTime}}' @click='optionTime({"type":"date"},1)'>{{beginFont}}</button>
+						<span class="flex-line-span flex-width20">至</span>
+						<button class="btn mui-btn mui-btn-block flexOne" @click='optionTime({"type":"date"})'>{{endFont}}</button>
+					</div>
+				</div>
+
+			</div>
+			<ul class="mui-table-view mui-table-rightcontent">
+				<li class="mui-table-view-cell" v-if='total'><span>合计</span><span>￥{{total}}</span></li>
+				<li class="mui-table-view-cell" v-for='item in amountStatistics'><span>{{item.paymentTypeName}}</span><span style={{item.paymentTypeName=="定金支出" ? "color:red": ''}}>{{item.paymentTypeName=="定金支出"?"￥-"+item.amount:'￥'+item.amount}}</span></li>
+
+			</ul>
+		</div>
+
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/app.js"></script>
+	<script src="../../js/mui.picker.min.js"></script>
+	<script src="index.js"></script>
+
+</html>

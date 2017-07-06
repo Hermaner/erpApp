@@ -172,17 +172,18 @@
 		<div id="payPopover" class="mui-popover mui-bar-popover">
 			<div class="mui-popover-arrow"></div>
 			<ul class="mui-table-view">
-				<li class="mui-table-view-cell" style="display: none;" pid="createCode">
 
-					<div>
-						<img class="mui-listshop-payicon" src="../images/pay.png" /> 生成支付码
-					</div>
-
-				</li>
 				<li class="mui-table-view-cell" pid="scanCode">
 
 					<div>
 						<img class="mui-listshop-payicon" src="../images/pay.png" /> 扫描付款码
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell" pid="wxpay">
+
+					<div>
+						<img class="mui-listshop-payicon" src="../images/weixin.png" /> 扫描付款码
 					</div>
 
 				</li>
@@ -218,7 +219,19 @@
 		<script>
 			var mlsh;
 			var itemHtml, detailList, itemPrice, couponId, mycouponId, createTime, createStore, createOp, getType, getTypeValue, itemNum, goodPricemsg, freightText, privilegeText, totalPriceText, freightVal, detailBuymsg, detailBuymsgli, couponContent, consigneeVal, mobileVal, addressVal, wo, freightmsg, denomination = 0;
-			var couponFullcut=[{"full":"100","cut":"20"},{"full":"200","cut":"40"},{"full":"300","cut":"60"},{"full":"400","cut":"80"}]
+			var couponFullcut = [{
+				"full": "100",
+				"cut": "20"
+			}, {
+				"full": "200",
+				"cut": "40"
+			}, {
+				"full": "300",
+				"cut": "60"
+			}, {
+				"full": "400",
+				"cut": "80"
+			}]
 			mui.plusReady(function() {
 				detailList = document.getElementById("detailList")
 				createTime = document.getElementById("createTime")
@@ -237,11 +250,11 @@
 				mobileVal = document.getElementById("mobileVal")
 				addressVal = document.getElementById("addressVal")
 				freightmsg = document.getElementById("freightmsg");
-				mlsh=document.getElementById("mlsh");
-				if(plus.storage.getItem("orgCode")!="mlsh"){
-					mlsh.style.display="block";
-				}else{
-					mlsh.style.display="none";
+				mlsh = document.getElementById("mlsh");
+				if (plus.storage.getItem("orgCode") != "mlsh") {
+					mlsh.style.display = "block";
+				} else {
+					mlsh.style.display = "none";
 				}
 				window.addEventListener('createOrderShow', function(event) {
 					itemHtml = event.detail.itemHtml;
@@ -318,12 +331,12 @@
 				var val = parseFloat(event.target.value) || 0;
 				val = val < 0 ? 0 : val;
 				freightText.innerHTML = "运费：￥" + parseFloat(val);
-				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(val) - parseFloat(couponId.value||0)- parseFloat(mycouponId.value||0));
+				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(val) - parseFloat(couponId.value || 0) - parseFloat(mycouponId.value || 0));
 			}
 			document.getElementById("freightBtn").addEventListener("tap", function() {
 				var val = freightVal.value;
 				freightText.innerHTML = "运费：￥" + val;
-				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(val) - parseFloat(couponId.value||0)- parseFloat(mycouponId.value||0));
+				totalPriceText.innerHTML = "应付：￥" + (parseFloat(itemPrice) + parseFloat(val) - parseFloat(couponId.value || 0) - parseFloat(mycouponId.value || 0));
 			})
 			mui("#dispatchPopover").on("tap", "li", function() {
 				var pid = this.getAttribute("pid");
@@ -386,10 +399,10 @@
 							}, "get")
 						}
 					})
-				}else if(pid="tonewlist"){
-					var html=""
-					for(var i=0;i<couponFullcut.length;i++){
-						html+="<div class='mui-input-row mui-radio mui-left'><label>" + "满"+couponFullcut[i].full+"减"+couponFullcut[i].cut+ "</label><input name='radio' rid=" + couponFullcut[i].full+ " rinfo=" + couponFullcut[i].cut + " type='radio'></div>";
+				} else if (pid = "tonewlist") {
+					var html = ""
+					for (var i = 0; i < couponFullcut.length; i++) {
+						html += "<div class='mui-input-row mui-radio mui-left'><label>" + "满" + couponFullcut[i].full + "减" + couponFullcut[i].cut + "</label><input name='radio' rid=" + couponFullcut[i].full + " rinfo=" + couponFullcut[i].cut + " type='radio'></div>";
 					}
 					layer.open({
 						title: ['选择满减规则', 'text-align:center'],
@@ -401,7 +414,7 @@
 							getMycoupon()
 						}
 					});
-				}else {
+				} else {
 					mui.openWindow({
 						id: "../barcode/barcode_promotionCode.html",
 						url: "../barcode/barcode_promotionCode.html",
@@ -428,19 +441,19 @@
 			}
 			mui("#payPopover").on("tap", "li", function() {
 				var pid = this.getAttribute("pid");
-				if (pid == "scanCode") {
-					successPay(pid,getTypeValue.value, 1)
+				if (pid == "scanCode" || pid == "wxpay") {
+					successPay(pid, getTypeValue.value, 1)
 				} else {
 					plus.nativeUI.confirm("确定已完成付款?", function(e) {
 						if (e.index == 0) {
-							successPay(pid,getTypeValue.value)
+							successPay(pid, getTypeValue.value)
 						}
 					}, "温馨提示", ["是", "否"]);
 				}
 				mui('#payPopover').popover('hide');
 			})
 
-			function successPay(p,e, c) {
+			function successPay(p, e, c) {
 				var list = detailList.getElementsByClassName("mui-input-group")
 				var products = {};
 				var product = [];
@@ -452,7 +465,7 @@
 						stock: stock
 					};
 				}
-				products.postFee = parseFloat(freightVal.value)- parseFloat(mycouponId.value || 0);
+				products.postFee = parseFloat(freightVal.value) - parseFloat(mycouponId.value || 0);
 				products.couponCode = couponContent.getAttribute("coupon") || "";
 				products.buyer = {
 					consignee: consigneeVal.value,
@@ -479,11 +492,13 @@
 						return
 					}
 					if (c) {
+						console.log(p)
 						mui.openWindow({
 							id: "../barcode/barcode_payment.html",
 							url: "../barcode/barcode_payment.html",
 							extras: {
-								orderNumber: data.orderNumber
+								orderNumber: data.orderNumber,
+								pid: p
 							},
 							styles: {
 								popGesture: "close"
@@ -519,45 +534,38 @@
 
 			function checkDetail(e) {
 				var pageDetail = plus.webview.getWebviewById("list/listdetail.html")
-				var orderStatus;
-				var param = systemParam("V5.mobile.order.info.get");
-				param.orderNumber = e;
-				dataSendFn('orderInfoGet', param, function(data) {
-					data = JSON.stringify(data)
-					mui.openWindow({
-						id: "list/listdetail.html",
-						show: {
-							aniShow: "pop-in"
-						},
-						waiting: {
-							autoShow: false
-						}
-					})
-					cleardetailShop()
-					pageDetail.evalJS("loadData('" + data + "',1)");
-					plus.webview.hide(plus.webview.currentWebview());
-				}, "get")
+				mui.openWindow({
+					id: "list/listdetail.html",
+					show: {
+						aniShow: "pop-in"
+					},
+					waiting: {
+						autoShow: false
+					}
+				})
+				cleardetailShop()
+				pageDetail.evalJS("getTwoData('" + e + "')");
+				plus.webview.hide(plus.webview.currentWebview());
 			}
 
 			function getMycoupon() {
-				var fullPrice, cutPrice,has=false;
-				var layermcont=document.getElementsByClassName("layermcont")[0];
-				var layput=layermcont.getElementsByTagName("input");
-				for(var i=0;i<layput.length;i++){
-					if(layput[i].checked){
-						fullPrice=layput[i].getAttribute("rid")
-						cutPrice=layput[i].getAttribute("rinfo")
-						has=true
+				var fullPrice, cutPrice, has = false;
+				var layermcont = document.getElementsByClassName("layermcont")[0];
+				var layput = layermcont.getElementsByTagName("input");
+				for (var i = 0; i < layput.length; i++) {
+					if (layput[i].checked) {
+						fullPrice = layput[i].getAttribute("rid")
+						cutPrice = layput[i].getAttribute("rinfo")
+						has = true
 					}
 				}
-				if(!has){
+				if (!has) {
 					return
 				}
-				if(parseFloat(itemPrice)<parseFloat(fullPrice)){
+				if (parseFloat(itemPrice) < parseFloat(fullPrice)) {
 					plus.nativeUI.alert("不符合优惠条件！", function() {}, "", "OK");
 					return
 				}
-				
 				var couponTxt = couponContent.innerHTML;
 				mycouponId.value = cutPrice;
 				if (couponContent.getElementsByClassName("p2")[0]) {

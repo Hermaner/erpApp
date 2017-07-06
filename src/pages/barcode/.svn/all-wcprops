@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/erpApp/!svn/ver/934/src/pages/barcode
+END
+payment.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/erpApp/!svn/ver/1071/src/pages/barcode/payment.js
+END
+payment.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/erpApp/!svn/ver/1053/src/pages/barcode/payment.html
+END
+orderScan.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/erpApp/!svn/ver/1071/src/pages/barcode/orderScan.js
+END
+orderScan.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/erpApp/!svn/ver/1053/src/pages/barcode/orderScan.html
+END

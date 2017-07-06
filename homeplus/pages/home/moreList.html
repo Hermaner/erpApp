@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="mui-home-htmlcolor">
+
+	<head>
+		<meta charset="utf-8">
+		<title>更多功能</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../styles/mui.css" rel="stylesheet" />
+		<link href="../../styles/iconfont.css" rel="stylesheet" />
+		<link href="../../styles/styleAll.css" rel="stylesheet" />
+		<link href="../../styles/bigStyle.css" rel="stylesheet" media="screen and (min-width:480px)" />
+	</head>
+
+	<body class="home-bc" id="vue">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">更多功能</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view flexCon homeOneList morehomeList" style="flex-wrap:wrap">
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit11==1'>
+					<a url="../goodsAction/goodsAction.html" class="noscan" type="check">
+						<span class="mui-icon iconfont icon-xiangzi1 mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">商品盘点</span>
+					</a>
+				</li>
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit16==1'>
+					<a class="noscan">
+						<span class="mui-icon iconfont icon-jinhuo mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">商品入库</span>
+					</a>
+				</li>
+
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit15==1'>
+					<a>
+						<span class="mui-icon iconfont icon-jia mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">门店收银</span>
+					</a>
+				</li>
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit13==1'>
+					<a>
+						<span class="mui-icon iconfont icon-qianqian mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">定金管理</span>
+					</a>
+				</li>
+
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit10==1'>
+					<a>
+						<span class="mui-icon iconfont icon-shengchenghuiyuanqia mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">会员发卡</span>
+					</a>
+				</li>
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit14==1'>
+					<a>
+						<span class="mui-icon iconfont icon-jinbi mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">会员充值</span>
+					</a>
+				</li>
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit8==1'>
+					<a>
+						<span class="mui-icon ifont icon-mendian mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">门店对账</span>
+					</a>
+				</li>
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit9==1'>
+					<a>
+						<span class="mui-icon ifont icon-duizhangdan mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">财务对账</span>
+					</a>
+				</li>
+
+				 <li @click='alertTips' class="flexoneFour mui-table-view-cell" v-if='exit12==1'>
+					<a>
+						<span class="mui-icon ifont icon-huiyuanfenrun mui-home-iconsize"></span>
+						<span class="mui-media-body mui-home-spancolor">绩效分润</span>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/app.js"></script>
+	<script src="moreList.js"></script>
+
+</html>

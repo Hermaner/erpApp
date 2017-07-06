@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="mui-index-htmlcolor">
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../styles/mui.css">
+		<link rel="stylesheet" href="../../styles/iconfont.css">
+		<style>
+			.orderBadge:after{
+				position:absolute;
+				display: block;
+				content:"";
+				right:-5px; 
+				top:-3px;
+				width:12px;height:12px;
+				border-radius: 50%;background: #ff0000;
+			}
+		</style>
+
+	</head>
+
+	<body class="mui-index-bodycolor" id="vue">
+		<nav class="mui-bar mui-bar-tab mui-indxe-navfontcolor">
+			<a class="mui-tab-item mui-active" data-href="../home/home.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" data-href="../goods/goods.html">
+				<span class="mui-icon iconfont icon-xiangzi1"></span>
+				<span class="mui-tab-label">商品</span>
+			</a>
+			<a class="mui-tab-item" data-href="../order/order.html">
+				<span class="mui-icon iconfont icon-order" v-bind:class="{'orderBadge':hasCount}">
+				</span>
+				<span class="mui-tab-label">订单</span>
+			</a>
+			<a class="mui-tab-item" data-href="../more/more.html">
+				<span class="mui-icon iconfont icon-gengduo"></span>
+				<span class="mui-tab-label">更多</span>
+			</a>
+		</nav>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="tab.js"></script>
+	</body>
+
+</html>

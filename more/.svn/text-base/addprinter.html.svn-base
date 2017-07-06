@@ -42,7 +42,7 @@
 		<script>
 			document.getElementById("openprinter").addEventListener('tap', function(e) {
 				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
-				if (plus.storage.getItem("printMac")) {
+				if (plus.storage.getItem("mac")) {
 					var confirmArray = ['是', '否'];
 					mui.confirm('确认更换打印机？','', confirmArray, function(e) {
 						if (e.index == 0) {
@@ -53,7 +53,7 @@
 										plus.nativeUI.alert("请输入ID", function() {}, "", "OK");
 										return
 									}
-									plus.storage.setItem("printMac", e.value)
+									plus.storage.setItem("mac", e.value)
 								} 
 							})
 						}
@@ -67,18 +67,18 @@
 										plus.nativeUI.alert("请输入ID", function() {}, "", "OK");
 										return
 									}
-									plus.storage.setItem("printMac",e.value)
+									plus.storage.setItem("mac",e.value)
 								}  
 							})
 				}
 			});
 			document.getElementById("closeprinter").addEventListener('tap', function(e) {
 				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
-				if (plus.storage.getItem("printMac")) { 
+				if (plus.storage.getItem("mac")) { 
 					var confirmArray = ['是', '否'];
 					mui.confirm('确认删除绑定的打印机？','', confirmArray, function(e) {
 						if (e.index == 0) {
-							plus.storage.removeItem("printMac")
+							plus.storage.removeItem("mac")
 							plus.nativeUI.alert("打印机已删除！", function() {}, "", "OK");
 						}
 					})

@@ -8,7 +8,7 @@ mui.init({
 var listhade, itemName, codeName, listself, phoneheight;
 var Destination, orderNum, detailList_id, totalPrices, addnewitem, orderStatus, sinceTime, sinceorderCode, sinceInput, getorderCode, getInput, sendCodeUl, detailBuymsg_id, buyer_id, detailfixBtn, id_UN_ACCPET, id_ACCPET, id_SINCE, IN_STORE, id_WAIT_GOOD, mtel_id, curwebview, backstatus, sinceedit = 0,
 	bournObj = {},
-	printAr, printShop, printOrderNum, printConsignee, printTel, printAddress, printYprice, mac, outputStream, mygetno, mysinceno, canprint = 1;
+	printAr, printShop, printOrderNum, printConsignee, printTel, printAddress, printYprice, mac, outputStream, mygetno, mysinceno, printpostFee, canprint = 1;
 mui.plusReady(function() {
 	phoneheight = plus.screen.resolutionHeight; //mui获取设备高度分辨率
 	listhade = document.getElementById("listhade");
@@ -54,6 +54,7 @@ mui.plusReady(function() {
 
 		dataSendFn('orderInfoGet', param, function(data) {
 			loadData(data)
+			console.log(JSON.stringify(data))
 		}, "get")
 
 	})
@@ -391,19 +392,6 @@ mui.plusReady(function() {
 
 	mui(".myfixBtn").on("click", ".mui-btnz-print", function() { //打印订单操作
 
-		if (plus.os.name == "iOS") {
-			plus.nativeUI.alert("苹果手机暂不支持", function() {}, "", "OK");
-			return
-		}
-		if (!mac) {
-			plus.nativeUI.alert("打印机尚未设置,点击更多进行设置", function() {}, "", "OK");
-			return
-		}
-
-		if (!outputStream) {
-			getbluetoothStatus()
-			outputStream = setPrint(mac)
-		}
 		printAr = []
 		printAr.push(printShop)
 		printAr.push(printOrderNum)
@@ -412,7 +400,7 @@ mui.plusReady(function() {
 		printAr.push(printAddress)
 		var printList = document.getElementsByClassName("mui-detail-list");
 		var totalCount = 0;
-		var totalPrice = 0;
+		var totalPrice = document.getElementById("total-prices").innerText;
 		for (var i = 0; i < printList.length; i++) {
 			var mid = printList[i].getElementsByClassName("mui-table-cell");
 			var name = mid[1].getElementsByTagName("span")[0].innerText;
@@ -422,42 +410,19 @@ mui.plusReady(function() {
 			unitprice = parseFloat(unitprice)
 			var count = mid[2].getElementsByTagName("span")[2].innerText.substring(1);
 			count = parseInt(count)
-			thisPrice = count * unitprice
 			printAr.push(name)
 			printAr.push(("数量:" + count + "；单价:" + unitprice).replace(/\s+/g, ""))
 			printAr.push(sku.replace(/\s+/g, ""));
 			totalCount += count
-			totalPrice += thisPrice
 		}
-		printAr.push("共计" + totalCount + "件");
+		printAr.push("共计" + totalCount + "件；运费" + printpostFee + "元");
 		printAr.push(("应付" + totalPrice + "元").replace(/\s+/g, ""));
 		console.log(printAr)
-		for (var i = 0; i < printAr.length; i++) {
-			var string = printAr[i];
-			var bytes = plus.android.invoke(string, 'getBytes', 'gbk');
-			outputStream.write(bytes, 0, bytes.length);
-			outputStream.write(0X0D);
-		}
-		outputStream.write(0X0D);
-		outputStream.write(0X0D);
-		outputStream.write(0X0A);
-		outputStream.flush();
-		var param = systemParam("V5.mobile.order.print");
-		param.orderNumber = orderNum;
-		dataSendFn('orderPrint', param, function(data) {
-			plus.nativeUI.closeWaiting();
-			console.log(JSON.stringify(data))
-			if (!data.isSuccess) {
-				var mapmsg = data.map.errorMsg;
-				plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
-				console.log(mapmsg)
-				return
-			}
-		}, "get")
+		printObj(printAr)
+
 
 
 	})
-
 	var old_back = mui.back;
 	mui.back = function() {
 		var ofb = detailfixBtn.getElementsByClassName('ld-footbtn');
@@ -474,6 +439,7 @@ mui.plusReady(function() {
 	}
 
 });
+
 
 function loadData(data, c) {
 	if (c) {
@@ -493,9 +459,11 @@ function loadData(data, c) {
 	orderStatus == "自提订单" ? orderStatus = "SINCE" : ""
 	orderStatus == "已完结订单" ? orderStatus = "END_ORDER" : "";
 	var orderPayStatus = data.orderPayStatus;
+
 	var totalAmount = data.totalAmount;
 	var initialTotalAmount = data.initialTotalAmount;
 	var postFee = data.postFee;
+	printpostFee = postFee;
 	var platId = data.platId;
 	var platName = data.platName;
 	mygetno = data.sendCode
@@ -515,11 +483,13 @@ function loadData(data, c) {
 		orderStatus = "IN_STORE";
 		distanceHtml = '<span class="mui-icon iconfont dd-fontcolor"></span><span id="orderPayStatus">' + orderPayStatus + '</span>';
 	} else {
-		distanceHtml = distance ? '<span class="mui-icon iconfont icon-dingwei dd-fontcolor" ></span><span>约' + distance + 'km</span>' : '';
+		distanceHtml = distance ? '<span class="mui-icon iconfont icon-ditu1 dd-fontcolor" ></span><span>约' + distance + 'km</span>' : '';
 
 	}
 	bournObj.distance = distance ? '约' + parseFloat(distance) / 1000 + 'km' : "";
+
 	var logisticInfo = data.logisticInfo;
+	console.log(JSON.stringify(logisticInfo))
 	var consignee = logisticInfo.consignee;
 	var mobile = logisticInfo.mobile;
 	var phone = logisticInfo.phone;
@@ -541,7 +511,7 @@ function loadData(data, c) {
 	printAddress = "收货地址：" + address;
 	printYprice = "已付：" + initialTotalAmount;
 
-	orderTopmsg.innerHTML = '<li class="mui-table-view-cell"><ul class="mui-table-view mui-grid-view"><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-8"><span class="mui-listself-spanblack mui-flex-block">订单号：<span class="longtab">' + orderNum + '</span></span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-4">' + distanceHtml + '</li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-7"><span class="mui-listself-spanblack">' + orderDate + '</span></li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-8"><img class="ld-ticon" src="../images/icontu/' + platId + '.jpg"  /><span class="ld-p mui-col-xs-10">' + shopName + '</span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-4" id="ntelLi"><div class="mui-pull-right ld-lianxi-hui"><span class="mui-icon iconfont icon-dianhua"></span><a class="lianxi-padding2 mui-tel-link" id="ntel" href="tel:' + sellerPhone + '">联系网店</a></div></li></ul></li>';
+	orderTopmsg.innerHTML = '<li class="mui-table-view-cell"><ul class="mui-table-view mui-grid-view"><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-8"><span class="mui-listself-spanblack mui-flex-block">订单号：<span class="longtab">' + orderNum + '</span></span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-4">' + distanceHtml + '</li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-7"><span class="mui-listself-spanblack">' + orderDate + '</span></li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-8"><img class="ld-ticon" src="../images/icontu/' + platId + '.jpg"  /><span class="ld-p mui-col-xs-10">' + shopName + '</span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-4" id="ntelLi"><div class="mui-pull-right ld-lianxi-hui"><span class="mui-icon iconfont icon-dianhuahaoma1"></span><a class="lianxi-padding2 mui-tel-link" id="ntel" href="tel:' + sellerPhone + '">联系网店</a></div></li></ul></li>';
 	if (platName == "门店订单") {
 		document.getElementById("ntelLi").style.display = "none";
 		document.getElementById("mtel_div").style.display = "none";
@@ -563,7 +533,7 @@ function loadData(data, c) {
 
 
 		if (orderStatus == "SINCE") {
-			plist += '<li class="mui-table-view-cell mui-detail-list"  rid="' + orderNum + '" bid="' + barcode + '"><div class="mui-slider-right mui-disabled btnsize"><a class="mui-btn btnsize mui-listself-pad" href="javascript:void(0);" onclick="delShop(this)"><div><span class="mui-icon iconfont icon-shanchu changeicon mui-listself-fontsize"></span> 删除</div></a><a class="mui-btn btnsize mui-listself-pad" href="javascript:void(0);" onclick="replaceShop(this)"><div><span class="mui-icon iconfont icon-xiugai changeicon mui-listself-fontsize"></span> 替换</div></a></div><div class="maxwidth mui-slider-handle"><div class="mui-table-cell mui-col-xs-2 "><img class="ld-itempic" src="' + productPic + '" /></div><div class="mui-table-cell mui-col-xs-6"><span class="spanheight getitemName">' + productName + '</span><span class="spanheight getcodeName">' + skuName + '</span></div><div class="mui-table-cell mui-col-xs-2 cellpad" ><span class="spanheight">' + price + '</span><span class="spanheight">&nbsp;</span><span class="getCount" >*' + count + '</span><div class="mui-numbox nl-num" data-numbox-min="0" style="display:none"><button class="mui-btn mui-numbox-btn-minus" type="button">-</button><input class="mui-numbox-input" type="number" value="' + count + '" /><button class="mui-btn mui-numbox-btn-plus" type="button">+</button></div></div></div></li>';
+			plist += '<li class="mui-table-view-cell mui-detail-list"  rid="' + orderNum + '" bid="' + barcode + '"><div class="mui-slider-right mui-disabled btnsize"><a class="mui-btn btnsize mui-listself-pad" href="javascript:void(0);" onclick="delShop(this)"><div><span class="mui-icon iconfont icon-guanbi1 changeicon mui-listself-fontsize"></span> 删除</div></a><a class="mui-btn btnsize mui-listself-pad" href="javascript:void(0);" onclick="replaceShop(this)"><div><span class="mui-icon iconfont icon-xiugai changeicon mui-listself-fontsize"></span> 替换</div></a></div><div class="maxwidth mui-slider-handle"><div class="mui-table-cell mui-col-xs-2 "><img class="ld-itempic" src="' + productPic + '" /></div><div class="mui-table-cell mui-col-xs-6"><span class="spanheight getitemName">' + productName + '</span><span class="spanheight getcodeName">' + skuName + '</span></div><div class="mui-table-cell mui-col-xs-2 cellpad" ><span class="spanheight">' + price + '</span><span class="spanheight">&nbsp;</span><span class="getCount" >*' + count + '</span><div class="mui-numbox nl-num" data-numbox-min="0" style="display:none"><button class="mui-btn mui-numbox-btn-minus" type="button">-</button><input class="mui-numbox-input" type="number" value="' + count + '" /><button class="mui-btn mui-numbox-btn-plus" type="button">+</button></div></div></div></li>';
 		} else {
 			plist += '<li class="mui-table-view-cell mui-detail-list" rid="' + orderNum + '" bid="' + barcode + '"><div class="maxwidth"><div class="mui-table-cell mui-col-xs-2 "><img class="ld-itempic" src="' + productPic + '"></div><div class="mui-table-cell mui-col-xs-6"><span class="spanheight getitemName">' + productName + '</span><span class="spanheight getcodeName">' + skuName + '</span></div><div class="mui-table-cell mui-col-xs-4 cellpad"><span class="spanheight mui-pull-right">' + price + '</span><span class="spanheight">&nbsp;</span><span class="mui-pull-right dd-kucun getCount">*' + count + '</span></div></div><span class="getmemo" style="display:none">' + memo + '</span></li>';
 		}
@@ -728,17 +698,17 @@ function loadData(data, c) {
 		case "IN_STORE":
 			detailfixBtn.style.display = "none";
 			//			document.body.style.paddingBottom = "0";
-			if (orderPayStatus == "未付款订单") {
-				IN_STORE.style.display = "block";
-				detailfixBtn.style.display = "block";
-				//				document.body.style.paddingBottom = "40px";
-			}
+
 			break;
 		default:
 			document.body.style.paddingBottom = "40px";
 			break;
 	}
-
+	if (orderPayStatus == "未付款订单") {
+		IN_STORE.style.display = "block";
+		detailfixBtn.style.display = "block";
+		//				document.body.style.paddingBottom = "40px";
+	}
 }
 
 function detailaddItems(product, index) { //自提订单新增商品
@@ -876,8 +846,8 @@ function coorDinate() { //自提订单申请协调
 }
 mui("#payPopover").on("tap", "li", function() {
 	var pid = this.getAttribute("pid");
-	if (pid == "scanCode") {
-		successPay(1)
+	if (pid == "scanCode" || pid == "wxpay") {
+		successPay(pid)
 	} else {
 		plus.nativeUI.confirm("确定已完成付款?", function(e) {
 			if (e.index == 0) {
@@ -929,7 +899,8 @@ function successPay(c) {
 			id: "../barcode/barcode_payment.html",
 			url: "../barcode/barcode_payment.html",
 			extras: {
-				orderNumber: orderNum
+				orderNumber: orderNum,
+				pid: c
 			},
 			styles: {
 				popGesture: "close"
@@ -1050,4 +1021,50 @@ function setPrint(e) {
 		plus.android.importClass(outputStream);
 		return outputStream
 	}
+}
+
+function getTwoData(e) {
+	var param = systemParam("V5.mobile.order.info.get");
+	param.orderNumber = e;
+	dataSendFn('orderInfoGet', param, function(data) {
+		loadData(data)
+	}, "get")
+}
+
+function printObj(printAr) {
+	var mac = plus.storage.getItem("printMac");
+	if (plus.os.name == "iOS") {
+		plus.nativeUI.alert("苹果手机暂不支持", function() {}, "", "OK");
+		return
+	}
+	if (!mac) {
+		plus.nativeUI.alert("打印机尚未设置,点击更多进行设置", function() {}, "", "OK");
+		return
+	}
+	if (!outputStream) {
+		getbluetoothStatus()
+		outputStream = setPrint(mac)
+	}
+	for (var i = 0; i < printAr.length; i++) {
+		var string = printAr[i];
+		var bytes = plus.android.invoke(string, 'getBytes', 'gbk');
+		outputStream.write(bytes, 0, bytes.length);
+		outputStream.write(0X0D);
+	}
+	outputStream.write(0X0D);
+	outputStream.write(0X0D);
+	outputStream.write(0X0A);
+	outputStream.flush();
+	var param = systemParam("V5.mobile.order.print");
+	param.orderNumber = orderNum;
+	dataSendFn('orderPrint', param, function(data) {
+		plus.nativeUI.closeWaiting();
+		console.log(JSON.stringify(data))
+		if (!data.isSuccess) {
+			var mapmsg = data.map.errorMsg;
+			plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+			console.log(mapmsg)
+			return
+		}
+	}, "get")
 }

@@ -3,7 +3,7 @@
 	"id": "H5D6E103D",
 	"name": "商铺旺",
 	"version": {
-		"name": "1.0.16",
+		"name": "1.0.22",
 		"code": "83"
 	},
 	"description": "",
@@ -94,6 +94,7 @@
 				"password": "",
 				"p12": "",
 				"devices": "universal",
+				"UIReserveStatusbarOffset":false,
 				"frameworks": []
 			},
 			"google": {
@@ -163,11 +164,11 @@
 					}
 				},
 				"android": {
-					"mdpi": "C:/Users/herman/Desktop/证书/安卓/240-282.png", 
-					"ldpi": "C:/Users/herman/Desktop/证书/安卓/320-442.png", 
-					"hdpi": "C:/Users/herman/Desktop/证书/安卓/480-762.png", 
-					"xhdpi": "C:/Users/herman/Desktop/证书/安卓/720-1242.png", 
-					"xxhdpi": "C:/Users/herman/Desktop/证书/安卓/1080-1882.png"
+					"mdpi": "/Users/herman/Downloads/证书/安卓/240-282.png", 
+					"ldpi": "/Users/herman/Downloads/证书/安卓/320-442.png", 
+					"hdpi": "/Users/herman/Downloads/证书/安卓/480-762.png", 
+					"xhdpi": "/Users/herman/Downloads/证书/安卓/720-1242.png", 
+					"xxhdpi": "/Users/herman/Downloads/证书/安卓/1080-1882.png"
 				}
 			}
 		}
@@ -180,7 +181,18 @@
 					"list/calldetail.js",
 					"fonts/mui.ttf",
 					"js/layer.m/need/layer.css",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"css/mui.listpicker.css",
+					"css/style.css",
+					"css/stylebypad.css",
+					"js/layer.m/layer.m.js",
+					"js/common.js",
+					"js/mui.listpicker.js",
+					"js/mui.poppicker.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"js/apijs/api.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -236,7 +248,9 @@
 					"more/tongzhituisong.html",
 					"datalist/linechart.html",
 					"list/newlist.html",
-					"more/setdevice.html"
+					"more/setdevice.html",
+					"cashr/cashrDetail.html",
+					"order/orderDetail.html"
 				],
 				"priority": 0
 			},
@@ -264,9 +278,12 @@
 					"images/icontu/15.jpg",
 					"images/icontu/34.jpg",
 					"images/icontu/28.jpg",
-					"fonts/iconfont.ttf"
+					"fonts/iconfont.ttf",
+					"images/weixin.png"
 				],
-				"refer": [],
+				"refer": [
+					"barcode/barcode_payment.html"
+				],
 				"priority": 0
 			},
 			"login.html": {
@@ -282,7 +299,8 @@
 					"css/style.css",
 					"fonts/iconfont.ttf",
 					"js/apijs/api.js",
-					"css/stylebypad.css"
+					"css/stylebypad.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -308,7 +326,9 @@
 					"fonts/mui.ttf",
 					"fonts/iconfont.ttf"
 				],
-				"refer": [],
+				"refer": [
+					"barcode/orderScan.html"
+				],
 				"priority": 0
 			},
 			"item/items.html": {
@@ -324,7 +344,9 @@
 					"js/apijs/api.js",
 					"css/stylebypad.css"
 				],
-				"refer": [],
+				"refer": [
+					"item/showItem.html"
+				],
 				"priority": 0
 			},
 			"list/addnewitem.html": {
@@ -385,7 +407,8 @@
 					"css/iconfont.css",
 					"css/mui.min.css",
 					"css/mui.poppicker.css",
-					"js/apijs/api.js"
+					"js/apijs/api.js",
+					"images/weixin.png"
 				],
 				"refer": [
 					"list/buyers.html",
@@ -407,7 +430,8 @@
 					"js/apijs/api.js",
 					"css/mui.css",
 					"css/stylebypad.css",
-					"images/cbd.jpg"
+					"images/cbd.jpg",
+					"js/app.js"
 				],
 				"refer": [
 					"barcode/barcode_scan.html"
@@ -436,7 +460,9 @@
 				],
 				"refer": [
 					"more/xitonglist.html",
-					"more/addprinter.html"
+					"more/addprinter.html",
+					"more/addour.html",
+					"more/about.html"
 				],
 				"priority": 0
 			},
@@ -482,7 +508,9 @@
 					"js/apijs/api.js",
 					"css/mui.css",
 					"css/stylebypad.css",
-					"list/shopcheck.html"
+					"list/shopcheck.html",
+					"payLog/payLog.html",
+					"map/location.html"
 				],
 				"refer": [
 					"datalist/linechart.html",
@@ -490,7 +518,15 @@
 					"list/newlist2.html",
 					"list/shopin.html",
 					"barcode/barcode_anchor.html",
-					"list/newlist.html"
+					"list/newlist.html",
+					"createVip/creatVip.html",
+					"vipCard/vipCard.html",
+					"vipRecharge/vipRecharge.html",
+					"createVip/createVip.html",
+					"chart/chart.html",
+					"cashr/cashrCart.html",
+					"barcode/orderScan.html",
+					"index/xiaoxilist.html"
 				],
 				"priority": 0
 			},
@@ -499,7 +535,9 @@
 					"js/mui.js",
 					"fonts/mui.ttf",
 					"css/mui.css",
-					"css/stylebypad.css"
+					"css/stylebypad.css",
+					"css/style.css",
+					"js/apijs/api.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -543,7 +581,8 @@
 					"js/apijs/api.js",
 					"css/mui.css",
 					"css/stylebypad.css",
-					"images/cbd.jpg"
+					"images/cbd.jpg",
+					"js/app.js"
 				],
 				"refer": [
 					"barcode/barcode_scan.html"
@@ -687,7 +726,13 @@
 			"map/maps_map.html": {
 				"resources": [
 					"fonts/mui.ttf",
-					"js/layer.m/need/layer.css"
+					"js/layer.m/need/layer.css",
+					"js/layer.m/layer.m.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/apijs/api.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -696,7 +741,10 @@
 				"resources": [
 					"fonts/mui.ttf",
 					"css/style.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/apijs/api.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -711,7 +759,403 @@
 			"barcode/barcode_payment.html": {
 				"resources": [
 					"css/common.css",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"js/common.js",
+					"fonts/mui.ttf",
+					"css/mui.css",
+					"js/apijs/api.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"payLog/payLog.html": {
+				"resources": [
+					"css/styleAll.css",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.css",
+					"payLog/payLog.js",
+					"js/vue.js"
+				],
+				"refer": [
+					"payLog/payDetail.html"
+				],
+				"priority": 0
+			},
+			"payLog/payDetail.html": {
+				"resources": [
+					"js/common.js",
+					"js/apijs/api.js",
+					"js/app.js",
+					"js/vue.js",
+					"payLog/payDetail.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css"
+				],
+				"refer": [
+					"barcode/payment.html"
+				],
+				"priority": 0
+			},
+			"map/location.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"css/styleAll.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.css",
+					"map/location.js"
+				],
+				"refer": [
+					"map/locationMap.html"
+				],
+				"priority": 0
+			},
+			"map/locationMap.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"css/styleAll.css",
+					"map/location.js",
+					"css/mui.css",
+					"fonts/mui.ttf",
+					"map/locationMap.js",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"createVip/creatVip.html": {
+				"resources": [
+					"js/common.js",
+					"js/apijs/api.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"js/app.js",
+					"js/vue.js",
+					"createVip/createVip.js"
+				],
+				"refer": [
+					"createVip/createAddress.html"
+				],
+				"priority": 0
+			},
+			"createVip/createAddress.html": {
+				"resources": [
+					"createVip/createAddress.js",
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"js/cityData.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vipCard/vipCard.html": {
+				"resources": [
+					"css/styleAll.css",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/apijs/api.js",
+					"css/mui.css",
+					"js/app.js",
+					"js/vue.js",
+					"vipCard/vipCard.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vipRecharge/vipRecharge.html": {
+				"resources": [
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"js/apijs/api.js",
+					"css/mui.css",
+					"vipRecharge/vipRecharge.js",
+					"js/app.js",
+					"js/vue.js"
+				],
+				"refer": [
+					"barcode/payment.html"
+				],
+				"priority": 0
+			},
+			"barcode/payment.html": {
+				"resources": [
+					"barcode/payment.js",
+					"css/iconfont.css",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"createVip/createVip.html": {
+				"resources": [
+					"js/mui.min.js",
+					"createVip/createVip.js",
+					"js/app.js",
+					"js/vue.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"createVip/createAddress.html"
+				],
+				"priority": 0
+			},
+			"chart/chart.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"chart/chart.js",
+					"css/styleAll.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashr/cashrCart.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/styleAll.css",
+					"fonts/iconfont.ttf",
+					"cashr/cashrCart.js",
+					"css/mui.css",
+					"images/logo.png"
+				],
+				"refer": [
+					"barcode/orderScan.html",
+					"cashr/cashrDetail.html"
+				],
+				"priority": 0
+			},
+			"cashr/cashrDetail.html": {
+				"resources": [
+					"cashr/cashrDetail.js",
+					"js/app.js",
+					"js/vue.js",
+					"css/styleAll.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.css",
+					"images/logo.png",
+					"js/mui.js"
+				],
+				"refer": [
+					"cashr/vipInfo.html",
+					"cashr/getAddress.html",
+					"barcode/payment.html",
+					"barcode/orderScan.html",
+					"cashr/mixPay.html"
+				],
+				"priority": 0
+			},
+			"cashr/vipInfo.html": {
+				"resources": [
+					"cashr/vipInfo.js",
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashr/getAddress.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/iconfont.css",
+					"cashr/getAddress.js",
+					"fonts/iconfont.ttf",
+					"css/mui.css"
+				],
+				"refer": [
+					"cashr/createAddress.html"
+				],
+				"priority": 0
+			},
+			"cashr/createAddress.html": {
+				"resources": [
+					"cashr/createAddress.js",
+					"js/cityData.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"order/orderDetail.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"order/orderDetail.js",
+					"css/styleAll.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/mui.css",
+					"images/weixin.png",
+					"images/money.png",
+					"images/cardpay.png",
+					"images/pay.png",
+					"images/icontu/15.jpg",
+					"images/icontu/34.jpg",
+					"images/logo.png",
+					"images/icontu/2.jpg",
+					"images/icontu/1.jpg"
+				],
+				"refer": [
+					"order/changeGoods.html",
+					"order/mixPay.html",
+					"barcode/payment.html",
+					"order/changePayType.html"
+				],
+				"priority": 0
+			},
+			"order/mixPay.html": {
+				"resources": [
+					"order/mixPay.js",
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"images/weixin2.png",
+					"images/shuaka.png",
+					"images/zhifubao.png",
+					"images/xianjin.png",
+					"images/huiyuanka.png"
+				],
+				"refer": [
+					"barcode/payment.html"
+				],
+				"priority": 0
+			},
+			"order/changeGoods.html": {
+				"resources": [
+					"order/changeGoods.js",
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"images/logo.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"item/showItem.html": {
+				"resources": [
+					"images/about-logo.png",
+					"js/common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/apijs/api.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"barcode/orderScan.html": {
+				"resources": [
+					"barcode/orderScan.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/iconfont.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashr/mixPay.html": {
+				"resources": [
+					"cashr/mixPay.js",
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"images/weixin2.png",
+					"images/shuaka.png",
+					"images/huiyuanka.png",
+					"images/zhifubao.png",
+					"images/xianjin.png"
+				],
+				"refer": [
+					"barcode/payment.html"
+				],
+				"priority": 0
+			},
+			"order/changePayType.html": {
+				"resources": [
+					"js/app.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/styleAll.css",
+					"css/mui.css",
+					"order/changePayType.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"more/addour.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"more/about.html": {
+				"resources": [
+					"images/about-logo.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -766,9 +1210,7 @@
 				"images/androidicon/c7.png",
 				"images/icontu/16.jpg",
 				"item/changenum.js",
-				"more/addour.html",
 				"images/icontu/4.jpg",
-				"images/icontu/2.jpg",
 				"map/maps.html",
 				"json/shoplist.json",
 				"list/orderBarcodec.js",
@@ -794,7 +1236,6 @@
 				"map/maps_map.js",
 				"json/products.json",
 				"images/iosicon/d5.png",
-				"images/logo.png",
 				"images/abcde/J2.png",
 				"list/detailitemCheck.js",
 				"images/abcde/E.png",
@@ -840,9 +1281,7 @@
 				"images/androidicon/c4.png",
 				"images/icontu/18.jpg",
 				"item/changenum.html",
-				"more/about.html",
 				"images/androidicon/d4.png",
-				"images/icontu/1.jpg",
 				"images/icontu/14.jpg",
 				"images/icontu/22.jpg",
 				"json/mendian.json",

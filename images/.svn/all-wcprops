@@ -1,7 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 31
-/svn/erpApp/!svn/ver/543/images
+/svn/erpApp/!svn/ver/981/images
+END
+qita.png
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/erpApp/!svn/ver/981/images/qita.png
+END
+zhifubao.png
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/erpApp/!svn/ver/981/images/zhifubao.png
 END
 pay.png
 K 25
@@ -39,6 +51,18 @@ svn:wc:ra_dav:version-url
 V 44
 /svn/erpApp/!svn/ver/1/images/pull_arrow.png
 END
+weixin2.png
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/erpApp/!svn/ver/981/images/weixin2.png
+END
+xianjin.png
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/erpApp/!svn/ver/981/images/xianjin.png
+END
 60x60.gif
 K 25
 svn:wc:ra_dav:version-url
@@ -69,6 +93,12 @@ svn:wc:ra_dav:version-url
 V 44
 /svn/erpApp/!svn/ver/1/images/pull_fresh.png
 END
+shuaka.png
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/erpApp/!svn/ver/981/images/shuaka.png
+END
 close.png
 K 25
 svn:wc:ra_dav:version-url
@@ -87,6 +117,12 @@ svn:wc:ra_dav:version-url
 V 41
 /svn/erpApp/!svn/ver/42/images/hwlogo.png
 END
+huiyuanka.png
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/erpApp/!svn/ver/981/images/huiyuanka.png
+END
 cbd.jpg
 K 25
 svn:wc:ra_dav:version-url
@@ -104,6 +140,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 41
 /svn/erpApp/!svn/ver/462/images/money.png
+END
+weixin.png
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/erpApp/!svn/ver/727/images/weixin.png
 END
 yuantiao.jpg
 K 25

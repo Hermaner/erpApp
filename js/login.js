@@ -166,6 +166,7 @@ function getStoreList(callback) { //门店列表查询接口，接口文档No.23
 			return
 		}
 		data = data.stores
+		console.log(JSON.stringify(data))
 		console.log("储存门店列表")
 		plus.storage.setItem("storesList", JSON.stringify(data)); //储存门店列表
 		var status=0
@@ -191,6 +192,7 @@ function getVersion() { //系统版本查询
 			var myVersion;
 			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 				myVersion = inf.version;
+			 
 				var newVersion = data.version;
 				if (myVersion != newVersion) {
 					plus.nativeUI.confirm("发现新资源，是否更新？", function(event) {
@@ -231,7 +233,8 @@ function downWgt() {
 				case 3: // 已接收到数据
 					var progressSpan = document.getElementById("progressSpan")
 					var progressPx = parseFloat(task.downloadedSize / task.totalSize) * 240 + "px";
-					progressSpan.style.width = progressPx
+					progressSpan.style.width = progressPx;
+					
 					break;
 				case 4: // 下载完成
 					break;

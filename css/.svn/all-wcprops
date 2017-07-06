@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
-V 28
-/svn/erpApp/!svn/ver/672/css
+V 29
+/svn/erpApp/!svn/ver/1050/css
 END
 common.css
 K 25
@@ -14,6 +14,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 43
 /svn/erpApp/!svn/ver/374/css/stylebypad.css
+END
+styleAll.css
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/erpApp/!svn/ver/1050/css/styleAll.css
 END
 mui.css
 K 25
@@ -31,7 +37,7 @@ style.css
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/erpApp/!svn/ver/672/css/style.css
+/svn/erpApp/!svn/ver/854/css/style.css
 END
 mui.poppicker.css
 K 25
@@ -48,14 +54,14 @@ END
 iconfont.css
 K 25
 svn:wc:ra_dav:version-url
-V 39
-/svn/erpApp/!svn/ver/6/css/iconfont.css
+V 41
+/svn/erpApp/!svn/ver/854/css/iconfont.css
 END
 datalist.css
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/erpApp/!svn/ver/647/css/datalist.css
+/svn/erpApp/!svn/ver/870/css/datalist.css
 END
 mui.listpicker.css
 K 25

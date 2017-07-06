@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="mui-home-htmlcolor">
+
+	<head>
+		<meta charset="utf-8">
+		<title>home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../styles/mui.css" rel="stylesheet" />
+		<link href="../../styles/iconfont.css" rel="stylesheet" />
+		<link href="../../styles/styleAll.css" rel="stylesheet" />
+	</head>
+
+	<body class="home-bc" id="home">
+		
+		<div class="mem-keep-out" v-if="hasClick"  @click="closeWx()">
+			<img v-bind:src="gongzhong.logo" class="QRcode" />
+			<img v-bind:src="gongzhong.image" class="QR-img" v-if='gongzhong.image.length>0'/>
+		</div>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view flexCon headbac padding10">
+									<li class="homeLogo">
+										<img class="" src="../../images/about-logo.png" @click="showWx()">
+									</li>
+									<li class="flexOne home-text" @click="goToloc()">
+										<div class="flexCon">
+											<p v-cloak>
+												{{homeData.storeName}}
+											</p>
+											<span class="mui-icon iconfont icon-ditu1 flexOne homeLoc"></span>
+										</div>
+										
+										<p v-cloak>
+											{{homeData.address}}
+										</p>
+										<p v-cloak>
+											{{op}}
+										</p>
+									</li>
+									<li class="flex-width50">
+										<a  url="../more/msgList.html" class="h-list">
+											<span class="mui-icon mui-icon-chatbubble"></span>
+										</a>
+										<button class="mui-btn-primary home-esc" @click="exitLogin()">注销</button>
+									</li>
+								</ul>
+								<ul class="mui-table-view flexCon homeOneList">
+									<li class="flexOne mui-table-view-cell">
+										<a type-url="../goodsAction/goodsAction.html" class="noscan" type="check">
+											<span class="mui-icon iconfont icon-xiangzi1 mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">商品盘点</span>
+										</a>
+									</li>
+									<li class="flexOne mui-table-view-cell">
+										<a type-url="../goodsAction/goodsAction.html" class="noscan" type="storage">
+											<span class="mui-icon iconfont icon-jinhuo mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">商品入库</span>
+										</a>
+									</li>
+									<li class="flexOne mui-table-view-cell" >
+										<a url="../barcode/orderScan.html">
+											<span class="mui-icon iconfont icon-saomiao mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">定位订单</span>
+										</a>
+									</li>
+									<li class="flexOne mui-table-view-cell">
+										<a url="../cashr/cashrCart.html">
+											<span class="mui-icon iconfont icon-jia mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">门店收银</span>
+										</a>
+									</li>
+								</ul>
+								<ul class="mui-table-view flexCon homeOneList">
+									<li class="flexOne mui-table-view-cell">
+										<a url="../payLog/payLog.html">
+											<span class="mui-icon iconfont icon-qianqian mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">定金管理</span>
+										</a>
+									</li>
+									<li class="flexOne mui-table-view-cell">
+										<a url="../createVip/createVip.html">
+											<span class="mui-icon iconfont icon-gongsiyuangong mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">新建会员</span>
+										</a>
+									</li>
+									<li class="flexOne mui-table-view-cell" >
+										<a url="../vipCard/vipCard.html">
+											<span class="mui-icon iconfont icon-shengchenghuiyuanqia mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">会员发卡</span>
+										</a>
+									</li>
+									<li class="flexOne mui-table-view-cell">
+										<a url="../vipRecharge/vipRecharge.html">
+											<span class="mui-icon iconfont icon-jinbi mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">会员充值</span>
+										</a>
+									</li>
+								</ul>
+								<ul class="mui-table-view homeTwoList">
+									<ul class="mui-table-view flexCon" style="border-bottom:1px solid #EEEEEE ;">
+										<li class="mui-table-view-cell flexOne">
+											<a uid="UN_ACCPET">
+												<div id="un_acount" v-cloak>
+													{{homeData.unAccpetCount || 0}}
+												</div>
+												<span class="mui-media-body mui-home-spancolor2">未接订单</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne">
+											<a uid="ACCPET">
+												<div id="acount" v-cloak>
+													{{homeData.acceptCount || 0}}
+												</div>
+												<span class="mui-media-body mui-home-spancolor2">已接订单</span>
+											</a>
+										</li>
+									</ul>
+									<ul class="mui-table-view flexCon">
+										<li class="mui-table-view-cell flexOne">
+											<a uid="SINCE">
+												<div id="since_acount" v-cloak>
+													{{homeData.sinceCount || 0}}
+												</div>
+												<span class="mui-media-body mui-home-spancolor2">自提订单</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne">
+											<a>
+												<!--<a url="../../pluginPrinter.html">-->
+												<div id="call_acount" v-cloak>
+													{{homeData.allocateCount || 0}}
+												</div>
+												<span class="mui-media-body mui-home-spancolor2">调货单据</span>
+											</a>
+										</li>
+									</ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div class="home-yt-header">昨日数据概况</div>
+								<div class="home-yt-shopname">
+									<span class="mui-icon iconfont icon-mendianchaxun"></span>
+									<span>{{homeData.storeName}}</span>
+								</div>
+								<ul class="mui-table-view homeYtOne">
+									<ul class="mui-table-view flexCon">
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex" chartId="0">
+												<div v-cloak>{{yesData.tradeCount || 0}}</div>
+												<span class="mui-media-body">订单总数</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex" chartId="1">
+												<div v-cloak>{{yesData.tradeSale || 0}}</div>
+												<span class="mui-media-body">总销售额</span>
+											</a>
+										</li>
+									</ul>
+								</ul>
+								<ul class="mui-table-view homeYtTwo">
+									<ul class="mui-table-view flexCon">
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex"  chartId="2">
+												<div class="h-fontsize mui-yt-borderright mui-yt-black" v-cloak>{{yesData.tradeDelivery || 0}}</div>
+												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">配送订单</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex"  chartId="3">
+												<div class="h-fontsize mui-yt-borderright mui-yt-black" v-cloak>{{yesData.sendCount || 0}}</div>
+												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">发货订单</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex"  chartId="4">
+												<div class="h-fontsize mui-yt-borderright mui-yt-black" v-cloak>{{yesData.sinceCount || 0}}</div>
+												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">自提订单</span>
+											</a>
+										</li>
+									</ul>
+									<ul class="mui-table-view flexCon">
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex"  chartId="5">
+												<div class="h-fontsize mui-yt-borderright mui-yt-black" v-cloak>{{parseInt(yesData.processCount) || 0}}</div>
+												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">处理订单总数</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex"  chartId="6">
+												<div class="h-fontsize mui-yt-borderright mui-yt-black" v-cloak>{{parseInt(yesData.xietiaoCount) || 0}}</div>
+												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">申请协调订单</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex"  chartId="7">
+												<div class="h-fontsize mui-yt-borderright mui-yt-black" v-cloak>{{yesData.fenrunAmount || 0}}</div>
+												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">分润金额</span>
+											</a>
+										</li>
+									</ul>
+								</ul>
+								<div class="home-yt-shopname">
+									<span class="mui-icon iconfont icon-mendianchaxun"></span>
+									<span>{{op}}</span>
+								</div>
+								<ul class="mui-table-view homeYtOne">
+									<ul class="mui-table-view flexCon">
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex" chartId="8">
+												<div v-cloak>{{yesData.selfSaleAmount || 0}}</div>
+												<span class="mui-media-body">销售额</span>
+											</a>
+										</li>
+										<li class="mui-table-view-cell flexOne home-bottom">
+											<a class="mui-table-flex" chartId="9">
+												<div v-cloak>{{yesData.selfBonus || 0}}</div>
+												<span class="mui-media-body">绩效奖金</span>
+											</a>
+										</li>
+									</ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-slider-indicator home-active">
+					<div class="mui-indicator mui-indicator-bac mui-active"></div>
+					<div class="mui-indicator mui-indicator-bac"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/app.js"></script>
+	<script src="home.js"></script>
+
+</html>

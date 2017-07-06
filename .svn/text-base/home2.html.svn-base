@@ -16,10 +16,32 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/common.js"></script>
 		<script src="js/apijs/api.js"></script>
+		<style>
+			.mem-keep-out {
+				height: 100%;
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.5);
+				position: absolute;
+				z-index: 999;
+				display: none;
+			}
+			
+			.erweipic {
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				left: 50%;
+				margin-left: -100px;
+				top: 50%;
+				margin-top: -100px;
+			}
+		</style>
 	</head>
 
 	<body class="mui-home-bodycolor">
-
+		<div class="mem-keep-out mem-bund-hidden" id="closeBlack">
+			<img src="http://open.weixin.qq.com/qr/code/?username=hongware" class="erweipic" />
+		</div>
 		<div class="mui-content myxhome mui-home-contentcolor">
 			<div id="slider" class="mui-slider">
 				<div class="mui-slider-group">
@@ -29,10 +51,16 @@
 								<div class="h-head">
 									<ul class="mui-table-view mui-flex-all headbac mui-home-tablepad" id="toxiaoxilist">
 										<li class="mui-home-middle mui-width-ten">
-											<img class="mui-media-object mui-imgradius" src="images/about-logo.png">
+
+											<img class="mui-media-object mui-imgradius" src="images/about-logo.png" id="openBlack">
 										</li>
-										<li class="mui-table-flex mui-home-middle mui-width-sixty" id="topMsg">
-											<p>&nbsp;</p>
+
+										<li class="mui-table-flex mui-home-middle mui-width-sixty" id="topMsg" onclick="goToloc()">
+											<div class="mui-flex-all">
+
+												<p class="changeP"></p>
+												<span class="mui-icon iconfont icon-ditu1 lineheight21 mui-table-flex"></span>
+											</div>
 											<p>&nbsp;</p>
 											<p>&nbsp;</p>
 										</li>
@@ -50,26 +78,52 @@
 								<ul class="mui-table-view mui-flex-all mui-home-contentcolor" id="homelist">
 									<li class="mui-table-flex mui-home-bordertop mui-table-view-cell">
 										<a href="list/shopcheck.html" class="noscan">
-											<span class="mui-icon iconfont icon-icon mui-home-iconsize"></span>
+											<span class="mui-icon iconfont icon-xiangzi1 mui-home-iconsize"></span>
 											<span class="mui-media-body mui-home-spancolor">商品盘点</span>
 										</a>
 									</li>
 									<li class="mui-table-flex mui-table-view-cell">
 										<a href="list/shopin.html" class="noscan">
-											<span class="mui-icon iconfont icon-mendianchaxun mui-home-iconsize"></span>
+											<span class="mui-icon iconfont icon-jinhuo mui-home-iconsize"></span>
 											<span class="mui-media-body mui-home-spancolor">商品入库</span>
 										</a>
 									</li>
 									<li class="mui-table-flex mui-table-view-cell">
-										<a onclick="clicked('barcode/barcode_anchor.html',true,true);">
+										<a onclick="anchorOrder()">
 											<span class="mui-icon iconfont icon-saomiao mui-home-iconsize"></span>
 											<span class="mui-media-body mui-home-spancolor">定位订单</span>
 										</a>
 									</li>
 									<li class="mui-table-flex mui-table-view-cell">
-										<a href="list/newlist.html" class="noscan">
-											<span class="mui-icon iconfont icon-gengduo mui-home-iconsize"></span>
+										<a href="cashr/cashrCart.html" class="noscan">
+											<span class="mui-icon iconfont icon-jia mui-home-iconsize"></span>
 											<span class="mui-media-body mui-home-spancolor">门店收银</span>
+										</a>
+									</li>
+								</ul>
+								<ul class="mui-table-view mui-flex-all mui-home-contentcolor" id="actionlist">
+									<li class="mui-table-flex mui-home-bordertop mui-table-view-cell">
+										<a href="payLog/payLog.html" class="noscan">
+											<span class="mui-icon iconfont icon-qianqian mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">定金管理</span>
+										</a>
+									</li>
+									<li class="mui-table-flex mui-table-view-cell">
+										<a href="createVip/createVip.html" class="noscan">
+											<span class="mui-icon iconfont icon-gongsiyuangong mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">新建会员</span>
+										</a>
+									</li>
+									<li class="mui-table-flex mui-table-view-cell">
+										<a href="vipCard/vipCard.html" class="noscan">
+											<span class="mui-icon iconfont icon-shengchenghuiyuanqia mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">会员发卡</span>
+										</a>
+									</li>
+									<li class="mui-table-flex mui-table-view-cell">
+										<a href="vipRecharge/vipRecharge.html" class="noscan">
+											<span class="mui-icon iconfont icon-jinbi mui-home-iconsize"></span>
+											<span class="mui-media-body mui-home-spancolor">会员充值</span>
 										</a>
 									</li>
 								</ul>
@@ -117,13 +171,13 @@
 								<ul class="mui-table-view mui-home-ulcolor statisticaldata" id="statisticaldata1">
 									<ul class="mui-table-view mui-flex-all">
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" lid="TALL">
-												<div class="mui-yt-font mui-yt-borderright" id="idTradeCount" tid="trade" >0</div>
+											<a class="mui-table-flex" chartId="0">
+												<div class="mui-yt-font mui-yt-borderright" id="idTradeCount" tid="trade">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">订单总数</span>
 											</a>
 										</li>
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" lid="SALL">
+											<a class="mui-table-flex" chartId="1">
 												<div class="mui-yt-font mui-yt-borderright" id="idSaleCount" tid="sale">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">总销售额</span>
 											</a>
@@ -133,19 +187,19 @@
 								<ul class="mui-table-view mui-home-ulcolor2" id="statisticaldata2">
 									<ul class="mui-table-view mui-flex-all">
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" href="datalist/linechart.html" lid="DIS">
+											<a class="mui-table-flex" href="chart/chart.html" chartId="2">
 												<div class="h-fontsize mui-yt-borderright mui-yt-black" id="idDeliveryCount" tid="delivery">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">配送订单</span>
 											</a>
 										</li>
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" href="datalist/linechart.html" lid="DELIVER">
+											<a class="mui-table-flex" href="chart/chart.html" chartId="3">
 												<div class="h-fontsize mui-yt-borderright mui-yt-black" id="idSendCount" tid="send">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">发货订单</span>
 											</a>
 										</li>
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" href="datalist/linechart.html" lid="OWN">
+											<a class="mui-table-flex" href="chart/chart.html" chartId="4">
 												<div class="h-fontsize mui-yt-borderright mui-yt-black" id="idSinceCount" tid="since">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">自提订单</span>
 											</a>
@@ -153,19 +207,19 @@
 									</ul>
 									<ul class="mui-table-view mui-flex-all">
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" href="datalist/linechart.html" lid="HAN">
+											<a class="mui-table-flex" href="chart/chart.html" chartId="5">
 												<div class="h-fontsize mui-yt-borderright mui-yt-black" id="idProcessCount" tid="process">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">处理订单总数</span>
 											</a>
 										</li>
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" href="datalist/linechart.html" lid="COOR">
+											<a class="mui-table-flex" href="chart/chart.html" chartId="6">
 												<div class="h-fontsize mui-yt-borderright mui-yt-black" id="idxietiaoCount" tid="xietiao">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">申请协调订单</span>
 											</a>
 										</li>
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" href="datalist/linechart.html" lid="MONEY">
+											<a class="mui-table-flex" href="chart/chart.html" chartId="7">
 												<div class="h-fontsize mui-yt-borderright mui-yt-black" id="idFenrunAmount" tid="fenrun">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">分润金额</span>
 											</a>
@@ -179,13 +233,13 @@
 								<ul class="mui-table-view mui-home-ulcolor statisticaldata" id="statisticaldata3">
 									<ul class="mui-table-view mui-flex-all">
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" lid="SALES">
+											<a class="mui-table-flex" chartId="8">
 												<div class="mui-yt-font mui-yt-borderright" id="idSelfSaleAmount" tid="selfSale">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">销售额</span>
 											</a>
 										</li>
 										<li class="mui-table-view-cell mui-table-flex home-bottom">
-											<a class="mui-table-flex" lid="BONUS">
+											<a class="mui-table-flex" chartId="9">
 												<div class="mui-yt-font mui-yt-borderright" id="idSelfBonus" tid="selfBonus">0</div>
 												<span class="mui-media-body mui-yt-borderright mui-yt-spancolor">绩效奖金</span>
 											</a>
@@ -206,42 +260,36 @@
 		</div>
 	</body>
 	<script>
-		var exit, un_acount, acount, since_acount, call_acount, topMsg, callPage, loginPage,phoneheight;
-		var idTradeCount,idSaleCount,idDeliveryCount,idSendCount,idSinceCount,idProcessCount,idxietiaoCount,idFenrunAmount,idSelfSaleAmount,idSelfBonus
-		var ws, wo;
-		var item1mobile,item2mobile;
-		var shopstaff,shopname,statisticaldata2,linechartPage;
-		mui.init({
-			swipeBack: true,
-			keyEventBind: {
-				backbutton: false
-			}
-		});
-		
+		var warehouseId;
 		mui.plusReady(function() {
-			
+			openBlack = document.getElementById("openBlack");
+			closeBlack = document.getElementById("closeBlack");
+			openBlack.addEventListener("click", function() {
+				closeBlack.style.display = "block";
+			});
+			closeBlack.addEventListener("click", function() {
+				closeBlack.style.display = "none";
+			});
 			mui('.mui-scroll-wrapper').scroll({
 				indicators: true //是否显示滚动条
 			});
-			phoneheight=plus.screen.resolutionHeight;
-			var muicc=document.getElementsByClassName("mui-control-content");
-			for(var i=0;i<muicc.length;i++){
-				muicc[i].style.minHeight=phoneheight-80+"px";
+			phoneheight = plus.screen.resolutionHeight;
+			var muicc = document.getElementsByClassName("mui-control-content");
+			for (var i = 0; i < muicc.length; i++) {
+				muicc[i].style.minHeight = phoneheight - 80 + "px";
 			}
-
-			idTradeCount=document.getElementById("idTradeCount");
-			idSaleCount=document.getElementById("idSaleCount");
-			idDeliveryCount=document.getElementById("idDeliveryCount");
-			idSendCount=document.getElementById("idSendCount");
-			idSinceCount=document.getElementById("idSinceCount");
-			idProcessCount=document.getElementById("idProcessCount");
-			idxietiaoCount=document.getElementById("idxietiaoCount");
-			idFenrunAmount=document.getElementById("idFenrunAmount");
-			idSelfSaleAmount=document.getElementById("idSelfSaleAmount");
-			idSelfBonus=document.getElementById("idSelfBonus");
-
-			shopname=document.getElementById("shopname");
-			shopstaff=document.getElementById("shopstaff");
+			idTradeCount = document.getElementById("idTradeCount");
+			idSaleCount = document.getElementById("idSaleCount");
+			idDeliveryCount = document.getElementById("idDeliveryCount");
+			idSendCount = document.getElementById("idSendCount");
+			idSinceCount = document.getElementById("idSinceCount");
+			idProcessCount = document.getElementById("idProcessCount");
+			idxietiaoCount = document.getElementById("idxietiaoCount");
+			idFenrunAmount = document.getElementById("idFenrunAmount");
+			idSelfSaleAmount = document.getElementById("idSelfSaleAmount");
+			idSelfBonus = document.getElementById("idSelfBonus");
+			shopname = document.getElementById("shopname");
+			shopstaff = document.getElementById("shopstaff");
 			un_acount = document.getElementById("un_acount");
 			acount = document.getElementById("acount");
 			since_acount = document.getElementById("since_acount");
@@ -252,9 +300,10 @@
 			exit = document.getElementById("exit-btn");
 			ws = plus.webview.currentWebview();
 			wo = ws.opener();
-			linechartPage=plus.webview.getWebviewById('datalist/linechart.html');
-			statisticaldata2=document.getElementById("statisticaldata2");
+			linechartPage = plus.webview.getWebviewById('chart/chart.html');
+			statisticaldata2 = document.getElementById("statisticaldata2");
 			clickedFn('#homelist', '.noscan');
+			clickedFn('#actionlist', '.noscan');
 			clickedFn('#toxiaoxilist', 'a');
 			mui('#homelist2').on('tap', 'a', function(e) {
 				var uid = this.getAttribute("uid");
@@ -288,39 +337,52 @@
 				plus.navigator.setStatusBarBackground("#1F71B4");
 				plus.storage.removeItem("orgCode");
 			});
-			mui.preload({
-				url: 'datalist/linechart.html',
-				id: 'datalist/linechart.html',
-			});
+			
 			mui("#scroll2").on('tap', 'a', function() {
-				plus.nativeUI.showWaiting();
-				var getid = this.getAttribute("lid");
-				var tid=this.getElementsByTagName("div")[0].getAttribute("tid");
-//				var idSaleCount=document.getElementById("idSaleCount").innerHTML;
-				
-				mui.fire(plus.webview.getWebviewById('datalist/linechart.html'), 'toCount', {
-					getid:getid,
-					tid:tid
-				});
-				setTimeout(function(){
+				var chartId = this.getAttribute("chartId");
+
 					mui.openWindow({
-							url: 'datalist/linechart.html',
-							id: 'datalist/linechart.html',
-							show: {
-								aniShow: "pop-in"
-							},
-							waiting: {
-								autoShow: true
-							}
+						id: "chart/chart.html",
+						url: "chart/chart.html",
+						styles: {
+							popGesture: "close"
+						},
+						show: {
+							aniShow: "pop-in"
+						},
+						waiting: {
+							autoShow: true
+						},
+						extras: {
+							chartId:chartId
+						}
 					})
-				},100);
-				
+
+				//				mui.fire(plus.webview.getWebviewById('chart/chart.html'), 'chartShow', {
+				//					chartId: chartId,
+				//				});
+				//				setTimeout(function() {
+				//					mui.openWindow({
+				//						id: 'chart/chart.html',
+				//						show: {
+				//							aniShow: "pop-in"
+				//						},
+				//						waiting: {
+				//							autoShow: true
+				//						}
+				//					})
+				//				}, 100);
 			});
 		})
 
 		function loadData() { //订单按状态反馈分店总数接口，接口文档No.37
 			var param = systemParam("V5.mobile.order.status.count");
 			dataSendFn('orderStatusCount', param, function(data) {
+				if (!data.isSuccess) {
+					var mapmsg = data.map.errorMsg;
+					plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+					return
+				}
 				plus.nativeUI.closeWaiting();
 				var storeName = data.storeName
 				var storeCode = data.storeCode
@@ -331,9 +393,10 @@
 				var sinceCount = data.sinceCount || 0
 				var allocateCount = data.allocateCount || 0;
 				var op = plus.storage.getItem("op");
-				shopname.innerHTML=storeName;
-				shopstaff.innerHTML=op;
-				topMsg.innerHTML = '<p class="mui-p-font">' + storeName + '</p><p>' + address + '</p><p>' + op + '</p>'
+				warehouseId = data.warehouseId
+				shopname.innerHTML = storeName;
+				shopstaff.innerHTML = op;
+				topMsg.innerHTML = '<div class="mui-flex-all"><p class="changeP" >' + storeName + '</p><span class="mui-icon iconfont icon-ditu1 lineheight21 mui-table-flex"></span></div><p>' + address + '</p><p>' + op + '</p>'
 				un_acount.innerHTML = unAccpetCount
 				acount.innerHTML = acceptCount
 				since_acount.innerHTML = sinceCount
@@ -343,47 +406,101 @@
 				} else {
 					wo.evalJS("addRed(0)");
 				}
-			}, "get")
-			
-			var param2 = systemParam("V5.mobile.order.yesterdayCount");
-			dataSendFn('yesterdayCount', param2, function(data) {
-				if (!data.isSuccess) {
-					var mapmsg = data.map.errorMsg;
-					plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
-					console.log(mapmsg);
-					return
-				}
-				var yesterdays=data.yesterdays;
-				
-				var tradeCount=yesterdays.tradeCount;
-				var saleCount=yesterdays.saleCount;
-				var deliveryCount=yesterdays.deliveryCount;
-				var sendCount=yesterdays.sendCount;
-				var sinceCount=yesterdays.sinceCount;
-				var processCount=yesterdays.processCount;
-				var xietiaoCount=yesterdays.xietiaoCount;
-				var fenrunAmount=yesterdays.fenrunAmount;
-				var selfSaleAmount=yesterdays.selfSaleAmount;
-				var selfBonus=yesterdays.selfBonus;
-				idTradeCount.innerHTML=tradeCount;
-				idSaleCount.innerHTML=saleCount;
-				idDeliveryCount.innerHTML=deliveryCount;
-				idSendCount.innerHTML=sendCount;
-				idSinceCount.innerHTML=sinceCount;
-				idProcessCount.innerHTML=processCount;
-				idxietiaoCount.innerHTML=xietiaoCount;
-				idFenrunAmount.innerHTML=fenrunAmount;
-				idSelfSaleAmount.innerHTML=selfSaleAmount;
-				idSelfBonus.innerHTML=selfBonus;
+				var param2 = systemParam("V5.mobile.order.yesterdayCount");
+				dataSendFn('yesterdayCount', param2, function(data) {
+					console.log(JSON.stringify(data))
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+						console.log(mapmsg);
+						return
+					}
+					var yesterdays = data.yesterdays;
+					var tradeCount = yesterdays.tradeCount;
+					var saleCount = yesterdays.saleCount;
+					var deliveryCount = yesterdays.deliveryCount;
+					var sendCount = yesterdays.sendCount;
+					var sinceCount = yesterdays.sinceCount;
+					var processCount = yesterdays.processCount;
+					var xietiaoCount = yesterdays.xietiaoCount;
+					var fenrunAmount = yesterdays.fenrunAmount;
+					var selfSaleAmount = yesterdays.selfSaleAmount;
+					var selfBonus = yesterdays.selfBonus;
+					idTradeCount.innerHTML = tradeCount;
+					idSaleCount.innerHTML = saleCount;
+					idDeliveryCount.innerHTML = deliveryCount;
+					idSendCount.innerHTML = sendCount;
+					idSinceCount.innerHTML = sinceCount;
+					idProcessCount.innerHTML = processCount;
+					idxietiaoCount.innerHTML = xietiaoCount;
+					idFenrunAmount.innerHTML = fenrunAmount;
+					idSelfSaleAmount.innerHTML = selfSaleAmount;
+					idSelfBonus.innerHTML = selfBonus;
+				}, "get")
 			}, "get")
 		}
 
-		function changeActive(){
-			item2mobile=document.getElementById("item2mobile");
-			if(item2mobile.className.indexOf("mui-active")!=-1){
+		function changeActive() {
+			item2mobile = document.getElementById("item2mobile");
+			if (item2mobile.className.indexOf("mui-active") != -1) {
 				ws.reload();
 			}
+		}
 
+		function reloadStore(a) {
+			mui.confirm("是否修改门店地址", "温馨提示", ["确认", "取消"], function(e) {
+				if (e.index == 1) {} else {
+					var params = systemParam("V5.mobile.store.update");
+					params.warehouseId = warehouseId;
+					params.address = a;
+					plus.nativeUI.showWaiting()
+					dataSendFn('storeUpdate', params, function(data) {
+						plus.nativeUI.closeWaiting()
+						if (!data.isSuccess) {
+							var mapmsg = data.map.errorMsg;
+							plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+							console.log(mapmsg);
+							return
+						}
+						mui("#topMsg")[0].querySelectorAll("p")[1].innerText = a
+					}, "get")
+				}
+			})
+		}
+
+		function goToloc() {
+			mui.openWindow({
+				id: "map/location.html",
+				url: "map/location.html",
+				styles: {
+					popGesture: "close"
+				},
+				show: {
+					aniShow: "pop-in"
+				},
+				waiting: {
+					autoShow: true
+				}
+			})
+		}
+
+		function anchorOrder() {
+			mui.openWindow({
+				id: "barcode/orderScan.html",
+				url: "barcode/orderScan.html",
+				styles: {
+					popGesture: "close"
+				},
+				show: {
+					aniShow: "pop-in"
+				},
+				waiting: {
+					autoShow: true
+				},
+				extras: {
+					type: "author"
+				}
+			})
 		}
 	</script>
 

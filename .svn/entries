@@ -1,15 +1,15 @@
 10
 
 dir
-716
+1051
 http://192.168.1.199:88/svn/erpApp
 http://192.168.1.199:88/svn/erpApp
 
 
 
-2016-01-28T22:20:00.052250Z
-716
-allen
+2016-04-27T01:54:07.201875Z
+1051
+herman
 has-props
 
 svn:special svn:externals svn:needs-lock
@@ -25,6 +25,12 @@ svn:special svn:externals svn:needs-lock
 
 
 d870b574-1e51-394f-95a9-f2929ad05d25
+
+.git
+dir
+
+.idea
+dir
 
 .project
 file
@@ -61,6 +67,15 @@ herman
 1134
 
 barcode
+dir
+
+cashr
+dir
+
+chart
+dir
+
+createVip
 dir
 
 css
@@ -112,11 +127,11 @@ file
 
 
 
-2016-01-29T07:32:56.000000Z
-e65441ca1f79d9915af876414c834b7a
-2016-01-28T16:39:56.239750Z
-710
-allen
+2016-04-24T03:59:21.000000Z
+b30f3e7d00264a1c4f1957e27bf22ab5
+2016-04-24T04:53:27.807875Z
+1026
+herman
 
 
 
@@ -138,7 +153,7 @@ allen
 
 
 
-15924
+19493
 
 images
 dir
@@ -152,11 +167,11 @@ file
 
 
 
-2016-01-29T07:32:55.000000Z
-3741621fab5603e1d450bc0e67870cc7
-2016-01-28T09:21:24.178559Z
-706
-allen
+2016-04-25T09:04:18.000000Z
+06ebb2d4fd84928c1e35b0efb8e9ecf2
+2016-04-27T01:54:07.201875Z
+1051
+herman
 
 
 
@@ -178,7 +193,7 @@ allen
 
 
 
-7982
+7508
 
 item
 dir
@@ -198,11 +213,11 @@ file
 
 
 
-2016-01-25T01:48:02.000000Z
-3f9285f3d5617eeb69192ff4889a6aaa
-2015-12-01T09:52:03.796875Z
-582
-allen
+2016-04-25T07:25:57.000000Z
+76bbc6ee68289df4458a8b2bc27b95e0
+2016-04-25T08:04:53.415837Z
+1047
+herman
 
 
 
@@ -224,7 +239,7 @@ allen
 
 
 
-3406
+3399
 
 manifest.json
 file
@@ -232,11 +247,11 @@ file
 
 
 
-2016-01-29T07:32:56.000000Z
-408ae8256272e4d5a27898153ccdeff0
-2016-01-28T21:34:40.614750Z
-713
-allen
+2016-04-26T03:58:12.000000Z
+5ca89cd9593735607f8d3a9e701c5078
+2016-04-27T01:54:07.201875Z
+1051
+herman
 
 
 
@@ -258,12 +273,18 @@ allen
 
 
 
-22836
+31853
 
 map
 dir
 
 more
+dir
+
+order
+dir
+
+payLog
 dir
 
 pluginPrinter.html
@@ -300,6 +321,15 @@ herman
 
 1470
 
+src
+dir
+
 unpackage
+dir
+
+vipCard
+dir
+
+vipRecharge
 dir
 

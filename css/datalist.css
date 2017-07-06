@@ -103,11 +103,25 @@ body {
 }
 
 /*昨日数据概况页面开始*/
+.changeP{
+	width: auto;
+	max-width: 120px;
+}
+.lineheight21{
+	line-height: 21px;
+}
 .mui-home-bodycolor .mui-slider .mui-slider-group .mui-slider-item .mui-table-view:before,
 .mui-slider .mui-slider-group .mui-slider-item .mui-table-view:after {
 	height: 0px;
 }
-
+.mui-home-bodycolor #actionlist:after {
+	height: 2px;
+	background-color: #EEEEEE;
+}
+.mui-home-bodycolor #actionlist li {
+	height: 90px;
+	border-right: 1px solid #eee;
+}
 .mui-home-bodycolor #homelist:after {
 	height: 2px;
 	background-color: #EEEEEE;

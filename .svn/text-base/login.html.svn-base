@@ -29,8 +29,8 @@
 						<input id='shopname' type="text" class="mui-input-clear mui-input" onblur="blurToast(this,'商家编码不能为空')" placeholder="商家编码">
 					</div>
 					<div class="mui-input-row login-bottomline">
-						<label><span class="mui-icon iconfont icon-mendianchaxun login-iconcolor"></span></label>
-						<input id='shopno' type="text" class="mui-input-clear mui-input" onblur="blurToast(this,'门店编码不能为空')" placeholder="门店编码">
+						<label><span class="mui-icon iconfont icon-111 login-iconcolor"></span></label>
+						<input id='shopno' type="text" class="mui-input-clear mui-input"  onblur="blurToast(this,'门店编码不能为空')" placeholder="门店编码">
 					</div>
 					<div class="mui-input-row login-bottomline">
 						<label><span class="mui-icon iconfont icon-gongsiyuangong login-iconcolor"></span></label>
@@ -38,7 +38,7 @@
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mima login-iconcolor"></span></label>
-						<input id='password' type="password" class="mui-input-clear mui-input" onblur="blurToast(this,'密码不能为空')" placeholder="请输入密码">
+						<input id='password' type="password" class="mui-input-clear mui-input"   onblur="blurToast(this,'密码不能为空')" placeholder="请输入密码">
 					</div>
 				</form>
 			</div>

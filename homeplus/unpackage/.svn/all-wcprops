@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/erpApp/!svn/ver/934/src/unpackage
+END
+.confirmed_dependencies
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/erpApp/!svn/ver/1071/src/unpackage/.confirmed_dependencies
+END
+.dependencies
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/erpApp/!svn/ver/751/src/unpackage/.dependencies
+END

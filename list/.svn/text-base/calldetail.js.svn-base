@@ -52,7 +52,7 @@ mui.plusReady(function() {
 					phone = storesList[i].phone||storesList[i].mobile;
 				}
 			}
-			orderTopmsg.innerHTML = '<li class="mui-table-view-cell"><ul class="mui-table-view mui-grid-view mui-table-view-chevron"><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-9"><span class="mui-listself-spanblack">' +ncode+allocateOutNo + '</span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-3"><div class="mui-pull-right ld-lianxi"><span class="mui-icon iconfont icon-dianhua"></span><a class="lianxi-padding2 mui-tel-link" id="ntel" href="tel:' + phone + '">联系门店</a></div></li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-8"><span class="ld-p mui-col-xs-10">' +sname +inStore + '</span></li></ul></li>';
+			orderTopmsg.innerHTML = '<li class="mui-table-view-cell"><ul class="mui-table-view mui-grid-view mui-table-view-chevron"><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-9"><span class="mui-listself-spanblack">' +ncode+allocateOutNo + '</span></li><li class="mui-table-view-cell mui-listdetail-km mui-col-xs-3"><div class="mui-pull-right ld-lianxi"><span class="mui-icon iconfont icon-dianhuahaoma1"></span><a class="lianxi-padding2 mui-tel-link" id="ntel" href="tel:' + phone + '">联系门店</a></div></li><li class="mui-table-view-cell mui-listdetail-num mui-col-xs-8"><span class="ld-p mui-col-xs-10">' +sname +inStore + '</span></li></ul></li>';
 			var plist = '';
 			for (var i = 0; i < products.length; i++) {
 				var productNumber = products[i].productNumber;

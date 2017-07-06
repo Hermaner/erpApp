@@ -101,6 +101,7 @@ mui.plusReady(function() {
 		console.log(param);
 		dataSendFn('stockCheckConfirm', param, function(data) {
 			plus.nativeUI.closeWaiting();
+			console.log(JSON.stringify(data))
 			if (!data.isSuccess) {
 				var mapmsg = data.map.errorMsg;
 				plus.nativeUI.alert(mapmsg, function() {}, "", "OK");

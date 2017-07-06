@@ -16,12 +16,12 @@ mui.init({
 		backbutton: false
 	}
 });
-var tochange,phonetype;
+var tochange, phonetype;
 var mypt = null,
 	map = null,
 	orderStatus, myGeo, tolistli, bournObj = {}; //储存地址，经纬度，订单编号
 mui.plusReady(function() {
-	tochange=document.getElementById("tochange");
+	tochange = document.getElementById("tochange");
 	var tolistdetail = document.getElementById("tolistdetail"); //列表UL
 	var bottomPopover = document.getElementById("bottomPopover"); //<!--待发货订单-->
 	var mapIdTap = document.getElementById("mapIdTap"); //右上角地图图标
@@ -36,7 +36,6 @@ mui.plusReady(function() {
 	if (phonetype == "ios") {
 		divios.innerHTML = styleios;
 	}
-
 	mapIdTap.addEventListener("tap", function() {
 		var list = tolistdetail.getElementsByTagName("li");
 		var count = 0;
@@ -87,7 +86,7 @@ mui.plusReady(function() {
 		mui.fire(plus.webview.getWebviewById('list/listdetail.html'), 'detailShow', {
 			orderNumber: orderNumber,
 			address: address,
-			backstatus: orderStatus.value
+			orderStatus: orderStatus.value
 		});
 
 		mui.openWindow({
@@ -145,6 +144,12 @@ mui.plusReady(function() {
 				param.operation = "ACCEPET";
 				param.operationReason = "";
 				dataSendFn('orderOperation', param, function(data) {
+					if (!data.isSuccess) {
+						var mapmsg = data.map.errorMsg;
+						plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
+						console.log(mapmsg)
+						return
+					}
 					plus.nativeUI.alert("接单成功", function() {
 						mui("#tochange").pullRefresh().refresh(true)
 						ItemId = null;
@@ -212,7 +217,7 @@ mui.plusReady(function() {
 		oval = orderStatus.value;
 		plus.nativeUI.showWaiting();
 		mui("#tochange").pullRefresh().refresh(true)
-//		tolistdetail.innerHTML = "";
+			//		tolistdetail.innerHTML = "";
 		getThisDate(oval, val, 1);
 		orderlistTxt.value = ""
 		if (plus.os.name == "Android") {
@@ -291,7 +296,7 @@ function getThisDate(e, v, c) {
 	orderStatus.value = e;
 	dataSendFn(paramurl, param, function(data) {
 		plus.nativeUI.closeWaiting();
-		if (c){
+		if (c) {
 			tolistdetail.innerHTML = "";
 			if (plus.os.name == "Android") {
 				window.scrollTo(0, 0)
@@ -302,11 +307,11 @@ function getThisDate(e, v, c) {
 		if (!data.isSuccess) {
 			mui('#tochange').pullRefresh().endPullupToRefresh(true);
 			var mapmsg = data.map.errorMsg;
-			document.getElementById("tolistdetail").innerHTML = "";
+			//			document.getElementById("tolistdetail").innerHTML = "";
 			plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
 			return
 		}
-		if(ItemId==null){
+		if (ItemId == null) {
 			document.getElementById("tolistdetail").innerHTML = "";
 		}
 		var orders = data.orders;
@@ -333,7 +338,7 @@ function getThisDate(e, v, c) {
 			} else {
 				allstatus = ""
 			}
-			var distanceHtml = distance ? '<span class="mui-icon iconfont icon-dingwei dd-fontcolor mui-flex-textright"></span><span class="discText mui-flex-textright">约' + distance + 'km</span>' : '';
+			var distanceHtml = distance ? '<span class="mui-icon iconfont icon-ditu1 dd-fontcolor mui-flex-textright"></span><span class="discText mui-flex-textright">约' + distance + 'km</span>' : '';
 			for (var j = 0; j < products.length; j++) {
 				var productNumber = products[j].productNumber || "";
 				var productName = products[j].productName || "";
@@ -347,7 +352,7 @@ function getThisDate(e, v, c) {
 
 				linkhtml += '<a class="mui-flex-all dd-top mui-flex-abottom" href="listdetail.html" address="' + address + '" orderNumber=' + orderNumber + '><img class="itempic" src="' + productPic + '"><div class="mui-table-flex mui-flex-lineheight"><span class="mui-flex-block">' + productName + '</span><span class="mui-flex-block">' + skuNumber + ' </span><span class="mui-flex-block">' + skuName + '</span></div><div class="cellpad mui-flex-width"><span class="mui-flex-block mui-flex-textright">￥' + price + '</span><span class="mui-flex-block mui-flex-positionright">*' + count + '</span></div></a>'
 			}
-			var hascheckBox = e == "" || e == "IN_STORE"||e == "SINCE"||e == "WAIT_GOOD"||e == "END_ORDER" ? '<div class="mui-input-row mui-checkbox mui-flex-checkwidth"></div>' : '<div class="mui-input-row mui-checkbox mui-flex-checkwidth"><input name="checkbox" address=' + address + ' orderNumber=' + orderNumber + ' class="changeinput" value="Item 1" type="checkbox"></div>';
+			var hascheckBox = e == "" || e == "IN_STORE" || e == "SINCE" || e == "WAIT_GOOD" || e == "END_ORDER" ? '<div class="mui-input-row mui-checkbox mui-flex-checkwidth"></div>' : '<div class="mui-input-row mui-checkbox mui-flex-checkwidth"><input name="checkbox" address=' + address + ' orderNumber=' + orderNumber + ' class="changeinput" value="Item 1" type="checkbox"></div>';
 			var html = '<div class="mui-input-group"><div class="mui-flex-all">' + hascheckBox + '<div class="mui-table-flex"><div class="mui-flex-all"><span class="mui-table-flex mui-dingdan-padding mui-flex-margintop"><span class="mui-flex-blockbyell">' + orderNumber + '</span></span><span class="mui-table-flex2 mui-flex-margintop mui-flex-textcenter">' + allstatus + '</span><div class="mui-flex-width mui-flex-margintop mui-text-right">' + distanceHtml + '</div></div>' + linkhtml + '</div></div><div class="mui-text-right"><span>共' + productNum + '件商品&nbsp;&nbsp;<span class="colorword dd-fontcolor">应付￥' + totalAmount + '&nbsp;&nbsp;实付￥' + initialTotalAmount + '</span></span></div></div>'
 			var li = document.createElement("li");
 			li.className = "mui-table-view-cell";
@@ -368,7 +373,7 @@ function getThisDate(e, v, c) {
 	switch (e) {
 		case "UN_ACCPET":
 			if (phonetype == "ios") {
-				tochange.style.paddingBottom="40px";
+				tochange.style.paddingBottom = "40px";
 			}
 			document.getElementById('mapIdTap').style.display = "block";
 			document.getElementById('saomiaoId').style.display = "none";
@@ -379,7 +384,7 @@ function getThisDate(e, v, c) {
 			break;
 		case "ACCPET":
 			if (phonetype == "ios") {
-				tochange.style.paddingBottom="40px";
+				tochange.style.paddingBottom = "40px";
 			}
 			document.getElementById('saomiaoId').style.display = "none";
 			document.getElementById('mapIdTap').style.display = "block";
@@ -395,12 +400,12 @@ function getThisDate(e, v, c) {
 			document.getElementById('id_UN_ACCPET').style.display = "none";
 			document.getElementById('id_ACCPET').style.display = "none";
 			document.body.style.paddingBottom = "0px";
-			tochange.style.paddingBottom="0px";
+			tochange.style.paddingBottom = "0px";
 			document.getElementById('headname').innerHTML = "自提订单<span class='mui-icon mui-icon-arrowdown dingdan-fff'></span>";
 			break;
 		case "WAIT_GOOD":
 			document.body.style.paddingBottom = "0px";
-			tochange.style.paddingBottom="0px";
+			tochange.style.paddingBottom = "0px";
 			document.getElementById('saomiaoId').style.display = "block";
 			document.getElementById('mapIdTap').style.display = "none";
 			document.getElementById('myfixBtn').style.display = "none";
@@ -415,7 +420,7 @@ function getThisDate(e, v, c) {
 			document.getElementById('id_UN_ACCPET').style.display = "none";
 			document.getElementById('id_ACCPET').style.display = "none";
 			document.body.style.paddingBottom = "0px";
-			tochange.style.paddingBottom="0px";
+			tochange.style.paddingBottom = "0px";
 			document.getElementById('headname').innerHTML = "已完结订单<span class='mui-icon mui-icon-arrowdown dingdan-fff'></span>";
 			break;
 		case "IN_STORE":
@@ -425,7 +430,7 @@ function getThisDate(e, v, c) {
 			document.getElementById('id_UN_ACCPET').style.display = "none";
 			document.getElementById('id_ACCPET').style.display = "none";
 			document.body.style.paddingBottom = "0px";
-			tochange.style.paddingBottom="0px";
+			tochange.style.paddingBottom = "0px";
 			document.getElementById('headname').innerHTML = "门店订单<span class='mui-icon mui-icon-arrowdown dingdan-fff'></span>";
 			break;
 		default:
@@ -435,7 +440,7 @@ function getThisDate(e, v, c) {
 			document.getElementById('id_UN_ACCPET').style.display = "none";
 			document.getElementById('id_ACCPET').style.display = "none";
 			document.body.style.paddingBottom = "0px";
-			tochange.style.paddingBottom="0px";
+			tochange.style.paddingBottom = "0px";
 			document.getElementById('headname').innerHTML = "全部订单<span class='mui-icon mui-icon-arrowdown dingdan-fff'></span>";
 			break;
 	}
@@ -472,4 +477,23 @@ function pulldownRefresh() {
 	var val = document.getElementById("orderStatus").value;
 	mui('#tochange').pullRefresh().endPulldownToRefresh();
 	getThisDate(val, '', 1);
+}
+
+function anchorOrder() {
+	mui.openWindow({
+		id: "../barcode/orderScan.html",
+		url: "../barcode/orderScan.html",
+		styles: {
+			popGesture: "close"
+		},
+		show: {
+			aniShow: "pop-in"
+		},
+		waiting: {
+			autoShow: true
+		},
+		extras: {
+			type: "author"
+		}
+	})
 }

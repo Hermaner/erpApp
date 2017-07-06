@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="">
+		<meta http-equiv="content-security-policy">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>试用申请</title>	
+		<link href="../../styles/mui.css" rel="stylesheet" />
+		<link href="../../styles/iconfont.css" rel="stylesheet" />
+		<link href="../../styles/styleAll.css" rel="stylesheet" />
+	</head>
+
+	<body id="vue" class='whiteBackground'>
+		<div class="mui-content whiteBackground">
+			<h1 class='mui-trial-title'>试用申请</h1>
+			<p class='mui-trial-sub'>请拨打我们的咨询电话
+				<a href="tel:4007285858">400-728-5858</a>直接申请<br>试用账号或填写下方信息，我们会尽快与您联系</p>
+			<ul class="mui-table mui-table-view mui-trial-ul">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>商家名称</label>
+						<input type="text" v-model="company" placeholder="可填写公司名称">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>联系人姓名</label>
+						<input type="text" v-model="name" placeholder="联系人姓名">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>联系人电话</label>
+						<input type="text" v-model="mobilePhone" placeholder="联系人电话" v-on:blur="checkTel()">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label class='mui-fullwidth'>请选择您的销售渠道：</label>
+					</div>
+					<div class='mui-channel-btn'>
+						<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" :class="{'mui-active':item.status}" :style="{'width':index==0||index==2?'68px':''}" v-for='(index,item) in channels' @click='channelTap(index)'>{{item.name}}</button>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+		<button class="mui-btn mui-btn-block mui-btn-primary mui-fullBtn" @click='save()'>提交</button>
+		<a class='mui-action-back mui-fontcenter mui-trial-back'>直接登录></a>
+	</body>
+	<script src="../../js/mui.min.js "></script>
+	<script src="../../js/vue.js "></script>
+	<script src="../../js/app.js "></script>
+	<script src="index.js "></script>
+
+</html>

@@ -1,13 +1,25 @@
 K 25
 svn:wc:ra_dav:version-url
-V 32
-/svn/erpApp/!svn/ver/707/barcode
+V 33
+/svn/erpApp/!svn/ver/1004/barcode
+END
+payment.js
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/erpApp/!svn/ver/1004/barcode/payment.js
 END
 barcode_payment.html
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/erpApp/!svn/ver/707/barcode/barcode_payment.html
+/svn/erpApp/!svn/ver/750/barcode/barcode_payment.html
+END
+payment.html
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/erpApp/!svn/ver/939/barcode/payment.html
 END
 barcode_anchor.html
 K 25
@@ -33,6 +45,12 @@ svn:wc:ra_dav:version-url
 V 44
 /svn/erpApp/!svn/ver/79/barcode/barcode.html
 END
+orderScan.js
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/erpApp/!svn/ver/997/barcode/orderScan.js
+END
 barcode_cartscan.html
 K 25
 svn:wc:ra_dav:version-url
@@ -44,4 +62,10 @@ K 25
 svn:wc:ra_dav:version-url
 V 50
 /svn/erpApp/!svn/ver/659/barcode/barcode_scan.html
+END
+orderScan.html
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/erpApp/!svn/ver/968/barcode/orderScan.html
 END

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="mui-home-htmlcolor">
+
+	<head>
+		<meta charset="utf-8">
+		<title>home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../styles/mui.css" rel="stylesheet" />
+		<link href="../../styles/iconfont.css" rel="stylesheet" />
+		<link href="../../styles/styleAll.css" rel="stylesheet" />
+		<link href="../../styles/bigStyle.css" rel="stylesheet" media="screen and (min-width:480px)" />
+	</head>
+
+	<body class="home-bc" id="home">
+
+		<div class="mem-keep-out" v-if="hasClick" @click="closeWx()">
+			<img v-bind:src="gongzhong.logo" class="QRcode" />
+			<img v-bind:src="gongzhong.image" class="QR-img" v-if='gongzhong.image.length>0' />
+		</div>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view flexCon headbac padding10">
+						<li class="homeLogo">
+							<img class="" v-bind:src="gongzhong.image || '../../images/redlogo.png'" @click="showWx()">
+						</li>
+						<li class="flexOne home-text" @click="goToloc()">
+							<div class="flexCon">
+								<p v-cloak>
+									{{homeData.storeName}}
+								</p>
+								<span class="mui-icon iconfont icon-ditu1 flexOne homeLoc"></span>
+							</div>
+
+							<p v-cloak>
+								{{homeData.address}}
+							</p>
+							<p v-cloak>
+								{{op}}
+							</p>
+						</li>
+						<li class="flex-width50">
+							<a class="h-list" @click='goPage("../more/msgList.html")'>
+								<span class="mui-icon mui-icon-chatbubble"></span>
+							</a>
+							<button class="mui-btn-primary home-esc" @click="exitLogin()">注销</button>
+						</li>
+					</ul>
+					<ul class="mui-table-view flexCon homeOneList" style="flex-wrap:wrap">
+						<li class="flexoneFour mui-table-view-cell">
+							<a uid="UN_ACCPET">
+								<span class="mui-icon ifont icon-unaccepte mui-home-iconsize"><font v-show='homeData.unAccpetCount!=0'>{{homeData.unAccpetCount || 0}}</font></span>
+								<span class="mui-media-body mui-home-spancolor">未接订单</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell">
+							<a uid="ACCPET">
+								<span class="mui-icon ifont icon-accept mui-home-iconsize"><font v-show='homeData.acceptCount!=0'>{{homeData.acceptCount|| 0}}</font></span>
+								<span class="mui-media-body mui-home-spancolor">已接订单</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell">
+							<a uid="SINCE">
+								<span class="mui-icon ifont icon-since mui-home-iconsize"><font v-show='homeData.sinceCount!=0'>{{homeData.sinceCount || 0}}</font></span>
+								<span class="mui-media-body mui-home-spancolor">自提订单</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("../barcode/orderScan.html")'>
+							<a>
+								<span class="mui-icon iconfont icon-saomiao mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">定位订单</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("../discount/index.html")'  v-if='exit7==1'>
+							<a>
+								<span class="mui-icon ifont icon-quan mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">优惠劵管理</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("../sendcoupon/index.html")'v-if='exit1==1'>
+							<a>
+								<span class="mui-icon ifont icon-gerenyouhuiquan mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">面对面发券</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("../caserIn/index.html")' v-if='exit2==1'>
+							<a>
+								<span class="mui-icon ifont icon-shouyin mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">收银</span>
+							</a>
+						</li>
+
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("../memberlibrary/index.html")' v-if='exit5==1'>
+							<a>
+								<span class="mui-icon ifont icon-huiyuanku mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">会员库</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("../createVip/createVip.html")' v-if='exit4==1'>
+							<a>
+								<span class="mui-icon ifont icon-huiyuan"></span>
+								<span class="mui-media-body mui-home-spancolor">新建会员</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" v-if='exit11==1' @click='goPage("../goodsAction/goodsAction.html","check")'>
+							<a>
+								<span class="mui-icon iconfont icon-xiangzi1 mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">商品盘点</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" v-if='exit16==1' @click='goPage("../goodsAction/goodsActions.html","storage")'>
+							<a>
+								<span class="mui-icon iconfont icon-jinhuo mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">商品入库</span>
+							</a>
+						</li>
+
+						<li class="flexoneFour mui-table-view-cell" v-if='exit15==1' @click='goPage("../cashr/cashrCart.html")'>
+							<a>
+								<span class="mui-icon ifont icon-mendianshouyin"></span>
+								<span class="mui-media-body mui-home-spancolor">门店收银</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" v-if='exit13==1' @click='goPage("../payLog/payLog.html")'>
+							<a>
+								<span class="mui-icon iconfont icon-qianqian mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">定金管理</span>
+							</a>
+						</li>
+
+						<li class="flexoneFour mui-table-view-cell" v-if='exit10==1' @click='goPage("../vipCard/vipCard.html")'>
+							<a>
+								<span class="mui-icon ifont icon-my-huiyuanka"></span>
+								<span class="mui-media-body mui-home-spancolor">会员发卡</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" v-if='exit14==1' @click='goPage("../vipRecharge/vipRecharge.html")'>
+							<a>
+								<span class="mui-icon ifont icon-chongzhi"></span>
+								<span class="mui-media-body mui-home-spancolor">会员充值</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" v-if='exit8==1' @click='goPage("../storeFinance/storeFinance.html")'>
+							<a>
+								<span class="mui-icon ifont icon-mendian mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">门店对账</span>
+							</a>
+						</li>
+						<li class="flexoneFour mui-table-view-cell" v-if='exit9==1' @click='goPage("../financialCheck/index.html")'>
+							<a>
+								<span class="mui-icon ifont icon-duizhangdan mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">财务对账</span>
+							</a>
+						</li>
+
+						<li class="flexoneFour mui-table-view-cell" v-if='exit12==1' @click='goPage("../chart/chartHome.html")'>
+							<a>
+								<span class="mui-icon ifont icon-huiyuanfenrun mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">绩效分润</span>
+							</a>
+						</li>
+
+						<li class="flexoneFour mui-table-view-cell" @click='goPage("moreList.html")' v-if='moreList.length>0'>
+							<a>
+								<span class="mui-icon ifont icon-diandiandian mui-home-iconsize"></span>
+								<span class="mui-media-body mui-home-spancolor">更多</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/app.js"></script>
+	<script src="home.js"></script>
+
+</html>

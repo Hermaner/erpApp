@@ -1,19 +1,25 @@
 K 25
 svn:wc:ra_dav:version-url
-V 29
-/svn/erpApp/!svn/ver/694/item
+V 30
+/svn/erpApp/!svn/ver/1034/item
 END
 items.js
 K 25
 svn:wc:ra_dav:version-url
-V 38
-/svn/erpApp/!svn/ver/694/item/items.js
+V 39
+/svn/erpApp/!svn/ver/1034/item/items.js
 END
 items.html
 K 25
 svn:wc:ra_dav:version-url
 V 40
 /svn/erpApp/!svn/ver/672/item/items.html
+END
+showItem.html
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/erpApp/!svn/ver/957/item/showItem.html
 END
 itemBarcode.js
 K 25

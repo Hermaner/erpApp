@@ -633,10 +633,10 @@
 							if(proportion==0||idSaleCount==0){
 								angle=0;
 							}else{
-								angle=parseFloat(idSaleCount)/proportion*360;
+								angle=proportion/parseFloat(idSaleCount)*360;
 							}
 							if(angle>360){
-								angle=359;
+								angle=360;
 							}else{
 								angle=angle.toFixed(2);
 							}

@@ -1232,7 +1232,10 @@ input {
 	color: #007aff;
 	font-size: 35px;
 }
-
+.mui-home-bodycolor span.mui-icon.iconfont.mui-home-iconsize {
+	color: #007aff;
+	font-size: 35px;
+}
 .mui-home-bodycolor span.mui-icon.iconfont.icon-saomiao.mui-home-iconsize {
 	color: #007aff;
 	font-size: 35px;

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="">
+		<meta http-equiv="content-security-policy">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>H5Plugin</title>
+		<script type="text/javascript" src="js/printerplugin.js"></script>
+		<script type="text/javascript">
+			function pluginShow() {
+				plus.pluginprinter.PluginPrinterFunction("Html5", "Plus", "AsyncFunction", "MultiArgument!", function(result) {}, function(result) {});
+			}
+
+			function pluginShowArrayArgu() {
+				plus.pluginprinter.PluginPrinterFunctionArrayArgu(["\n", "订单编号：12313123123123\n", "收货人：2313131312231213\n", "AsyncFunction\n", "ArrayArgument!"], function(result) {}, function(result) {});
+			}
+
+		</script>
+	</head>
+
+	<body>
+		<header>
+			<div class="nvtt">打印</div>
+		</header>
+		<div id="dcontent" class="dcontent">
+			<br/>
+			<div class="button" onclick="pluginShow()">扫描打印机</div>
+			<div class="button" onclick="pluginShowArrayArgu()">测试打印，请传入参数请看源码</div>
+			<br/>
+		</div>
+	</body>
+
+</html>

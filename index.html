@@ -23,7 +23,7 @@
 				<span class="mui-tab-label">首页</span>
 			</a>
 			<a class="mui-tab-item" href="item/items.html">
-				<span class="mui-icon iconfont icon-mendianchaxun"></span>
+				<span class="mui-icon iconfont icon-xiangzi1"></span>
 				<span class="mui-tab-label">商品</span>
 			</a>
 			<a class="mui-tab-item" href="list/dingdan.html">
@@ -43,10 +43,7 @@
 			mui.init({
 				preloadPages: [{
 					"id": "list/listdetail.html",
-					"url": "list/listdetail.html",
-				}, {
-					"id": 'map/maps_map.html',
-					"url": 'map/maps_map.html'
+					"url": "order/orderDetail.html",
 				}, {
 					"id": "calldetail.html",
 					"url": "list/calldetail.html",
@@ -56,10 +53,12 @@
 				}, {
 					"id": "pushset.html",
 					"url": "more/tongzhituisong.html",
-				}, {
-					"id": "listdetailbyshop.html",
-					"url": "list/listdetailbyshop.html",
-				}]
+				}
+				, {
+					"id": "map/maps_map.html",
+					"url": "map/maps_map.html",
+				}
+				]
 			});
 			var subpages = ['home2.html', 'item/items.html', 'list/dingdan.html', 'more/more.html'];
 			var subpage_style, self;
@@ -194,29 +193,18 @@
 
 			function checkDetail(e) { //订单列表查询接口，接口文档No.12
 				var pageDetail = plus.webview.getWebviewById("list/listdetail.html")
-				var param = systemParam("V5.mobile.order.info.get");
-				param.orderNumber = e;
-				plus.nativeUI.showWaiting()
-				dataSendFn('orderInfoGet', param, function(data) {
-					if (!data.isSuccess) {
-						var mapmsg = data.map.errorMsg;
-						plus.nativeUI.alert(mapmsg, function() {}, "", "OK");
-						console.log(mapmsg)
-						return
+				mui.fire(pageDetail, "detailShow", {
+					orderNumber: e
+				});
+				mui.openWindow({
+					id: "list/listdetail.html",
+					show: {
+						aniShow: "pop-in"
+					},
+					waiting: {
+						autoShow: false
 					}
-					alert(1)
-					data = JSON.stringify(data)
-					mui.openWindow({
-						id: "list/listdetail.html",
-						show: {
-							aniShow: "pop-in"
-						},
-						waiting: {
-							autoShow: false
-						}
-					})
-					pageDetail.evalJS("loadData('" + data + "',1)");
-				}, "get")
+				})
 			}
 
 			function addRed(e) {

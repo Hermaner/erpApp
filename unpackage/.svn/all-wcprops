@@ -1,11 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 34
-/svn/erpApp/!svn/ver/684/unpackage
+V 35
+/svn/erpApp/!svn/ver/1051/unpackage
 END
 .dependencies
 K 25
 svn:wc:ra_dav:version-url
 V 48
 /svn/erpApp/!svn/ver/643/unpackage/.dependencies
+END
+.confirmed_dependencies
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/erpApp/!svn/ver/1051/unpackage/.confirmed_dependencies
 END

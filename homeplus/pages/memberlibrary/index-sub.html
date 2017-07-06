@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="">
+		<meta http-equiv="content-security-policy">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>会员库</title>
+		<link href="../../styles/mui.css" rel="stylesheet" />
+		<link href="../../styles/iconfont.css" rel="stylesheet" />
+		<link href="../../styles/styleAll.css" rel="stylesheet" />
+		<link href="../../styles/mui.picker.min.css" rel="stylesheet" />
+	</head>
+	<body class="" id="vue">
+		<div class="search-con sub-con">
+			<div class="switchBox">
+				<div class="flexCon">
+					<div class="flexOne">
+						<input type="search" class="" placeholder="请输入会员手机号" v-model='tel'>
+						<span class="mui-icon mui-icon-search"></span>
+					</div>
+					<button class="" @click='searchItem()'>搜索</button>
+					<button class="" @click='openScreen()'>筛选</button>
+				</div>
+			</div>
+		</div>
+		<div class="mui-content mui-scroll-wrapper paddingbom50 paddingtop41" id="tochange" v-show='!showData'>
+			<div class="mui-scroll fontsize12">
+				<ul class="mui-table-view" style="display: none;" v-show='items.length>0&&!showscreen'>
+					<li class="mui-table-view-cell getstore-li" v-for='(index,item) in items'>
+						<div class="mui-input-row mui-checkbox  mui-left">
+							<label class="flexCon mui-meb-label"><div class="mui-meb-one flexOne">{{item.memberName}}<br>{{item.mobilePhone}}<br>会员卡号：{{item.memberCardNumber||'无'}}</div><div  class="mui-meb-one  flexOne">{{item.memberLevel}}<br>当前积分：{{item.memberPoint||0}}<br>余额:{{item.memberAmount||'0'}}</div></label>
+							<input name="checkbox" type="checkbox" checked="{{item.status}}" index='{{index}}'>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<div class='screen-content' v-show="showscreen" transition="screenContent" style="display: none;">
+			<ul class="mui-table mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>性别</label>
+						<select class="mui-buyer-select" v-model="sexval">
+							<option value="">全部</option>
+							<option value="1">男</option>
+							<option value="0">女</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>省份</label>
+						<select class="mui-buyer-select" v-model="province" id="province" onchange="changeProvince(this)">
+							<option value="">请选择省份</option>
+							<option value="{{p}}" v-for="p in pData">{{p}}</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>城市</label>
+						<select class="mui-buyer-select" v-model="city" id="city" onchange="changeCity(this)">
+							<option value="">请选择城市</option>
+							<option value="{{c}}" v-for="c in cData">{{c}}</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>区县</label>
+						<select class="mui-buyer-select" v-model="cityarea" onchange="changeaddress()">
+							<option value="">请选择区县</option>
+							<option value="{{c}}" v-for="c in caData">{{c}}</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>会员等级</label>
+						<select class="mui-buyer-select" v-model="level">
+							<option value="0">全部</option>
+							<option value="{{level.memberLevelId}}" v-for="level in levels">{{level.memberLevelName}}</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>会员组</label>
+						<select class="mui-buyer-select" v-model="group">
+							<option value="0">全部</option>
+							<option value="{{group.memberGroupId}}" v-for="group in groups">{{group.memberGroupName}}</option>
+						</select>
+						<span class="mui-navigate-right downIcon"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row discountRow">
+						<label>注册时间</label>
+						<button class="btn mui-btn mui-btn-block" @click='optionTime({"type":"date time"},1)'>{{beginFont}}</button>
+					</div>
+					<div class="mui-input-row discountRow">
+						<label>&nbsp;</label>
+
+						<button class="btn mui-btn mui-btn-block" @click='optionTime({"type":"date time"})'>{{endFont}}</button>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-meb-lino">
+					<div class="mui-input-row">
+						<label>累计积分</label>
+						<div class="flexCon">
+							<!--<div class="mui-numbox flexOne">
+					<button class="mui-btn mui-btn-numbox-minus" type="button" v-show='false'>-</button>
+					<input class="mui-input-numbox" type="number" />
+					<button class="mui-btn mui-btn-numbox-plus" type="button" v-show='false'>+</button>
+				</div>-->
+							<input type="text" class='flexOne' v-model='allIntstart'>
+							<span>-</span>
+							<input type="text" class='flexOne' v-model='allIntend'>
+						</div>
+
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-meb-lino">
+					<div class="mui-input-row">
+						<label>当前积分</label>
+						<div class="flexCon">
+							<input type="text" class='flexOne' v-model='curIntstart'>
+							<span>-</span>
+							<input type="text" class='flexOne' v-model='curIntend'>
+						</div>
+
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-meb-lino">
+					<div class="mui-input-row">
+						<label>消费金额</label>
+						<div class="flexCon">
+							<input type="text" class='flexOne' v-model='amountstart'>
+							<span>-</span>
+							<input type="text" class='flexOne' v-model='amountend'>
+						</div>
+
+					</div>
+				</li>
+			</ul>
+			<div class="mui-bar mui-bar-tab dis-nav-bar" >
+				<button type="button" class="mui-btn" @click='closeScreen()'>
+					取消
+				</button>
+				<button type="button" class="mui-btn mui-btn-primary" @click='doScreen()'>
+					筛选
+				</button>
+			</div>
+		</div>
+		<div class="noData" v-show='noData'  style="display: none;">没有相关数据</div>
+		<div class="noData" v-show='showData'  >数据加载中</div>
+		<nav class="mui-bar mui-bar-tab dis-nav-bar" style="z-index:7;display: none;"  v-show='!showData'>
+			<div class="mui-input-row mui-checkbox  mui-left mbliby-select" @click='selectAll()'>
+				<label>全选({{countNum}})</label>
+				<input name="checkbox" type="checkbox" class="checkAll">
+			</div>
+			<button type="button" class="mui-btn mui-btn-primary" @click='selectcoupon()'>
+					发券
+				</button>
+		</nav>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/app.js"></script>
+	<script src="../../js/cityData.js"></script>
+	<script src="../../js/mui.picker.min.js"></script>
+	<script src="index.js"></script>
+
+</html>

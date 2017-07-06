@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/erpApp/!svn/ver/943/src/pages/order
+END
+changeGoods.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/erpApp/!svn/ver/1071/src/pages/order/changeGoods.js
+END
+changeGoods.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/erpApp/!svn/ver/1070/src/pages/order/changeGoods.html
+END
+changePayType.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/erpApp/!svn/ver/1052/src/pages/order/changePayType.js
+END
+changePayType.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/erpApp/!svn/ver/1053/src/pages/order/changePayType.html
+END
+orderDetail.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/erpApp/!svn/ver/1071/src/pages/order/orderDetail.js
+END
+order.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/erpApp/!svn/ver/1071/src/pages/order/order.js
+END
+orderDetail.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/erpApp/!svn/ver/1071/src/pages/order/orderDetail.html
+END
+order.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/erpApp/!svn/ver/1071/src/pages/order/order.html
+END
+mixPay.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/erpApp/!svn/ver/1071/src/pages/order/mixPay.js
+END
+mixPay.html
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/erpApp/!svn/ver/1071/src/pages/order/mixPay.html
+END

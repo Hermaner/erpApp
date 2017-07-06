@@ -1,7 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
-V 29
-/svn/erpApp/!svn/ver/706/list
+V 30
+/svn/erpApp/!svn/ver/1051/list
+END
+createAddress.html
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/erpApp/!svn/ver/894/list/createAddress.html
 END
 additembyself.html
 K 25
@@ -19,25 +25,25 @@ dingdan.js
 K 25
 svn:wc:ra_dav:version-url
 V 40
-/svn/erpApp/!svn/ver/693/list/dingdan.js
+/svn/erpApp/!svn/ver/998/list/dingdan.js
 END
 shopcheck.js
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/erpApp/!svn/ver/668/list/shopcheck.js
+/svn/erpApp/!svn/ver/747/list/shopcheck.js
 END
 orderBarcode.js
 K 25
 svn:wc:ra_dav:version-url
-V 45
-/svn/erpApp/!svn/ver/680/list/orderBarcode.js
+V 46
+/svn/erpApp/!svn/ver/1051/list/orderBarcode.js
 END
 dingdan.html
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/erpApp/!svn/ver/626/list/dingdan.html
+/svn/erpApp/!svn/ver/997/list/dingdan.html
 END
 orderBarcodec.js
 K 25
@@ -48,26 +54,26 @@ END
 shopcheck.html
 K 25
 svn:wc:ra_dav:version-url
-V 44
-/svn/erpApp/!svn/ver/668/list/shopcheck.html
+V 45
+/svn/erpApp/!svn/ver/1051/list/shopcheck.html
 END
 listdetail.js
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/erpApp/!svn/ver/717/list/listdetail.js
+/svn/erpApp/!svn/ver/892/list/listdetail.js
 END
 calldetail.js
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/erpApp/!svn/ver/376/list/calldetail.js
+/svn/erpApp/!svn/ver/856/list/calldetail.js
 END
 listdetail.html
 K 25
 svn:wc:ra_dav:version-url
 V 45
-/svn/erpApp/!svn/ver/696/list/listdetail.html
+/svn/erpApp/!svn/ver/912/list/listdetail.html
 END
 calldetail.html
 K 25
@@ -81,11 +87,23 @@ svn:wc:ra_dav:version-url
 V 47
 /svn/erpApp/!svn/ver/663/list/shoppingcart.html
 END
+changeGoods.js
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/erpApp/!svn/ver/937/list/changeGoods.js
+END
+changeGoods.html
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/erpApp/!svn/ver/937/list/changeGoods.html
+END
 callin.js
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/erpApp/!svn/ver/399/list/callin.js
+/svn/erpApp/!svn/ver/857/list/callin.js
 END
 newcallBarcode.js
 K 25
@@ -103,7 +121,7 @@ dis_dingdan.js
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/erpApp/!svn/ver/418/list/dis_dingdan.js
+/svn/erpApp/!svn/ver/858/list/dis_dingdan.js
 END
 callin.html
 K 25
@@ -127,13 +145,19 @@ newlist.html
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/erpApp/!svn/ver/668/list/newlist.html
+/svn/erpApp/!svn/ver/817/list/newlist.html
 END
 newcalllist.js
 K 25
 svn:wc:ra_dav:version-url
 V 44
 /svn/erpApp/!svn/ver/499/list/newcalllist.js
+END
+getAddress.html
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/erpApp/!svn/ver/894/list/getAddress.html
 END
 shopin.js
 K 25
@@ -151,11 +175,11 @@ listdetailbyshop.html
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/erpApp/!svn/ver/698/list/listdetailbyshop.html
+/svn/erpApp/!svn/ver/747/list/listdetailbyshop.html
 END
 shopin.html
 K 25
 svn:wc:ra_dav:version-url
-V 41
-/svn/erpApp/!svn/ver/663/list/shopin.html
+V 42
+/svn/erpApp/!svn/ver/1051/list/shopin.html
 END

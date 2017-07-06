@@ -37,7 +37,7 @@ mui.plusReady(function() {
 	var aboutFoot = document.getElementById("about-foot")
 	aboutFoot.style.top = (rh - 70) + "px";
 	plus.navigator.closeSplashscreen();
-	getVersion()
+//	getVersion()
 	var todaogou = document.getElementById("todaogou");
 	var daogou = document.getElementById("daogou");
 	var daogouclose = document.getElementById("daogouclose");
@@ -166,6 +166,7 @@ function getStoreList(callback) { //门店列表查询接口，接口文档No.23
 			return
 		}
 		data = data.stores
+		console.log(JSON.stringify(data))
 		console.log("储存门店列表")
 		plus.storage.setItem("storesList", JSON.stringify(data)); //储存门店列表
 		var status=0
@@ -191,6 +192,7 @@ function getVersion() { //系统版本查询
 			var myVersion;
 			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 				myVersion = inf.version;
+			 
 				var newVersion = data.version;
 				if (myVersion != newVersion) {
 					plus.nativeUI.confirm("发现新资源，是否更新？", function(event) {
